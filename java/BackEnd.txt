@@ -11,7 +11,7 @@
 -Add Picture Controller---@CrossOrigin(Do not forget)
 -CRUD OPERATIONS(Get, Put, Post, Delete)
 -API end Points
-Path --- "/photos",  "/photo/{id}", "/photo/{id}/comments", "/user/{id}", "/favorites", "/user/{id}/favorites", "/removefavorite/{id}", "/addfavorite/{id}"
+Path --- "/pictures",  "/picture/{id}", "/picture/{id}/comments", "/user/{id}", "/favorites", "/user/{id}/favorites", "/removefavorite/{id}", "/addfavorite/{id}"
 
 
 
