@@ -1,0 +1,46 @@
+ Design for Back End---
+
+1. DATABASE
+ - Comment Table( picture_id, user_id, message/comment)
+ - Favorite Table(picture_id, user_id,)
+ - Picture Table(user_id, likes_count/favorite_count, link to picture/image)
+
+
+
+2. CONTROLLER PACKAGE
+-Add Picture Controller---@CrossOrigin(Do not forget)
+-CRUD OPERATIONS(Get, Put, Post, Delete)
+-API end Points
+Path --- "/photos",  "/photo/{id}", "/photo/{id}/comments", "/user/{id}", "/favorites", "/user/{id}/favorites", "/removefavorite/{id}", "/addfavorite/{id}"
+
+
+
+
+
+3. DAO PACKAGE
+Interfaces:
+-CommentDAO
+-FavoriteDAO
+-PictureDAO
+
+JDBC Classes:
+-JdbcCommentDAO
+-JdbcFavoriteDAO
+-JdbcPictureDAO
+
+
+
+4. EXCEPTION PACKAGE
+-User Already Exists Exception
+-For all exceptions
+
+5. SERVICE PACKAGE
+
+6. MODEL PACKAGE
+-Comment class
+-Picture class
+-Favorite Class
+
+
+
+
