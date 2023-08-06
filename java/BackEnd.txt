@@ -3,7 +3,7 @@
 1. DATABASE
  - Comment Table( picture_id, user_id, message/comment)
  - Favorite Table(picture_id, user_id,)
- - Picture Table(user_id, likes_count/favorite_count, link to picture/image)
+ - Picture Table(picture_id, size, link, format)
 
 
 
@@ -11,8 +11,15 @@
 -Add Picture Controller---@CrossOrigin(Do not forget)
 -CRUD OPERATIONS(Get, Put, Post, Delete)
 -API end Points
-Path --- "/pictures",  "/picture/{id}", "/picture/{id}/comments", "/user/{id}", "/favorites", "/user/{id}/favorites", "/removefavorite/{id}", "/addfavorite/{id}"
-
+Path ---
+ --To get a list of pictures - "/pictures",
+ --To get a specific picture - "/picture/{id}",
+ --To get a picture by a specific user_id - "/user/{id}",
+ --To post a comment- "/picture/{id}/comments",
+ --To get favorites- "/favorites",
+ "/user/{id}/favorites",
+To remove a picture  - "/removefavorite/{id}",
+To add favourite  -"/addfavorite/{id}"
 
 
 
