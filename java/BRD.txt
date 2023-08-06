@@ -1,0 +1,14 @@
+For Sprint on 8/9:
+
+As per our meeting on 8/4/2023:
+
+Client needs to see :
+
+-Users Login
+-Sign up/Register---Upon sign in the message 'Welcome to TE-Gram' should pop up
+-Colors---Pastel, morning colors, yellow, blue, green provided by client.
+-Button--Thanks/No Thanks
+-Scrolling -Left -Right (NO UP-DOWN SCROLLING)
+-Vibe - Favorite List
+-Pictures- Big Pictures(size)  No filters should be used, pictures should be all natural
+
