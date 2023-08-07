@@ -1,0 +1,137 @@
+We need to implement some method of "lazy loading", so that when we're scrolling, the img url is only being called as an object enters the viewport. You may have already thought of that, just sparking the conversation. Some code related:
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            // Load the image for the post
+            const img = entry.target.querySelector('img');
+            img.src = entry.target.getAttribute('data-image-url');
+            // Stop observing this element after the image is loaded
+            observer.unobserve(entry.target);
+        }
+    });
+});
+// Find all posts and observe them
+const posts = document.querySelectorAll('.post');
+posts.forEach((post) => {
+    observer.observe(post);
+});
+
+That would need adapted to what we're doing, but the point is to approach 
+this so that we're minimizing local resource usage and balancing that with 
+reasonable get requests.
+
+One thing I'm unsure of: Let's say I log in and it displays my feed based 
+on followers or just photos in a descending chronological order) should we 
+determine a limit of posts to pull? The object data isn't huge, so we could 
+-100 at a time, and if we're lazy loading the actual images, it's not a 
+huge resource hog.
+
+But ultimately, this is something new. We're not loading a single Cat Card, 
+or even a list of books. Potentially, there could be millions of images to 
+load through (assuming you just kept scrolling), so I think this has back 
+and front end implications. Your display and memory should only need to 
+handle so many simultaneously, and there's no need to load an infinite 
+amount of posts in array from backend.
+
+VUE HORIZONTAL POST SCROLL AND LOAD CODE BASE:
+
+<template>
+  <div class="horizontal-scroll-container">
+    <div class="horizontal-scroll-content">
+      <div v-for="post in posts" :key="post.id" class="post-card">
+        <!-- Display post content here -->
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      posts: [],
+      currentPage: 1,
+      pageSize: 10, // Number of posts per page
+      loading: false,
+    };
+  },
+  methods: {
+    async loadMorePosts() {
+      if (this.loading) return;
+      this.loading = true;
+      const response = await fetch(`/api/posts?page=${this.currentPage}&limit=${this.pageSize}`);
+      const newPosts = await response.json();
+      this.posts = this.posts.concat(newPosts);
+      this.currentPage++;
+      this.loading = false;
+    },
+    handleScroll() {
+      const horizontalScrollContainer = document.querySelector('.horizontal-scroll-container');
+      const contentWidth = horizontalScrollContainer.scrollWidth;
+      const scrollX = horizontalScrollContainer.scrollLeft;
+      const containerWidth = horizontalScrollContainer.clientWidth;
+      const rightOffset = 100; // Load more posts when user is 100px from the right edge
+      
+      if (scrollX + containerWidth + rightOffset >= contentWidth) {
+        this.loadMorePosts();
+      }
+    },
+  },
+  mounted() {
+    this.loadMorePosts();
+    const horizontalScrollContainer = document.querySelector('.horizontal-scroll-container');
+    horizontalScrollContainer.addEventListener('scroll', this.handleScroll);
+  },
+  beforeDestroy() {
+    const horizontalScrollContainer = document.querySelector('.horizontal-scroll-container');
+    horizontalScrollContainer.removeEventListener('scroll', this.handleScroll);
+  },
+};
+</script>
+
+<style>
+/* Add appropriate styles for horizontal scrolling and post cards */
+.horizontal-scroll-container {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.horizontal-scroll-content {
+  display: inline-block;
+}
+
+.post-card {
+  display: inline-block;
+  /* Add your styling here */
+}
+</style>
+
+//SPRINGBOOT BACKEND CODING
+
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+@Service
+public class PostService {
+
+    private final PostRepository postRepository;
+
+    public PostService(PostRepository postRepository) {
+        this.postRepository = postRepository;
+    }
+
+    public List<Post> getPosts(int page, int limit) {
+        Pageable pageable = PageRequest.of(page - 1, limit);
+        return postRepository.findAll(pageable).getContent();
+    }
+}
+
+Repository class?
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface PostRepository extends JpaRepository<Post, Long> {
+    // Add custom queries if needed
+}
