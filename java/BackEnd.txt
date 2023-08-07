@@ -5,7 +5,7 @@
  - Favorite Table(picture_id, user_id,)
  - Picture Table(picture_id, size, link, format)
 
-
+We can use img_url to get the picture!
 
 2. CONTROLLER PACKAGE
 -Add Picture Controller---@CrossOrigin(Do not forget)
