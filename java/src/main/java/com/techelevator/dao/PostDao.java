@@ -7,7 +7,7 @@ import java.util.List;
 public interface PostDao {
 
 
-    List<Post> getPosts();
+    //List<Post> getPosts();
 
 
     List<Post> getAllPosts();

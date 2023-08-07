@@ -21,10 +21,8 @@ public class JdbcPostDao implements PostDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    @Override
-    public List<Post> getPosts() {
-        return null;
-    }
+
+    
 
     public List<Post> getAllPosts() {
         String sql = "SELECT * FROM post";
