@@ -4,7 +4,7 @@ import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 import java.util.Objects;
 
-public class Photo {
+public class Post {
     private int postId;
 
 
@@ -56,7 +56,7 @@ public class Photo {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Photo photo = (Photo) o;
+        Post photo = (Post) o;
         return postId == photo.postId && userId == photo.userId && Objects.equals(imgUrl, photo.imgUrl) && Objects.equals(dateTime, photo.dateTime);
     }
 
