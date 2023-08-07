@@ -22,7 +22,7 @@ public class JdbcPostDao implements PostDao {
     }
 
 
-    
+
 
     public List<Post> getAllPosts() {
         String sql = "SELECT * FROM post";
