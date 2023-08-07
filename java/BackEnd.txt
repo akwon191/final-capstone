@@ -48,6 +48,37 @@ JDBC Classes:
 -Picture class
 -Favorite Class
 
-
+/Post Model data structure:
+post: {
+int post_id
+int user_id
+String image_url
+date_time
+String/varchar caption
+int like_count (COUNT query on like table by user_id)
+int dislike_count (COUNT query on dislike table by user_id) //this is where post visiblity is managed by dislikes)
+int vibe_count (COUNT query on Favorites table by post_id=>user_id)
+comment[] : {
+    int comment_id
+    username (pulled by user_id in comment table)
+    date_time
+    text
+}
+//User Model data structure:
+user: {
+    int user_id
+    user_posts[]: {
+        post_id (queried by user_id, used to pull post data for Post Model))
+    }
+    followers[]: {
+        user_id
+    }
+    vibes[]: {
+        post_id (queried by this user_id)
+    }
+    profile_img_url
+    description //should we change this to prof_desc or something descriptive?
+    role (if we're doing any administrative behaviors client-side)
+}
 
 
