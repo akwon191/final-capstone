@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/photos")
+@RequestMapping("/api/posts")
 public class PostController {
     @Autowired
     private PostDao postDao;
