@@ -5,17 +5,25 @@ import com.techelevator.model.Comment;
 import com.techelevator.model.Post;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JdbcPostDao {
+
+@Component
+public class JdbcPostDao implements PostDao {
     private JdbcTemplate jdbcTemplate;
 
     public JdbcPostDao(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }
+
+    @Override
+    public List<Post> getPosts() {
+        return null;
     }
 
     public List<Post> getAllPosts() {
