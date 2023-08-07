@@ -4,5 +4,5 @@ package com.techelevator.dao;
 
 
 
-public class JdbcPhotoDao {
+public class JdbcPostDao {
 }

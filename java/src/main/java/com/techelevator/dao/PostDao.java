@@ -5,7 +5,7 @@ import com.techelevator.model.Post;
 import java.util.List;
 
 public interface PostDao {
-    List<Post> getPhotos();
+    List<Post> getPosts();
 
 
 
