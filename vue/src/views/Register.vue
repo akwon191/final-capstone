@@ -74,6 +74,16 @@ export default {
 </script>
 
 <style scoped>
+
+#register {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  font-family: courgette;
+  font-size: 1rem;
+  color: #365016;
+}
+
 .form-input-group {
   margin-bottom: 1rem;
 }

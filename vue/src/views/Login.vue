@@ -1,5 +1,13 @@
 <template>
   <div id="login">
+     <div class="header-container">
+      <div class="welcome-header">
+        <h1>Welcome to Uplift</h1>
+      </div>
+      <div class="login-image">
+        <img src="src\Img\UpliftLogo.png" alt="Uplift logo">
+      </div>
+    </div>
     <form @submit.prevent="login">
       <h1 >Please Sign In</h1>
       <div role="alert" v-if="invalidCredentials">
@@ -62,6 +70,37 @@ export default {
 </script>
 
 <style scoped>
+ @import url('https://fonts.googleapis.com/css2?family=Courgette&family=Lobster&display=swap');
+
+#login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: courgette;
+  font-size: 1rem;
+  color: #365016;
+}
+
+.welcome-header {
+  text-align: center;
+  margin-bottom: 20px; 
+}
+
+.login-image img {
+  max-width: 100px; 
+  height: auto;
+}
+
+.login-box {
+  border: 1px solid #ccc;
+  padding: 20px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
 .form-input-group {
   margin-bottom: 1rem;
 }
