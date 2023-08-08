@@ -3,12 +3,16 @@ package com.techelevator.model;
 public class Image {
     private int imageId;
     private String imageName;
-    private int imageData;
+    private String imageData;
 
-    public Image(int imageId, String imageName, int imageData){
+    public Image(int imageId, String imageName, String imageData){
         this.imageId = imageId;
         this.imageName = imageName;
         this.imageData = imageData;
+    }
+
+    public Image() {
+
     }
 
     public int getImageId() {
@@ -27,11 +31,11 @@ public class Image {
         this.imageName = imageName;
     }
 
-    public int getImageData() {
+    public String getImageData() {
         return imageData;
     }
 
-    public void setImageData(int imageData) {
+    public void setImageData(String imageData) {
         this.imageData = imageData;
     }
 }
