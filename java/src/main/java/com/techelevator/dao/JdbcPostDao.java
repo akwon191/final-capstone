@@ -35,6 +35,7 @@ public class JdbcPostDao implements PostDao {
     private Post mapPost(SqlRowSet rowSet) {
         int postId = rowSet.getInt("post_id");
         int userId = rowSet.getInt("user_id");
+        String username = getUsername(userId);
         int imgId = rowSet.getInt("img_id");
         Timestamp dateTime = rowSet.getTimestamp("date_time");
         String caption = rowSet.getString("caption");
@@ -43,10 +44,15 @@ public class JdbcPostDao implements PostDao {
         int dislikeCount = getReactionCount("dislike", postId);
         int vibeCount = getReactionCount("vibe", postId);
 
-        Post post = new Post(postId, userId, imgId, dateTime, caption,
+        Post post = new Post(postId, userId, username, imgId, dateTime, caption,
                 likeCount, dislikeCount, vibeCount);
         loadComments(post);
         return post;
+    }
+
+    private String getUsername(int userId) {
+        String sql = "SELECT username FROM users WHERE user_id = ?";
+        return jdbcTemplate.queryForObject(sql, String.class, userId);
     }
 
     private int getReactionCount(String reactionType, int postId) {
