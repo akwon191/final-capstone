@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.Base64;
 
 @Component
-public class JdbcImageDao {
+public class JdbcImageDao implements ImageDao {
 
 
     //TO-DO - ERROR HANDLING FOR jdbc query
