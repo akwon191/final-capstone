@@ -82,3 +82,13 @@ CREATE TABLE profiles (
 );
 
 COMMIT TRANSACTION;
+
+START TRANSACTION;
+
+DROP TABLE images;
+
+ALTER TABLE posts
+ADD COLUMN image_id INT,
+ADD CONSTRAINT FK_image FOREIGN KEY (image_id) REFERENCES image_data (image_data_id);
+
+COMMIT;
