@@ -1,9 +1,5 @@
 package com.techelevator.controller;
 
-
-import com.techelevator.dao.PostDao;
-import com.techelevator.dao.UserDao;
-import com.techelevator.model.Image;
 import com.techelevator.model.Post;
 import com.techelevator.model.User;
 import com.techelevator.service.ImageService;
@@ -26,32 +22,19 @@ public class PostController {
         @Autowired
 
         private PostService postService;
-        private ImageService imageService;
-        private UserService userService;
 
-    public PostController(PostService postService,ImageService imageService,UserService userService){
-            this.imageService = imageService;
-            this.postService = postService;
-            this.userService = userService;
-        }
-    @GetMapping(path = "")
-    public List<User> listUsers() {
-        return userService.findAll();
+
+    public PostController(PostService postService) {
+        this.postService = postService;
+
     }
+
 
     @GetMapping(path = "")
     public List<Post> getAllPosts() {
         return postService.getAllPosts();
     }
 
-    @GetMapping(path = "/{imageId}")
-    public Image getImageDataById(@Valid @PathVariable long imageId) {
-       // try {
-            return imageService.getImageDataStringById(imageId);
-      //  } catch (ResourceNotFoundException e) {
-      //      throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
-     //   }
-    }
 
 
 }
