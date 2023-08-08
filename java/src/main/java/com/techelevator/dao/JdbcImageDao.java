@@ -22,7 +22,7 @@ public class JdbcImageDao implements ImageDao {
     }
 
     public Image getImageDataStringById(long id) {
-        String sql = "SELECT * FROM image_data WHERE img_data_id = ?";
+        String sql = "SELECT * FROM image_data WHERE image_data_id = ?";
 
         //Reduced complexity - queryForObject contains resultSet parameter to allow RowMapping and String conversion
         return jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
@@ -30,7 +30,7 @@ public class JdbcImageDao implements ImageDao {
             // convert to String
             String imageDataString = Base64.getEncoder().encodeToString(imageData);
             Image newImg = new Image();
-            newImg.setImageId(resultSet.getInt("img_data_id"));
+            newImg.setImageId(resultSet.getInt("image_data_id"));
             newImg.setImageName(resultSet.getString("image_name"));
             newImg.setImageData(imageDataString);
             return newImg;
