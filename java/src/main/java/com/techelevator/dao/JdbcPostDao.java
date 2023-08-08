@@ -36,16 +36,15 @@ public class JdbcPostDao implements PostDao {
         int postId = rowSet.getInt("post_id");
         int userId = rowSet.getInt("user_id");
         String username = getUsername(userId);
-        int imgId = rowSet.getInt("img_id");
+        int imgId = rowSet.getInt("image_data_id");
         Timestamp dateTime = rowSet.getTimestamp("date_time");
         String caption = rowSet.getString("caption");
 
-        int likeCount = getReactionCount("like", postId);
-        int dislikeCount = getReactionCount("dislike", postId);
-        int vibeCount = getReactionCount("vibe", postId);
+        int likeCount = getReactionCount("thanks", postId);
+        int dislikeCount = getReactionCount("no_thanks", postId);
+        int vibeCount = getReactionCount("vibes", postId);
 
-        Post post = new Post(postId, userId, username, imgId, dateTime, caption,
-                likeCount, dislikeCount, vibeCount);
+        Post post = new Post(postId, userId, username, imgId, dateTime, caption, likeCount, dislikeCount, vibeCount);
         loadComments(post);
         return post;
     }
@@ -61,7 +60,7 @@ public class JdbcPostDao implements PostDao {
     }
 
     private void loadComments(Post post) {
-        String sql = "SELECT user_id, comment_text, date_time FROM comment WHERE post_id = ?";
+        String sql = "SELECT * FROM post_comments WHERE post_id = ?";
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, post.getPostId());
         while (rowSet.next()) {
             Comment comment = mapComment(rowSet);
@@ -70,9 +69,11 @@ public class JdbcPostDao implements PostDao {
     }
 
     private Comment mapComment(SqlRowSet rowSet) {
+        int commentId = rowSet.getInt("comment_id");
+        int postId = rowSet.getInt("post_id");
         int userId = rowSet.getInt("user_id");
-        String commentText = rowSet.getString("comment_text");
         Timestamp dateTime = rowSet.getTimestamp("date_time");
-        return new Comment(userId, commentText, dateTime);
+        String commentText = rowSet.getString("comment_text");
+        return new Comment(commentId, postId, userId, dateTime, commentText);
     }
 }

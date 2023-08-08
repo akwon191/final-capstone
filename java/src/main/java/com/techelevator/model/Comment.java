@@ -1,39 +1,51 @@
 package com.techelevator.model;
-
 import java.sql.Timestamp;
 
 public class Comment {
-    private int userId;
-    private String commentText;
-    private Timestamp dateTime;
 
-    public Comment(int userId, String commentText, Timestamp dateTime) {
-        this.userId = userId;
-        this.commentText = commentText;
-        this.dateTime = dateTime;
+    private int comment_id;
+    private int post_id;
+    private int user_id;
+    private Timestamp date_time;
+    private String comment_text;
+
+    public Comment(int comment_id, int post_id, int user_id, Timestamp date_time, String comment_text) {
+        this.comment_id = comment_id;
+        this.post_id = post_id;
+        this.user_id = user_id;
+        this.date_time = date_time;
+        this.comment_text = comment_text;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getComment_id() {
+        return comment_id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setComment_id(int comment_id) {
+        this.comment_id = comment_id;
     }
 
-    public String getCommentText() {
-        return commentText;
+    public int getPost_id() {
+        return post_id;
     }
 
-    public void setCommentText(String commentText) {
-        this.commentText = commentText;
+    public void setPost_id(int post_id) {
+        this.post_id = post_id;
     }
 
-    public Timestamp getDateTime() {
-        return dateTime;
+    public Timestamp getDate_time() {
+        return date_time;
     }
 
-    public void setDateTime(Timestamp dateTime) {
-        this.dateTime = dateTime;
+    public void setDate_time(Timestamp date_time) {
+        this.date_time = date_time;
+    }
+
+    public String getComment_text() {
+        return comment_text;
+    }
+
+    public void setComment_text(String comment_text) {
+        this.comment_text = comment_text;
     }
 }
