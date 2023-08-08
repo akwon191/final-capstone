@@ -8,6 +8,7 @@ import java.util.List;
 public class Post {
     private int postId;
     private int userId;
+    private int img_id;
     private Timestamp dateTime;
     private String caption;
     private int likeCount;
@@ -15,15 +16,24 @@ public class Post {
     private int vibeCount;
     private List<Comment> comments;
 
-    public Post( int postId, int userId, Timestamp dateTime, String caption, int likeCount, int dislikeCount, int vibeCount) {
+    public Post( int postId, int userId, int imgId, Timestamp dateTime, String caption, int likeCount, int dislikeCount, int vibeCount) {
         this.postId = postId;
         this.userId = userId;
+        this.img_id = imgId;
         this.dateTime = dateTime;
         this.caption = caption;
         this.likeCount = likeCount;
         this.dislikeCount = dislikeCount;
         this.vibeCount = vibeCount;
         this.comments = new ArrayList<>();
+    }
+
+    public int getImg_id() {
+        return img_id;
+    }
+
+    public void setImg_id(int img_id) {
+        this.img_id = img_id;
     }
 
     public void addComment(Comment comment) {

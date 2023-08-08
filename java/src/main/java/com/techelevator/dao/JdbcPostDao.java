@@ -21,9 +21,6 @@ public class JdbcPostDao implements PostDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-
-
-
     public List<Post> getAllPosts() {
         String sql = "SELECT * FROM post";
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql);
@@ -38,6 +35,7 @@ public class JdbcPostDao implements PostDao {
     private Post mapPost(SqlRowSet rowSet) {
         int postId = rowSet.getInt("post_id");
         int userId = rowSet.getInt("user_id");
+        int imgId = rowSet.getInt("img_id");
         Timestamp dateTime = rowSet.getTimestamp("date_time");
         String caption = rowSet.getString("caption");
 
@@ -45,7 +43,7 @@ public class JdbcPostDao implements PostDao {
         int dislikeCount = getReactionCount("dislike", postId);
         int vibeCount = getReactionCount("vibe", postId);
 
-        Post post = new Post(postId, userId, dateTime, caption,
+        Post post = new Post(postId, userId, imgId, dateTime, caption,
                 likeCount, dislikeCount, vibeCount);
         loadComments(post);
         return post;

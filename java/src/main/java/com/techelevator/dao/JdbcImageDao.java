@@ -10,7 +10,10 @@ import java.sql.SQLException;
 import java.util.Base64;
 
 @Component
-public class JdbcImageDao implements RowMapper<Image> {
+public class JdbcImageDao {
+
+
+    //TO-DO - ERROR HANDLING FOR jdbc query
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -18,21 +21,19 @@ public class JdbcImageDao implements RowMapper<Image> {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @Override
-    public Image mapRow(ResultSet resultSet, int i) throws SQLException {
-        byte[] imageData = resultSet.getBytes("image_data");
-        // convert to String
-        String imageDataString = Base64.getEncoder().encodeToString(imageData);
-        Image newImg = new Image();
-        newImg.setImageId(resultSet.getInt("img_data_id"));
-        newImg.setImageName(resultSet.getString("image_name"));
-        newImg.setImageData(resultSet.getString("image_data"));;
-        return newImg;
-    }
-
     public Image getImageDataStringById(long id) {
         String sql = "SELECT * FROM image_data WHERE img_data_id = ?";
 
-        return null;
+        //Reduced complexity - queryForObject contains resultSet parameter to allow RowMapping and String conversion
+        return jdbcTemplate.queryForObject(sql, (resultSet, i) -> {
+            byte[] imageData = resultSet.getBytes("image_data");
+            // convert to String
+            String imageDataString = Base64.getEncoder().encodeToString(imageData);
+            Image newImg = new Image();
+            newImg.setImageId(resultSet.getInt("img_data_id"));
+            newImg.setImageName(resultSet.getString("image_name"));
+            newImg.setImageData(imageDataString);
+            return newImg;
+        }, id);
     }
 }
