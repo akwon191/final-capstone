@@ -5,7 +5,7 @@
         <h1>Welcome to Uplift</h1>
       </div>
       <div class="login-image">
-        <img src="src\Img\UpliftLogo.png" alt="Uplift logo">
+        <img src="@/assets/Uplift logo1.png" alt="Uplift logo"> 
       </div>
     </div>
     <form @submit.prevent="login">
