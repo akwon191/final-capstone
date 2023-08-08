@@ -51,8 +51,6 @@ public class JdbcUserDao implements UserDao {
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
         String sql = "select * from users";
-        System.out.println(" I am in JdbcUserDao ");
-
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()) {
             User user = mapRowToUser(results);
