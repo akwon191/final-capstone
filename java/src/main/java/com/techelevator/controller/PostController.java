@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/posts")
+@RequestMapping("posts")
 public class PostController {
     @Autowired
     private PostDao postDao;
-    //private Service photoService;
+    //private Service postService;
      public PostController(PostDao postDao){
          this.postDao = postDao;
      }
