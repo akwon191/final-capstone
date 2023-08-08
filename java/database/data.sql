@@ -34,7 +34,49 @@ VALUES ((SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id W
 ((SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'andyk'), (SELECT user_id FROM users WHERE username = 'brianr'),'2023-12-31 23:59:59', 'How fun!');
 
 --User_Following
+INSERT INTO user_following (user_id, follower_id)
+VALUES ((SELECT user_id FROM users WHERE username = 'brianr'), (SELECT user_id FROM users WHERE username = 'aartik')),
+((SELECT user_id FROM users WHERE username = 'brianr'), (SELECT user_id FROM users WHERE username = 'yoavm')),
+((SELECT user_id FROM users WHERE username = 'aartik'), (SELECT user_id FROM users WHERE username = 'yoavm')),
+((SELECT user_id FROM users WHERE username = 'aartik'), (SELECT user_id FROM users WHERE username = 'beckyz')),
+((SELECT user_id FROM users WHERE username = 'yoavm'), (SELECT user_id FROM users WHERE username = 'beckyz')),
+((SELECT user_id FROM users WHERE username = 'yoavm'), (SELECT user_id FROM users WHERE username = 'brodinm')),
+((SELECT user_id FROM users WHERE username = 'beckyz'), (SELECT user_id FROM users WHERE username = 'brodinm')),
+((SELECT user_id FROM users WHERE username = 'beckyz'), (SELECT user_id FROM users WHERE username = 'andyk')),
+((SELECT user_id FROM users WHERE username = 'brodinm'), (SELECT user_id FROM users WHERE username = 'andyk')),
+((SELECT user_id FROM users WHERE username = 'brodinm'), (SELECT user_id FROM users WHERE username = 'brianr')),
+((SELECT user_id FROM users WHERE username = 'andyk'), (SELECT user_id FROM users WHERE username = 'brianr')),
+((SELECT user_id FROM users WHERE username = 'andyk'), (SELECT user_id FROM users WHERE username = 'aartik'));
+
+-- Vibes
+INSERT INTO vibes (user_id, post_id)
+VALUES ((SELECT user_id FROM users WHERE username = 'brianr'), (SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'aartik')),
+((SELECT user_id FROM users WHERE username = 'aartik'), (SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'yoavm')),
+((SELECT user_id FROM users WHERE username = 'yoavm'), (SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'beckyz')),
+((SELECT user_id FROM users WHERE username = 'beckyz'), (SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'brodinm')),
+((SELECT user_id FROM users WHERE username = 'brodinm'), (SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'andyk')),
+((SELECT user_id FROM users WHERE username = 'andyk'), (SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'brianr'));
+
+--Thanks
+INSERT INTO thanks (user_id, post_id)
+VALUES ((SELECT user_id FROM users WHERE username = 'brianr'), (SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'aartik')),
+((SELECT user_id FROM users WHERE username = 'aartik'), (SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'yoavm')),
+((SELECT user_id FROM users WHERE username = 'yoavm'), (SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'beckyz')),
+((SELECT user_id FROM users WHERE username = 'beckyz'), (SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'brodinm')),
+((SELECT user_id FROM users WHERE username = 'brodinm'), (SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'andyk')),
+((SELECT user_id FROM users WHERE username = 'andyk'), (SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'brianr'));
+
+--No_Thanks
+INSERT INTO no_thanks (user_id, post_id)
+VALUES ((SELECT user_id FROM users WHERE username = 'brianr'), (SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'yoavm')),
+((SELECT user_id FROM users WHERE username = 'aartik'), (SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'beckyz')),
+((SELECT user_id FROM users WHERE username = 'yoavm'), (SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'brodinm')),
+((SELECT user_id FROM users WHERE username = 'beckyz'), (SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'andyk')),
+((SELECT user_id FROM users WHERE username = 'brodinm'), (SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'brianr')),
+((SELECT user_id FROM users WHERE username = 'andyk'), (SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'aartik'));
 
 
+
+COMMIT TRANSACTION;
 
 
