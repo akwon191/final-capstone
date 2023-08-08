@@ -22,7 +22,7 @@ public class JdbcPostDao implements PostDao {
     }
 
     public List<Post> getAllPosts() {
-        String sql = "SELECT * FROM post";
+        String sql = "SELECT * FROM posts";
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql);
         List<Post> posts = new ArrayList<>();
         while (rowSet.next()) {
