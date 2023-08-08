@@ -6,15 +6,19 @@
         <p class="description">This is an example of how the description box will look. This text will be deleted later and linked to the description from the post.</p>
         <div class="button-container">
             <div class="button-vibes" v-if="! vibeCheck">
-                <button class="mark-vibeson" v-on:click.prevent="setVibes(true)" >Good Vibes</button>
-               <!-- <button class="mark-vibesoff" v-on:click.prevent="setVibes(false)" >Remove Vibes</button> -->
+                <i class="fa-solid fa-hand-holding-heart" v-on:click.prevent="setVibes(true)" >Good Vibes</i>
+               <!-- <i class="fa-solid fa-hand-holding-heart" v-on:click.prevent="setVibes(false)" >Remove Vibes</i> -->
             </div>
             <div class="button-thanks" v-if="! thanksCheck">
-                <button class="mark-thankson" v-on:click.prevent="setThanks(true)" >No Thanks</button>
-               <!-- <button class="mark-thanksoff" v-on:click.prevent="setThanks(false)" >Remove No Thanks</button> -->
+                <i class="fa-solid fa-thumbs-up" v-on:click.prevent="setThanks(true)" >Thanks</i>
+               <!-- <i class="fa-solid fa-thumbs-up" v-on:click.prevent="setThanks(false)" >Remove No Thanks</i> -->
             </div>
-            <button class="button-comments" >Comments</button>
-            <button class="button-extra" >Extra</button>
+            <div class="button-nothanks" v-if="! thanksCheck">
+                <i class="fa-solid fa-thumbs-down" v-on:click.prevent="setNoThanks(true)" >No Thanks</i>
+               <!-- <i class="fa-solid fa-thumbs-down" v-on:click.prevent="setThanks(false)" >Remove No Thanks</i> -->
+            </div>
+            <i class="fa-solid fa-comment" >Comments</i>
+            <i class="fa-solid fa-ellipsis" >Extra</i>
         </div>
     </div>
   </template>
@@ -31,6 +35,10 @@
         thanksCheck: {
             type:Boolean,
             default: false
+        },
+        noThanksCheck: {
+            type:Boolean,
+            default: false
         }
       },
       methods: {
@@ -42,15 +50,21 @@
 //            Method to commit changes to no thanks status
 //            this.$store.commit('SET_THANKS_STATUS', {post: this.post, value: value});
 //        }
+//        setNoThanks(value) {
+//            Method to commit changes to no thanks status
+//            this.$store.commit('SET_NOTHANKS_STATUS', {post: this.post, value: value});
+//        }
       }
   }
   </script>
   
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Courgette&family=Lobster&display=swap');
+
     .card {
         position: relative;
-        background: white;
-        border: 10px solid #FD8A8A;
+        background: whitesmoke;
+        border: 10px solid #FF9B42;
         border-radius: 10px;
         width: 500px;
         height: 500px;
@@ -64,7 +78,7 @@
         right: -20px;
         bottom: -20px;
         border-radius: 10px;
-        background: #FFFBC1;
+        background: #F7A072;
         z-index: -1;
     }
 
@@ -76,31 +90,36 @@
         right: -30px;
         bottom: -30px;
         border-radius: 10px;
-        background: #B6E2A1;
+        background: #EDDEA4;
         z-index: -2;
     }
 
-    .card .post-title {
+    .post-title {
+        font-family: 'Courgette';
         font-size: 2rem;
-        color: #FD8A8A;
+        color: #365016;
         margin: 20px;
     }
 
-    .card .post-author {
+    .post-author {
+        font-family: 'Courgette';
         font-size: 1.5rem;
-        color: #FD8A8A;
+        color: #365016;
         margin: 20px;
     }
 
-    .card .description {
+    .description {
+        font-family: 'Courgette';
         font-size: 1rem;
-        color: #FD8A8A;
+        color: #365016;
         margin: 20px;
     }
 
     .button-container {
         display: flex;
         justify-content: space-evenly;
+        font-size: 2.0rem;
+        color: #57614b;
     }
 
   </style>
