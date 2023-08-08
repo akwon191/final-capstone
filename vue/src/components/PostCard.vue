@@ -6,19 +6,19 @@
             <h2 id="post-author">Author Name</h2>
             <p id="description">This is an example of how the description box will look. This text will be deleted later and linked to the description from the post.</p>
             <div class="button-container">
-                <div class="button-vibes" v-if="! vibeCheck">
-                    <button class="fa-solid fa-hand-holding-heart" v-on:click.prevent="setVibes(true)" >Good Vibes</button>
-                    <!-- <button class="fa-solid fa-hand-holding-heart" v-on:click.prevent="setVibes(false)" >Remove Vibes</button> -->
+                <div class="button-vibes" v-if="!vibeCheck">
+                    <button class="fa-solid fa-hand-holding-heart" v-on:click.prevent="setVibes()" >Good Vibes</button>
+                    <!-- <button class="fa-solid fa-hand-holding-heart" v-on:click.prevent="setVibes()" >Remove Vibes</button> -->
                 </div>
-                <div class="button-thanks" v-if="! thanksCheck">
-                    <button class="fa-solid fa-thumbs-up" v-on:click.prevent="setThanks(true)" >Thanks</button>
-                    <!-- <button class="fa-solid fa-thumbs-up" v-on:click.prevent="setThanks(false)" >Remove No Thanks</button> -->
+                <div class="button-thanks" v-if="!thanksCheck">
+                    <button class="fa-solid fa-thumbs-up" v-on:click.prevent="setThanks()" >Thanks</button>
+                    <!-- <button class="fa-solid fa-thumbs-up" v-on:click.prevent="setThanks()" >Remove No Thanks</button> -->
                 </div>
-                <div class="button-nothanks" v-if="! thanksCheck">
-                    <button class="fa-solid fa-thumbs-down" v-on:click.prevent="setNoThanks(true)" >No Thanks</button>
-                    <!-- <button class="fa-solid fa-thumbs-down" v-on:click.prevent="setThanks(false)" >Remove No Thanks</button> -->
+                <div class="button-nothanks" v-if="!thanksCheck">
+                    <button class="fa-solid fa-thumbs-down" v-on:click.prevent="setNoThanks()" >No Thanks</button>
+                    <!-- <button class="fa-solid fa-thumbs-down" v-on:click.prevent="setThanks()" >Remove No Thanks</button> -->
                 </div>
-                <button class="fa-solid fa-comment" v-on:click="isHidden = !isHidden">Comments</button>
+                <div @click="toggleHidden"><i class="fa-solid fa-comment" ></i></div>
                 <button class="fa-solid fa-ellipsis" >Extra</button>
             </div>
         </div>
@@ -37,37 +37,40 @@
       name: 'post-card',
       data() {
         return {
-            isHidden: true
+            isHidden: true,
+            vibeCheck: false,
+            thanksCheck: false,
+            noThanksCheck: false,
         };
     },
-      props: {
-        post: Object,
-        vibeCheck: {
-            type: Boolean,
-            default: false
-        },
-        thanksCheck: {
-            type:Boolean,
-            default: false
-        },
-        noThanksCheck: {
-            type:Boolean,
-            default: false
-        }
-      },
+    //   props: {
+    //     post: Object,
+    //     vibeCheck: {
+    //         type: Boolean,
+    //         default: false
+    //     },
+    //     thanksCheck: {
+    //         type:Boolean,
+    //         default: false
+    //     },
+    //     noThanksCheck: {
+    //         type:Boolean,
+    //         default: false
+    //     }
+    //   },
       methods: {
-//        setVibes(value) {
-//            Method to commit changes to vibes status
-//            this.$store.commit('SET_VIBES_STATUS', {post: this.post, value: value});
-//        },
-//        setThanks(value) {
-//            Method to commit changes to no thanks status
-//            this.$store.commit('SET_THANKS_STATUS', {post: this.post, value: value});
-//        }
-//        setNoThanks(value) {
-//            Method to commit changes to no thanks status
-//            this.$store.commit('SET_NOTHANKS_STATUS', {post: this.post, value: value});
-//        }
+       setVibes() {
+           this.vibeCheck = true;
+       },
+       setThanks() {
+           this.thanksCheck = true;
+       },
+       setNoThanks() {
+           this.noThanksCheck = true;
+       },
+       toggleHidden() {
+            this.isHidden = !this.isHidden;
+        }
       }
   }
   </script>
@@ -92,6 +95,7 @@
         width: 500px;
         height: 500px;
     }
+   
     .card::after {
         content: '';
         position: absolute;
@@ -114,6 +118,7 @@
         border-radius: 10px;
         background: #EDDEA4;
         z-index: -2;
+        box-shadow: 5px 10px #888888;
     }
 
     #post-title {
