@@ -24,4 +24,8 @@ export default {
     justify-content: space-evenly;
     flex-wrap: nowrap;
 }
+
+body {
+  background-color: lightblue;
+}
 </style>
