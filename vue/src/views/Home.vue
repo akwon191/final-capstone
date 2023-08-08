@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <h1>Home</h1>
-    <p>If you are seeing this, you are authenticated.</p>
     <feed-list />
   </div>
 </template>
@@ -16,3 +15,14 @@ export default {
   }
 };
 </script>
+
+<style>
+
+    h1 {
+        font-family: 'Courgette';
+        font-size: 3rem;
+        color: #365016;
+        margin: 20px;
+    }
+
+</style>
