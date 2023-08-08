@@ -75,7 +75,8 @@ VALUES ((SELECT user_id FROM users WHERE username = 'brianr'), (SELECT post_id F
 ((SELECT user_id FROM users WHERE username = 'brodinm'), (SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'brianr')),
 ((SELECT user_id FROM users WHERE username = 'andyk'), (SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'aartik'));
 
-
+--Profiles
+INSERT INTO profiles
 
 COMMIT TRANSACTION;
 
