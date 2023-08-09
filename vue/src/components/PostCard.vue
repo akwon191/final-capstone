@@ -2,7 +2,7 @@
     <div id="main">
         <div class="card">
             <h1 id="post-title">{{ $store.state.posts[0].postId }}</h1>
-            <!-- <img v-if="" v-bind:src="" /> Image Goes Here-->
+            <img :src="imageUrl" alt="Image" />
             <h2 id="post-author">{{ $store.state.posts[0].username }}</h2>
             <p id="description">{{ $store.state.posts[0].caption }}</p>
             <!-- When ready to add Thanks or No Thanks, the syntax will be the same:
@@ -13,7 +13,7 @@
 
                 The display can be changed by the index number (0 here) to determine which post data is being
                 retrieved. Our scroll mechanism will modify that index. That same index will be used to determine
-                the postId to send to our URL generator for image generation.
+                the postId to send to our URL generator for image generator.
              -->
             <div class="button-container">
                 <div class="button-vibes">
@@ -46,6 +46,7 @@
   
 <script>
     // import ImageService from "../services/ImageService.js"
+    import axios from 'axios'
 
     export default {
         name: 'post-card',
@@ -55,6 +56,7 @@
                 vibeCheck: false,
                 thanksCheck: false,
                 noThanksCheck: false,
+                imageUrl: '',
             };
         },
         methods: {
@@ -69,10 +71,23 @@
             },
             toggleHidden() {
                 this.isHidden = !this.isHidden;
-            }
+            },
+            fetchImage(imageId) {
+                axios.get(`http://localhost:9000/images/${imageId}`).then(response => {
+                    this.imageUrl = `data:image/jpeg;base64,${response.data.imageData}`;
+            })
+            .catch(error => {
+                console.error('Image could not be retrieved:', error);
+        });
+},
         },
         created() {
             this.$store.dispatch('fetchPosts');
+            if (this.$store.state.posts.length > 0) {
+                const imgId = this.$store.state.posts[0].img_id;
+                this.fetchImage(imgId);
+            }
+            
         }
     }
 </script>
