@@ -76,12 +76,21 @@ export default {
 <style scoped>
 
 #register {
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   height: 100vh;
   font-family: courgette;
   font-size: 1rem;
   color: #365016;
+  background: whitesmoke;
+  border: 10px solid #FF9B42;
+  border-radius: 10px;
+  width: calc(100% - 40px); /* Adjusted width to accommodate borders */
+  max-width: 500px; /* Limit width to 500px */
+  box-sizing: border-box; /* Include borders in width and height calculations */
+  padding: 20px;
 }
 
 .form-input-group {
