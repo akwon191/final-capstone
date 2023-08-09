@@ -1,13 +1,13 @@
 <template>
     <div id="main">
         <div class="card">
-            <h1 id="post-title">{{ $store.state.posts[0].postId }}</h1>
+            <h1 id="post-title">{{ post.postId }}</h1>
             <div class="image-container">
                 <img v-if="imageUrl" :src="imageUrl" alt="Image" />
             </div>
             <div class="post-content">
-                <h2 id="post-author">{{ $store.state.posts[0].username }}</h2>
-                <p id="description">{{ $store.state.posts[0].caption }}</p>
+                <h2 id="post-author">{{ post.username }}</h2>
+                <p id="description">{{ post.caption }}</p>
             </div>
             <!-- When ready to add Thanks or No Thanks, the syntax will be the same:
                 $store.state.posts[0].likeCount
@@ -61,13 +61,26 @@
                 thanksCheck: false,
                 noThanksCheck: false,
                 imageUrl: '',
+                
             };
+        },
+        computed: {
+            post() {
+                return this.$store.state.posts.length > 0 ? this.$store.state.posts[0] : {}
+            },
         },
         methods: {
             fetchPosts() {
                 axios.get('http://localhost:9000/posts')
                 .then(response => {
                     this.$store.commit('setPosts', response.data);
+                    if (response.data.length > 0) {
+                        
+                        // this.post = response.data[0];
+                        const imgId = this.post.img_id;
+                        this.fetchImage(imgId);
+                    }
+                    
             })
             .catch(error => {
                 console.error('Error fetching posts:', error);
@@ -94,16 +107,13 @@
         });
 },
         },
-        async created() {
-            try {
-                await this.fetchPosts();
-                if (this.$store.state.posts.length > 0) {
-                    const imgId = this.$store.state.posts[0].img_id;
-                    this.fetchImage(imgId);
-                }
-            } catch (error) {
-                console.error('Error retreiving posts:', error);
-            }
+        created() {
+            // try {
+                this.fetchPosts();
+               
+            // } catch (error) {
+            //     console.error('Error retreiving posts:', error);
+            // }
         }
     }
 </script>
