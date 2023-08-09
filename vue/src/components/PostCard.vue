@@ -21,19 +21,19 @@
              -->
             <div class="button-container">
                 <div class="button-vibes">
-                    <div @click="setVibes()" v-if="!vibeCheck"><i class="fa-solid fa-hand-holding-heart"></i></div>
-                    <div @click="setVibes()" v-if="vibeCheck"><i class="fa-solid fa-hand-holding-heart" style="color: #C52E1D;"></i></div>
+                    <div class="button-style" @click="setVibes()" v-show="!vibeCheck"><i class="fa-solid fa-hand-holding-heart" style="color: #57614b;"></i></div>
+                    <div class="button-style" @click="setVibes()" v-show="vibeCheck"><i class="fa-solid fa-hand-holding-heart" style="color: #C52E1D;"></i></div>
                 </div>
                 <div class="button-thanks">
-                    <div @click="setThanks()" v-if="!thanksCheck"><i class="fa-solid fa-thumbs-up"></i></div>
-                    <div @click="setThanks()" v-if="thanksCheck"><i class="fa-solid fa-thumbs-up" style="color: #C52E1D;"></i></div>
+                    <div class="button-style" @click="setThanks()" v-show="!thanksCheck"><i class="fa-solid fa-thumbs-up" style="color: #57614b;"></i></div>
+                    <div class="button-style" @click="setThanks()" v-show="thanksCheck"><i class="fa-solid fa-thumbs-up" style="color: #C52E1D;"></i></div>
                 </div>
                 <div class="button-nothanks">
-                    <div @click="setNoThanks()" v-if="!noThanksCheck"><i class="fa-solid fa-thumbs-down"></i></div>
-                    <div @click="setNoThanks()" v-if="noThanksCheck"><i class="fa-solid fa-thumbs-down" style="color: #C52E1D;"></i></div>
+                    <div class="button-style" @click="setNoThanks()" v-show="!noThanksCheck"><i class="fa-solid fa-thumbs-down" style="color: #57614b;"></i></div>
+                    <div class="button-style" @click="setNoThanks()" v-show="noThanksCheck"><i class="fa-solid fa-thumbs-down" style="color: #C52E1D;"></i></div>
                 </div>
-                <div @click="toggleHidden"><i class="fa-solid fa-comment" ></i></div>
-                <div><button class="fa-solid fa-ellipsis" ></button></div>
+                <div class="button-style" @click="toggleHidden"><i class="fa-solid fa-comment" style="color: #57614b;"></i></div>
+                <div class="button-style" ><button class="fa-solid fa-ellipsis" style="color: #57614b;"></button></div>
             </div>
         </div>
         <div class="card comments" v-if="isHidden">
@@ -126,7 +126,7 @@
         border-bottom: 10px solid #FF9B42;
         border-radius: 10px;
         width: 500px;
-        height: 500px;
+        height: 600px;
     }
    
     .card::after {
@@ -151,7 +151,7 @@
         border-radius: 10px;
         background: #EDDEA4;
         z-index: -2;
-        box-shadow: 5px 10px #888888;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
 
     #post-title {
@@ -159,6 +159,7 @@
         font-size: 2rem;
         color: #365016;
         margin: 20px;
+        text-shadow: 0px 0px 1px black;
     }
 
     #post-author {
@@ -166,6 +167,7 @@
         font-size: 1.5rem;
         color: #365016;
         margin: 20px;
+        text-shadow: 0px 0px 1px black;
     }
 
     #description {
@@ -191,7 +193,17 @@
         display: flex;
         justify-content: space-evenly;
         font-size: 2.0rem;
-        color: #57614b;
+    }
+
+    .button-style {
+        height: 50px;
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #365016;
+        border-radius: 15px;
+        box-shadow: rgba(54, 80, 22, 0.17) 0px -23px 25px 0px inset, rgba(54, 80, 22, 0.15) 0px -36px 30px 0px inset, rgba(54, 80, 22, 0.1) 0px -79px 40px 0px inset, rgba(54, 80, 22, 0.06) 0px 2px 1px, rgba(54, 80, 22, 0.09) 0px 4px 2px, rgba(54, 80, 22, 0.09) 0px 8px 4px, rgba(54, 80, 22, 0.09) 0px 16px 8px, rgba(54, 80, 22, 0.09) 0px 32px 16px;
     }
 
     .card.comments {
@@ -210,7 +222,7 @@
         top: 0px;
         border-top-left-radius: 0px;
         border-top-right-radius: 0px;
-    }
+    } 
 
     #comments-title {
         border-top: 5px solid #FF9B42;
