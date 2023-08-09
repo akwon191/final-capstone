@@ -30,45 +30,52 @@
             </div>
         </div>
     </div>
-  </template>
+</template>
   
-  <script>
-  export default {
+<script>
+    import PostService from "../services/PostService.js"
+    import ImageService from "../services/ImageService.js"
 
-      name: 'post-card',
-      data() {
-        return {
-            post: {
-                id: 0,
-                userId: 0,
-                dateTime: '',
-                caption: '',
-                imgDataId: 0,
+    export default {
+        name: 'post-card',
+        data() {
+            return {
+                post: {
+                    id: 0,
+                    userId: 0,
+                    dateTime: '',
+                    caption: '',
+                    imgDataId: 0
+                },
+                isHidden: true,
+                vibeCheck: false,
+                thanksCheck: false,
+                noThanksCheck: false,
+            };
+        },
+        methods: {
+            setVibes() {
+                this.vibeCheck = !this.vibeCheck;
             },
-            isHidden: true,
-            vibeCheck: false,
-            thanksCheck: false,
-            noThanksCheck: false,
-        };
-    },
-      methods: {
-       setVibes() {
-            this.vibeCheck = !this.vibeCheck;
+            setThanks() {
+                this.thanksCheck = !this.thanksCheck;
+            },
+            setNoThanks() {
+                this.noThanksCheck = !this.noThanksCheck;
+            },
+            toggleHidden() {
+                this.isHidden = !this.isHidden;
+            }
         },
-       setThanks() {
-            this.thanksCheck = !this.thanksCheck;
-        },
-       setNoThanks() {
-            this.noThanksCheck = !this.noThanksCheck;
-        },
-       toggleHidden() {
-            this.isHidden = !this.isHidden;
+        created() {
+            PostService.get(this.$props.id).then((response) => {
+                this.post = response.data;
+            });
         }
-      }
-  }
-  </script>
+    }
+</script>
   
-  <style>
+<style>
     @import url('https://fonts.googleapis.com/css2?family=Courgette&family=Lobster&display=swap');
     
     #main {
@@ -195,4 +202,4 @@
         margin: 10px;
     }
 
-  </style>
+</style>
