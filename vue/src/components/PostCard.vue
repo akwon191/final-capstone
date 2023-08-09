@@ -1,32 +1,32 @@
 <template>
     <div id="main">
         <div class="card">
-            <h1 id="post-title">Example Title</h1>
+            <h1 id="post-title">{{ post.title }}</h1>
             <!-- <img v-if="" v-bind:src="" /> Image Goes Here-->
-            <h2 id="post-author">Author Name</h2>
-            <p id="description">This is an example of how the description box will look. This text will be deleted later and linked to the description from the post.</p>
+            <h2 id="post-author">{{ post.author }}</h2>
+            <p id="description">{{ post.caption }}</p>
             <div class="button-container">
-                <div class="button-vibes" v-if="!vibeCheck">
-                    <button class="fa-solid fa-hand-holding-heart" v-on:click.prevent="setVibes()" >Good Vibes</button>
-                    <!-- <button class="fa-solid fa-hand-holding-heart" v-on:click.prevent="setVibes()" >Remove Vibes</button> -->
+                <div class="button-vibes">
+                    <div @click="setVibes()" v-if="!vibeCheck"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                    <div @click="setVibes()" v-if="vibeCheck"><i class="fa-solid fa-hand-holding-heart" style="color: #C52E1D;"></i></div>
                 </div>
-                <div class="button-thanks" v-if="!thanksCheck">
-                    <button class="fa-solid fa-thumbs-up" v-on:click.prevent="setThanks()" >Thanks</button>
-                    <!-- <button class="fa-solid fa-thumbs-up" v-on:click.prevent="setThanks()" >Remove No Thanks</button> -->
+                <div class="button-thanks">
+                    <div @click="setThanks()" v-if="!thanksCheck"><i class="fa-solid fa-thumbs-up"></i></div>
+                    <div @click="setThanks()" v-if="thanksCheck"><i class="fa-solid fa-thumbs-up" style="color: #C52E1D;"></i></div>
                 </div>
-                <div class="button-nothanks" v-if="!thanksCheck">
-                    <button class="fa-solid fa-thumbs-down" v-on:click.prevent="setNoThanks()" >No Thanks</button>
-                    <!-- <button class="fa-solid fa-thumbs-down" v-on:click.prevent="setThanks()" >Remove No Thanks</button> -->
+                <div class="button-nothanks">
+                    <div @click="setNoThanks()" v-if="!noThanksCheck"><i class="fa-solid fa-thumbs-down"></i></div>
+                    <div @click="setNoThanks()" v-if="noThanksCheck"><i class="fa-solid fa-thumbs-down" style="color: #C52E1D;"></i></div>
                 </div>
                 <div @click="toggleHidden"><i class="fa-solid fa-comment" ></i></div>
-                <button class="fa-solid fa-ellipsis" >Extra</button>
+                <div><button class="fa-solid fa-ellipsis" ></button></div>
             </div>
         </div>
         <div class="card comments" v-if="isHidden">
             <h1 id="comments-title">Comments</h1>
-            <div class="comment" >
-                <h3 class="comment-author">Comment Author</h3>
-                <p class="comment-text">This is an example of how the comment box will look. This text will be deleted later and linked to the comments from the post.</p>
+            <div class="comment">
+                <h3 class="comment-author">{{ comments.author }}</h3>
+                <p class="comment-text">{{ comments.caption }}</p>
             </div>
         </div>
     </div>
@@ -34,40 +34,33 @@
   
   <script>
   export default {
+
       name: 'post-card',
       data() {
         return {
+            post: {
+                id: 0,
+                userId: 0,
+                dateTime: '',
+                caption: '',
+                imgDataId: 0,
+            },
             isHidden: true,
             vibeCheck: false,
             thanksCheck: false,
             noThanksCheck: false,
         };
     },
-    //   props: {
-    //     post: Object,
-    //     vibeCheck: {
-    //         type: Boolean,
-    //         default: false
-    //     },
-    //     thanksCheck: {
-    //         type:Boolean,
-    //         default: false
-    //     },
-    //     noThanksCheck: {
-    //         type:Boolean,
-    //         default: false
-    //     }
-    //   },
       methods: {
        setVibes() {
-           this.vibeCheck = true;
-       },
+            this.vibeCheck = !this.vibeCheck;
+        },
        setThanks() {
-           this.thanksCheck = true;
-       },
+            this.thanksCheck = !this.thanksCheck;
+        },
        setNoThanks() {
-           this.noThanksCheck = true;
-       },
+            this.noThanksCheck = !this.noThanksCheck;
+        },
        toggleHidden() {
             this.isHidden = !this.isHidden;
         }
