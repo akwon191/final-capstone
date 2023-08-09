@@ -66,7 +66,7 @@
         },
         computed: {
             post() {
-                return this.$store.state.posts.length > 0 ? this.$store.state.posts[0] : {}
+                return this.$store.state.posts.length > 0 ? this.$store.state.posts[5] : {}
             },
         },
         methods: {
@@ -108,12 +108,9 @@
 },
         },
         created() {
-            // try {
+        
                 this.fetchPosts();
                
-            // } catch (error) {
-            //     console.error('Error retreiving posts:', error);
-            // }
         }
     }
 </script>
