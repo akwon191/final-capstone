@@ -80,16 +80,17 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 80vh;
   font-family: courgette;
   font-size: 1rem;
   color: #365016;
   background: whitesmoke;
   border: 10px solid #FF9B42;
   border-radius: 10px;
-  width: calc(100% - 40px); /* Adjusted width to accommodate borders */
-  max-width: 500px; /* Limit width to 500px */
-  box-sizing: border-box; /* Include borders in width and height calculations */
+  width: calc(100% - 40px); 
+  max-width: 500px; 
+  margin: 0 auto;
+  box-sizing: border-box;  
   padding: 20px;
 }
 
