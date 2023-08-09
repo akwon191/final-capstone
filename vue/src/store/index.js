@@ -43,16 +43,4 @@ export default new Vuex.Store({
       state.posts = posts;
     },
   },
-  actions: {
-    fetchPosts({ commit }) {
-      axios.get('http://localhost:9000/posts')
-        .then(response => {
-          commit('setPosts', response.data);
-        })
-        .catch(error => {
-          console.error('Error fetching posts:', error);
-        });
-
-    }
-  },
 })

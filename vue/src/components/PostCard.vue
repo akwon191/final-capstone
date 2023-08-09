@@ -2,9 +2,13 @@
     <div id="main">
         <div class="card">
             <h1 id="post-title">{{ $store.state.posts[0].postId }}</h1>
-            <img :src="imageUrl" alt="Image" />
-            <h2 id="post-author">{{ $store.state.posts[0].username }}</h2>
-            <p id="description">{{ $store.state.posts[0].caption }}</p>
+            <div class="image-container">
+                <img v-if="imageUrl" :src="imageUrl" alt="Image" />
+            </div>
+            <div class="post-content">
+                <h2 id="post-author">{{ $store.state.posts[0].username }}</h2>
+                <p id="description">{{ $store.state.posts[0].caption }}</p>
+            </div>
             <!-- When ready to add Thanks or No Thanks, the syntax will be the same:
                 $store.state.posts[0].likeCount
                 $store.state.posts[0].dislikeCount
@@ -52,7 +56,7 @@
         name: 'post-card',
         data() {
             return {
-                isHidden: true,
+                isHidden: false,
                 vibeCheck: false,
                 thanksCheck: false,
                 noThanksCheck: false,
@@ -60,6 +64,15 @@
             };
         },
         methods: {
+            fetchPosts() {
+                axios.get('http://localhost:9000/posts')
+                .then(response => {
+                    this.$store.commit('setPosts', response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching posts:', error);
+            });
+            },
             setVibes() {
                 this.vibeCheck = !this.vibeCheck;
             },
@@ -74,20 +87,23 @@
             },
             fetchImage(imageId) {
                 axios.get(`http://localhost:9000/images/${imageId}`).then(response => {
-                    this.imageUrl = `data:image/jpeg;base64,${response.data.imageData}`;
+                    this.imageUrl = `data:image/jpg;base64,${response.data.imageData}`;
             })
             .catch(error => {
                 console.error('Image could not be retrieved:', error);
         });
 },
         },
-        created() {
-            this.$store.dispatch('fetchPosts');
-            if (this.$store.state.posts.length > 0) {
-                const imgId = this.$store.state.posts[0].img_id;
-                this.fetchImage(imgId);
+        async created() {
+            try {
+                await this.fetchPosts();
+                if (this.$store.state.posts.length > 0) {
+                    const imgId = this.$store.state.posts[0].img_id;
+                    this.fetchImage(imgId);
+                }
+            } catch (error) {
+                console.error('Error retreiving posts:', error);
             }
-            
         }
     }
 </script>
@@ -157,6 +173,18 @@
         font-size: 1rem;
         color: #365016;
         margin: 20px;
+    }
+
+    .image-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 10px auto; /* Adjust margin as needed */
+    }
+    img {
+        max-width: 100%;
+        max-height: 300px; /* Adjust height as needed */
+        object-fit: contain; /* or "cover" depending on design */
     }
 
     .button-container {
