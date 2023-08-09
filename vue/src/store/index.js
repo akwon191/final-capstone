@@ -19,7 +19,8 @@ if(currentToken != null) {
 export default new Vuex.Store({
   state: {
     token: currentToken || '',
-    user: currentUser || {}
+    user: currentUser || {},
+    posts: [],
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -37,6 +38,21 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
+    },
+    setPosts(state,posts) {
+      state.posts = posts;
+    },
+  },
+  actions: {
+    fetchPosts({ commit }) {
+      axios.get('http://localhost:9000/posts')
+        .then(response => {
+          commit('setPosts', response.data);
+        })
+        .catch(error => {
+          console.error('Error fetching posts:', error);
+        });
+
     }
-  }
+  },
 })

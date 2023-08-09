@@ -1,10 +1,20 @@
 <template>
     <div id="main">
         <div class="card">
-            <h1 id="post-title">{{ post.title }}</h1>
+            <h1 id="post-title">{{ $store.state.posts[0].postId }}</h1>
             <!-- <img v-if="" v-bind:src="" /> Image Goes Here-->
-            <h2 id="post-author">{{ post.author }}</h2>
-            <p id="description">{{ post.caption }}</p>
+            <h2 id="post-author">{{ $store.state.posts[0].username }}</h2>
+            <p id="description">{{ $store.state.posts[0].caption }}</p>
+            <!-- When ready to add Thanks or No Thanks, the syntax will be the same:
+                $store.state.posts[0].likeCount
+                $store.state.posts[0].dislikeCount
+                $store.state.posts[0].vibeCount
+                $store.state.posts[0].dateTime
+
+                The display can be changed by the index number (0 here) to determine which post data is being
+                retrieved. Our scroll mechanism will modify that index. That same index will be used to determine
+                the postId to send to our URL generator for image generation.
+             -->
             <div class="button-container">
                 <div class="button-vibes">
                     <div @click="setVibes()" v-if="!vibeCheck"><i class="fa-solid fa-hand-holding-heart"></i></div>
@@ -24,29 +34,23 @@
         </div>
         <div class="card comments" v-if="isHidden">
             <h1 id="comments-title">Comments</h1>
-            <div class="comment">
-                <h3 class="comment-author">{{ comments.author }}</h3>
-                <p class="comment-text">{{ comments.caption }}</p>
+            <div class="comment" v-if="this.$store.state.posts.length > 0">
+            <div class="single-comment" v-for="(comment, commentIndex) in this.$store.state.posts[0].comments" :key="commentIndex">
+                <h4 class="comment-author">{{ comment.comment_id }}</h4>
+                <p class="comment-text">{{ comment.comment_text }}</p>
             </div>
+        </div>
         </div>
     </div>
 </template>
   
 <script>
-    import PostService from "../services/PostService.js"
-    import ImageService from "../services/ImageService.js"
+    // import ImageService from "../services/ImageService.js"
 
     export default {
         name: 'post-card',
         data() {
             return {
-                post: {
-                    id: 0,
-                    userId: 0,
-                    dateTime: '',
-                    caption: '',
-                    imgDataId: 0
-                },
                 isHidden: true,
                 vibeCheck: false,
                 thanksCheck: false,
@@ -68,9 +72,7 @@
             }
         },
         created() {
-            PostService.get(this.$props.id).then((response) => {
-                this.post = response.data;
-            });
+            this.$store.dispatch('fetchPosts');
         }
     }
 </script>
