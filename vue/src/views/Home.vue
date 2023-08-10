@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <page-headers />
     <h1 id="home-text">Home</h1>
     <feed-list />
   </div>
@@ -7,11 +8,13 @@
 
 <script>
 import FeedList from '../components/FeedList.vue';
+import PageHeaders from '../components/Headers.vue'
 
 export default {
   name: "home",
   components: {
-    FeedList
+    FeedList,
+    PageHeaders
   }
 };
 </script>

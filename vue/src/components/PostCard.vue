@@ -75,13 +75,9 @@
             };
         },
         computed: {
-            post() {
-<<<<<<< HEAD
-                return this.$store.state.posts.length > 0 ? this.$store.state.posts[0] : {}
-=======
-                return this.$store.state.posts.length > 0 ? this.$store.state.posts[count.value] : {}
->>>>>>> 2d95da21aac6a3fc1b0cb804714887824a502784
-            },
+        post() {
+            return this.$store.state.posts.length > 0 ? this.$store.state.posts[count.value] : {}
+        },
         },
         methods: {
             nextPost() {
