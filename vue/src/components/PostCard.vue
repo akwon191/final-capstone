@@ -1,9 +1,10 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
 <template>
     <div id="main">
         <div class="card">
             <h1 id="post-title">{{ post.postId }}</h1>
             <div class="image-container">
-                <img v-if="imageUrl" :src="imageUrl" alt="Image" />
+                <img v-if="imageUrl" :src="imageUrl" alt="Image" @click="nextPost()" />
             </div>
             <div class="post-content">
                 <h2 id="post-author">{{ post.username }}</h2>
@@ -36,6 +37,7 @@
                 <div class="button-style" ><button class="fa-solid fa-ellipsis" style="color: #57614b;"></button></div>
             </div>
         </div>
+        <transition name="expand">
         <div class="card comments" v-if="isHidden">
             <h1 id="comments-title">Comments</h1>
             <div class="comment" v-if="this.$store.state.posts.length > 0">
@@ -43,15 +45,23 @@
                 <h4 class="comment-author">{{ comment.comment_id }}</h4>
                 <p class="comment-text">{{ comment.comment_text }}</p>
             </div>
+            </div>
         </div>
-        </div>
+        </transition>
     </div>
 </template>
   
 <script>
-    // import ImageService from "../services/ImageService.js"
+    //import ImageService from "../services/ImageService.js"
     import axios from 'axios'
+    import { ref } from 'vue'
+    const count = ref(0)
 
+ //actions
+    function postIndex(i) {
+        count.value = i
+    }
+    
     export default {
         name: 'post-card',
         data() {
@@ -66,10 +76,21 @@
         },
         computed: {
             post() {
+<<<<<<< HEAD
                 return this.$store.state.posts.length > 0 ? this.$store.state.posts[0] : {}
+=======
+                return this.$store.state.posts.length > 0 ? this.$store.state.posts[count.value] : {}
+>>>>>>> 2d95da21aac6a3fc1b0cb804714887824a502784
             },
         },
         methods: {
+            nextPost() {
+                const i= ++count.value%this.$store.state.posts.length;
+                console.log(i);
+                postIndex(i);
+                const imgId = this.post.img_id;
+                        this.fetchImage(imgId);
+            },
             fetchPosts() {
                 axios.get('http://localhost:9000/posts')
                 .then(response => {
@@ -113,10 +134,15 @@
                
         }
     }
+
 </script>
   
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Courgette&family=Lobster&display=swap');
+
+    html {
+    overflow-y: scroll;
+    }
     
     #main {
         display: flex;
@@ -250,6 +276,7 @@
         position: relative;
         clear: both;
         background: rgb(226, 226, 226);
+        transition: opacity 0.5s;
     }
 
     .comment-author {
@@ -264,6 +291,16 @@
         font-size: 0.9rem;
         color: #365016;
         margin: 10px;
+    }
+
+    .expand-enter-active, .expand-leave-active {
+        transition: max-height .5s ease;
+        max-height: 400px;
+    }
+
+    .expand-enter, .expand-leave-to {
+        max-height: 0;
+        overflow: hidden;
     }
 
 </style>
