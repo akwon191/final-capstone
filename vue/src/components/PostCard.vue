@@ -3,7 +3,7 @@
         <div class="card">
             <h1 id="post-title">{{ post.postId }}</h1>
             <div class="image-container">
-                <img v-if="imageUrl" :src="imageUrl" alt="Image" />
+                <img v-if="imageUrl" :src="imageUrl" alt="Image" @click="nextPost()" />
             </div>
             <div class="post-content">
                 <h2 id="post-author">{{ post.username }}</h2>
@@ -49,9 +49,15 @@
 </template>
   
 <script>
-    // import ImageService from "../services/ImageService.js"
+    //import ImageService from "../services/ImageService.js"
     import axios from 'axios'
+    import { ref } from 'vue'
+    const count = ref(0)
 
+ //actions
+    function postIndex(i) {
+        count.value = i
+    }
     export default {
         name: 'post-card',
         data() {
@@ -66,10 +72,17 @@
         },
         computed: {
             post() {
-                return this.$store.state.posts.length > 0 ? this.$store.state.posts[5] : {}
+                return this.$store.state.posts.length > 0 ? this.$store.state.posts[count.value] : {}
             },
         },
         methods: {
+            nextPost() {
+                const i= ++count.value%this.$store.state.posts.length;
+                console.log(i);
+                postIndex(i);
+                const imgId = this.post.img_id;
+                        this.fetchImage(imgId);
+            },
             fetchPosts() {
                 axios.get('http://localhost:9000/posts')
                 .then(response => {
