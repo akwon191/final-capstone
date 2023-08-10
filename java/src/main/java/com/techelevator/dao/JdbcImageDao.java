@@ -39,38 +39,49 @@ public class JdbcImageDao implements ImageDao {
         }, id);
     }
 
-    public Image uploadImage(Image  img) {
+
+
+    /*public Image uploadImage(Image img) {
 
         Image newImg = null;
-        String sql = "INSERT INTO image_data (img_name, image_data) VALUES (?, ?) RETURNING id";
+        String sql = "INSERT INTO image_data (img_name, image_data) VALUES (?, ?) RETURNING image_data_id";
 
+
+       // img.getImageData()
         try {
-            int imgId = jdbcTemplate.queryForObject(sql, int.class, img.getImageName(), img.getImageData());//we can also use Long.class
+            long imgId = jdbcTemplate.queryForObject(sql, int.class, img.getImageName(), img.getImageData());
             newImg = getImageDataStringById(imgId);
         } catch (EmptyResultDataAccessException ex) {
             return null;
         }
         return newImg;
-        // create params array for all ? params
-                 /*   Object[] params = { id };
-                    RowMapper<Image> rowMapper = (resultSet, rowNum) -> {
-                    int imageId = resultSet.getInt("img_id");
-                    String imageName = resultSet.getString("image_name");
+    }
+}*/
+    public Image uploadImage(Image img) {
 
-                    byte[] imageData = resultSet.getBytes("image_data");
-                    String imageDataString = Base64.getEncoder().encodeToString(imageData);
+        Image newImg = null;
+        String sql = "INSERT INTO image_data (img_name, image_data) VALUES (?, ?) RETURNING image_data_id";
 
-                    return new Image(imageId, imageName, imageDataString);
-                };
+        //create params array for all ? params
+        Object[] params = {img.getImageName(), img.getImageData()};
+        RowMapper<Image> rowMapper = (resultSet, rowNum) -> {
+            int imageId = resultSet.getInt("img_id");
+            String imageName = resultSet.getString("image_name");
 
-                try {
-                    return jdbcTemplate.queryForObject(sql, rowMapper, params);
-                } catch (EmptyResultDataAccessException ex) {
-                    return null;
-                }*/
-        // }
+            byte[] imageData = resultSet.getBytes("image_data");
+            String imageDataString = Base64.getEncoder().encodeToString(imageData);
+
+            return new Image(imageId, imageName, imageDataString);
+        };
+
+       try {
+            return jdbcTemplate.queryForObject(sql, rowMapper, params);
+        } catch (EmptyResultDataAccessException ex) {
+            return null;
+        }
 
     }
-
     }
+
+
 

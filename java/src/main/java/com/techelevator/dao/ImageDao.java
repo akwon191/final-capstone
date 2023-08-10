@@ -6,4 +6,5 @@ public interface ImageDao {
 
     Image getImageDataStringById(long id);
      Image uploadImage(Image  img);
+
 }

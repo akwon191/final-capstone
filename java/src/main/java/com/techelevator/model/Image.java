@@ -31,9 +31,7 @@ public class Image {
         this.imageName = imageName;
     }
 
-    public String getImageData() {
-        return imageData;
-    }
+    public String getImageData() { return imageData;}
 
     public void setImageData(String imageData) {
         this.imageData = imageData;
