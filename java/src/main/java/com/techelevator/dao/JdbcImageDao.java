@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 
 import com.techelevator.model.Image;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -36,4 +37,29 @@ public class JdbcImageDao implements ImageDao {
             return newImg;
         }, id);
     }
-}
+
+    public Image uploadImage(long id) {
+        String sql = "SELECT * FROM image_upload WHERE img_id = ?";
+
+                    // create params array for all ? params
+                    Object[] params = { id };
+                    RowMapper<Image> rowMapper = (resultSet, rowNum) -> {
+                    int imageId = resultSet.getInt("img_id");
+                    String imageName = resultSet.getString("image_name");
+
+                    byte[] imageData = resultSet.getBytes("image_data");
+                    String imageDataString = Base64.getEncoder().encodeToString(imageData);
+
+                    return new Image(imageId, imageName, imageDataString);
+                };
+
+                try {
+                    return jdbcTemplate.queryForObject(sql, rowMapper, params);
+                } catch (EmptyResultDataAccessException ex) {
+                    return null;
+                }
+            }
+
+
+    }
+
