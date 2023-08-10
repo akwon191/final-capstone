@@ -18,4 +18,6 @@ public class ImageService {
     public Image getImageDataStringById(long id) {
         return imageDao.getImageDataStringById(id);
     }
+    public Image uploadImage(Image image) { return imageDao.uploadImage(image); }
+
 }
