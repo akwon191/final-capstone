@@ -34,6 +34,7 @@
 <script>
 import authService from "../services/AuthService";
 
+
 export default {
   name: "login",
   components: {},
@@ -74,7 +75,7 @@ export default {
 body {
   min-height: 100vh; 
   margin: 0;
-  background: linear-gradient(to bottom, lightblue, #EDDEA4); 
+  background: linear-gradient(to bottom, lightblue, #EDDEA4, lightblue); 
 }
 
 #login {
