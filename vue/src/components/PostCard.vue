@@ -130,6 +130,10 @@
   
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Courgette&family=Lobster&display=swap');
+
+    html {
+    overflow-y: scroll;
+    }
     
     #main {
         display: flex;
