@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <page-headers />
-    <h1 id="home-text">Home</h1>
+    <!-- <h1 id="home-text">Home</h1> -->
     <feed-list />
   </div>
 </template>

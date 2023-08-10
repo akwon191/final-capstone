@@ -2,14 +2,14 @@
     <header>
         <section>
             <div id="navigation-bar">
-                <img src="@/assets/Uplift logo1.png" alt="Uplift logo">
+                <img id="logo" src="@/assets/Uplift logo1.png" alt="Uplift logo">
                 <h1 id="uplift-title">Uplift</h1>
                 <div id="navigation-buttons">
-                    <button id="home">Home</button>
-                    <button id="my-vibes"><i class="fa-solid fa-heart"></i></button>
-                    <button id="upload"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
-                    <button id="log-out"><i class="fa-solid fa-right-from-bracket"></i></button>
-                    <button id="profile"><i class="fa-solid fa-user"></i></button>
+                    <router-link id="home" v-bind:to="{ name: 'home' }"><i class="fa-solid fa-house" style="color: #57614b;"></i></router-link>
+                    <router-link id="my-vibes" v-bind:to="{ name: 'vibes' }"><i class="fa-solid fa-heart" style="color: #57614b;"></i></router-link>
+                    <router-link id="upload" v-bind:to="{ name: 'upload' }"><i class="fa-solid fa-arrow-up-from-bracket" style="color: #57614b;"></i></router-link>
+                    <router-link id="logout" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''"><i class="fa-solid fa-right-from-bracket" style="color: #57614b;"></i></router-link>
+                    <router-link id="profile" v-bind:to="{ name: 'profile' }"><i class="fa-solid fa-user" style="color: #57614b;"></i></router-link>
                 </div>
             </div>
         </section>
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+
 export default {
     name: 'page-headers',
     components: {
@@ -25,6 +26,44 @@ export default {
 
 </script>
 
+
+
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Courgette&family=Lobster&display=swap');
+
+    html, body {
+    height: 100%;
+    margin: 0;
+    }
+
+    #navigation-bar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        border-bottom: 10px solid #FF9B42;
+        background-color: whitesmoke;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
+    #logo {
+        max-width: 80px; 
+        height: auto;
+    }
+
+    #uplift-title {
+        font-family: 'Courgette';
+        font-size: 2.5rem;
+        color: #365016;
+        margin: 10px;
+        text-shadow: 0px 0px 1px black;
+    }
+
+    #navigation-buttons {
+        display: flex;
+        font-size: 2rem;
+        flex-grow: 1;
+        justify-content: space-evenly;
+    }
+
 
 </style>
