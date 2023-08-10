@@ -66,7 +66,7 @@
         },
         computed: {
             post() {
-                return this.$store.state.posts.length > 0 ? this.$store.state.posts[5] : {}
+                return this.$store.state.posts.length > 0 ? this.$store.state.posts[0] : {}
             },
         },
         methods: {

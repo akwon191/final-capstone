@@ -1,8 +1,16 @@
 <template>
     <section>
-      <div class="feed-list">
-        <post-card />
-      </div>
+      <!-- <div class = "container">
+        <div class="feed-list-left">
+          <post-card />
+        </div> -->
+        <div class="feed-list">
+          <post-card />
+        </div>
+        <!-- <div class="feed-list-right">
+          <post-card />
+        </div>
+      </div> -->
     </section>
 </template>
 
@@ -27,5 +35,23 @@ export default {
 
 body {
   background-color: lightblue;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 10px;
+}
+
+.feed-list-left {
+  margin-left: none;
+  margin-right: 250px;
+
+}
+
+.feed-list-right {
+  margin-left: 250px;
+  margin-right: none;
 }
 </style>
