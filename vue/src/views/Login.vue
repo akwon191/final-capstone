@@ -75,7 +75,7 @@ export default {
 body {
   min-height: 100vh; 
   margin: 0;
-  background: linear-gradient(to bottom, lightblue, #EDDEA4, lightblue); 
+  background: linear-gradient(to bottom, lightblue, #edffeb, lightblue); 
 }
 
 #login {
