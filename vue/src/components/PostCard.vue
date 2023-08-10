@@ -1,3 +1,4 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
 <template>
     <div id="main">
         <div class="card">
@@ -36,6 +37,7 @@
                 <div class="button-style" ><button class="fa-solid fa-ellipsis" style="color: #57614b;"></button></div>
             </div>
         </div>
+        <transition name="expand">
         <div class="card comments" v-if="isHidden">
             <h1 id="comments-title">Comments</h1>
             <div class="comment" v-if="this.$store.state.posts.length > 0">
@@ -43,8 +45,9 @@
                 <h4 class="comment-author">{{ comment.comment_id }}</h4>
                 <p class="comment-text">{{ comment.comment_text }}</p>
             </div>
+            </div>
         </div>
-        </div>
+        </transition>
     </div>
 </template>
   
@@ -58,6 +61,7 @@
     function postIndex(i) {
         count.value = i
     }
+    
     export default {
         name: 'post-card',
         data() {
@@ -126,6 +130,7 @@
                
         }
     }
+
 </script>
   
 <style>
@@ -267,6 +272,7 @@
         position: relative;
         clear: both;
         background: rgb(226, 226, 226);
+        transition: opacity 0.5s;
     }
 
     .comment-author {
@@ -281,6 +287,16 @@
         font-size: 0.9rem;
         color: #365016;
         margin: 10px;
+    }
+
+    .expand-enter-active, .expand-leave-active {
+        transition: max-height .5s ease;
+        max-height: 400px;
+    }
+
+    .expand-enter, .expand-leave-to {
+        max-height: 0;
+        overflow: hidden;
     }
 
 </style>

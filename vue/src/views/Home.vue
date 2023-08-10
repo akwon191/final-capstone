@@ -29,11 +29,11 @@ export default {
         border-right: 5px solid #FF9B42;
         border-left: 5px solid #FF9B42;
         border-bottom: 5px solid #FF9B42;
-        border-radius: 5px;
+        border-radius: 50px;
         width: fit-content;
         padding-right: 10px;
         padding-left: 100px;
-        margin-left: -20px;
+        margin-left: -50px;
     }
    
     #home-text::after {
@@ -43,7 +43,7 @@ export default {
         left: -10px;
         right: -10px;
         bottom: -10px;
-        border-radius: 10px;
+        border-radius: 50px;
         background: #F7A072;
         z-index: -1;
     }
@@ -55,7 +55,7 @@ export default {
         left: -15px;
         right: -15px;
         bottom: -15px;
-        border-radius: 10px;
+        border-radius: 50px;
         background: #EDDEA4;
         z-index: -2;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
