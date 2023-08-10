@@ -69,8 +69,13 @@ export default {
 };
 </script>
 
-<style scoped>
- @import url('https://fonts.googleapis.com/css2?family=Courgette&family=Lobster&display=swap');
+<style >
+
+body {
+  min-height: 100vh; 
+  margin: 0;
+  background: linear-gradient(to bottom, lightblue, #EDDEA4); 
+}
 
 #login {
   display: flex;
@@ -118,7 +123,31 @@ export default {
 .form-input-group {
   margin-bottom: 1rem;
 }
+
 label {
   margin-right: 0.5rem;
 }
+
+button[type="submit"] {
+  background-color: whitesmoke;
+  border: 2px solid #FF9B42;
+  border-radius: 15px;
+  font-family: courgette;
+  color: #365016;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #FF9B42;
+  color: #365016;
+}
+
+.login-form {
+  text-align: left;
+}
+
+
 </style>

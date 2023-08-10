@@ -1,7 +1,8 @@
 <template>
   <div id="register" class="text-center">
     <form @submit.prevent="register">
-      <h1>Create Account</h1>
+      <h1>Be the Moment</h1> 
+      <h1>Create Vibes with Us</h1>
       <div role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
@@ -14,7 +15,7 @@
         <input type="password" id="password" v-model="user.password" required />
       </div>
       <div class="form-input-group">
-        <label for="confirmPassword">Confirm Password</label>
+        <label for="confirmPassword">Double check Password vibes</label>
         <input type="password" id="confirmPassword" v-model="user.confirmPassword" required />
       </div>
       <button type="submit">Create Account</button>
@@ -94,6 +95,22 @@ export default {
   padding: 20px;
 }
 
+button[type="submit"] {
+  background-color: whitesmoke;
+  border: 2px solid #FF9B42;
+  border-radius: 15px;
+  font-family: courgette;
+  color: #365016;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #FF9B42;
+  color: #365016;
+}
 .form-input-group {
   margin-bottom: 1rem;
 }
