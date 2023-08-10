@@ -3,6 +3,7 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Image;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -38,11 +39,20 @@ public class JdbcImageDao implements ImageDao {
         }, id);
     }
 
-    public Image uploadImage(long id) {
-        String sql = "SELECT * FROM image_upload WHERE img_id = ?";
+    public Image uploadImage(Image  img) {
 
-                    // create params array for all ? params
-                    Object[] params = { id };
+        Image newImg = null;
+        String sql = "INSERT INTO image_data (img_name, image_data) VALUES (?, ?) RETURNING id";
+
+        try {
+            int imgId = jdbcTemplate.queryForObject(sql, int.class, img.getImageName(), img.getImageData());//we can also use Long.class
+            newImg = getImageDataStringById(imgId);
+        } catch (EmptyResultDataAccessException ex) {
+            return null;
+        }
+        return newImg;
+        // create params array for all ? params
+                 /*   Object[] params = { id };
                     RowMapper<Image> rowMapper = (resultSet, rowNum) -> {
                     int imageId = resultSet.getInt("img_id");
                     String imageName = resultSet.getString("image_name");
@@ -57,9 +67,10 @@ public class JdbcImageDao implements ImageDao {
                     return jdbcTemplate.queryForObject(sql, rowMapper, params);
                 } catch (EmptyResultDataAccessException ex) {
                     return null;
-                }
-            }
+                }*/
+        // }
 
+    }
 
     }
 
