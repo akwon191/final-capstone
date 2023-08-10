@@ -23,6 +23,7 @@ public class JdbcImageDao implements ImageDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    @Override
     public Image getImageDataStringById(long id) {
         String sql = "SELECT * FROM image_data WHERE image_data_id = ?";
 
@@ -57,6 +58,7 @@ public class JdbcImageDao implements ImageDao {
         return newImg;
     }
 }*/
+    @Override
     public Image uploadImage(Image img) {
 
         Image newImg = null;

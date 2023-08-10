@@ -76,4 +76,5 @@ public class JdbcPostDao implements PostDao {
         String commentText = rowSet.getString("comment_text");
         return new Comment(commentId, postId, userId, dateTime, commentText);
     }
+
 }
