@@ -3,49 +3,57 @@ import java.sql.Timestamp;
 
 public class Comment {
 
-    private int comment_id;
-    private int post_id;
-    private int user_id;
-    private Timestamp date_time;
-    private String comment_text;
+    private int commentId;
+    private int postId;
+    private int userId;
+    private Timestamp dateTime;
+    private String commentText;
 
-    public Comment(int comment_id, int post_id, int user_id, Timestamp date_time, String comment_text) {
-        this.comment_id = comment_id;
-        this.post_id = post_id;
-        this.user_id = user_id;
-        this.date_time = date_time;
-        this.comment_text = comment_text;
+    public Comment(int commentId, int postId, int userId, Timestamp dateTime, String commentText) {
+        this.commentId= commentId;
+        this.postId = postId;
+        this.userId = userId;
+        this.dateTime = dateTime;
+        this.commentText = commentText;
     }
 
-    public int getComment_id() {
-        return comment_id;
+    public int getCommentId() {
+        return commentId;
     }
 
-    public void setComment_id(int comment_id) {
-        this.comment_id = comment_id;
+    public void setCommentId(int commentId) {
+        this.commentId = commentId;
     }
 
-    public int getPost_id() {
-        return post_id;
+    public int getPostId() {
+        return postId;
     }
 
-    public void setPost_id(int post_id) {
-        this.post_id = post_id;
+    public void setPostId(int postId) {
+        this.postId = postId;
     }
 
-    public Timestamp getDate_time() {
-        return date_time;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setDate_time(Timestamp date_time) {
-        this.date_time = date_time;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public String getComment_text() {
-        return comment_text;
+    public Timestamp getDateTime() {
+        return dateTime;
     }
 
-    public void setComment_text(String comment_text) {
-        this.comment_text = comment_text;
+    public void setDateTime(Timestamp dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public String getCommentText() {
+        return commentText;
+    }
+
+    public void setCommentText(String commentText) {
+        this.commentText = commentText;
     }
 }
