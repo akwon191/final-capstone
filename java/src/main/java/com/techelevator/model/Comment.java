@@ -56,4 +56,15 @@ public class Comment {
     public void setCommentText(String commentText) {
         this.commentText = commentText;
     }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "commentId=" + commentId +
+                ", postId=" + postId +
+                ", userId=" + userId +
+                ", dateTime=" + dateTime +
+                ", commentText='" + commentText + '\'' +
+                '}';
+    }
 }
