@@ -50,7 +50,7 @@ export default {
 }
 
 .upload-button {
-  background-color: #3490dc;
+  background-color: #EA70CF;;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -59,6 +59,6 @@ export default {
 }
 
 .upload-button:hover {
-  background-color: #2779bd;
+  background-color: #FFBA29;
 }
 </style>
