@@ -6,6 +6,7 @@ import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
 import Vibes from '../views/Vibes.vue'
+import Upload from '../views/Upload.vue'
 
 Vue.use(Router)
 
@@ -58,6 +59,14 @@ const router = new Router({
       path: '/vibes',
       name: 'vibes',
       component: Vibes,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/upload',
+      name: 'upload',
+      component: Upload,
       meta: {
         requiresAuth: true
       }
