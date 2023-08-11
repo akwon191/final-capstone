@@ -1,41 +1,58 @@
 <template>
-    <section>
-      <div class = "container">
-        <!-- <div class="feed-list-left">
-          <post-card />
-        </div> -->
-        <div class="feed-list">
-          <post-card />
-        </div>
-        <!-- <div class="feed-list-right">
-          <post-card />
-        </div> -->
+  <section>
+    <div class="container">
+      <div
+        class="feed-list"
+        ref="feedList"
+      >
+        <post-card
+          v-for="(post, index) in posts"
+          :key="index"
+          :postIndex="index"
+          class="post-card-item"
+        />
       </div>
-      <div id="arrows">
-          <div class="orange-triangle"></div>
-          <div class="peach-triangle"></div>
-          <div class="yellow-triangle"></div>
-      </div>
-    </section>
+    </div>
+    <div id="arrows">
+      <div class="orange-triangle"></div>
+      <div class="peach-triangle"></div>
+      <div class="yellow-triangle"></div>
+    </div>
+  </section>
 </template>
 
 <script>
-import PostCard from '../components/PostCard.vue';
+import PostCard from "../components/PostCard.vue";
+import { mapActions } from "vuex";
 
 export default {
-    name: 'feed-list',
-    components: {
-        PostCard
-    }
-}
-
+  name: "feed-list",
+  components: {
+    PostCard,
+  },
+  computed: {
+    posts() {
+      return this.$store.state.posts.length > 0 ? this.$store.state.posts : {};
+    },
+  },
+  created() {
+    this.fetchPosts();
+  },
+  methods: {
+    ...mapActions(["fetchPosts"]),
+  },
+};
 </script>
 
 <style>
 .feed-list {
-    display:flex;
-    justify-content: space-evenly;
-    flex-wrap: nowrap;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: nowrap;
+}
+
+.post-card-item {
+  margin-right: 100px; /* Adjust the value for horizontal spacing */
 }
 
 body {
@@ -47,12 +64,12 @@ body {
   display: flex;
   justify-content: space-evenly;
   padding: 10px;
+  /* overflow: hidden; */
 }
 
 .feed-list-left {
   margin-left: none;
   margin-right: 250px;
-
 }
 
 .feed-list-right {
@@ -95,6 +112,4 @@ body {
   transform: translateX(1620px);
   margin-top: -640px;
 } */
-
-
 </style>
