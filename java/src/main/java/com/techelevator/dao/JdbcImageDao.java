@@ -56,9 +56,6 @@ public class JdbcImageDao implements ImageDao {
         }
         return newImg;
     }
-
-
-
 }
 
 
