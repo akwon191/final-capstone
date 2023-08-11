@@ -45,21 +45,6 @@ public class JdbcImageDao implements ImageDao {
     }
 
 
-   /*public Image uploadImage(Image img) {
-
-        Image newImg = null;
-        String sql = "INSERT INTO image_data (image_name, image_data) VALUES (?, ?) RETURNING image_data_id";
-        String inputString = img.getImageData();
-        byte[] byteArray = inputString.getBytes();
-
-        try {
-            long imgId = jdbcTemplate.queryForObject(sql, int.class, img.getImageName(), byteArray);
-            newImg = getImageDataStringById(imgId);
-        } catch (EmptyResultDataAccessException ex) {
-            return null;
-        }
-        return newImg;
-    }*/
 
     public Image uploadImageNew(MultipartFile file) {
         Image newImg = null;
