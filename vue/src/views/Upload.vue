@@ -39,10 +39,7 @@ export default {
 <style>
 .upload {
   text-align: center;
-}
-
-.upload-form {
-  margin-top: 20px;
+  margin-top: 100px;
 }
 
 .file-input {
