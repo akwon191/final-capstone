@@ -80,7 +80,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style >
+/* @import "@/assets/style.css"; */
 
 #register {
   display: flex;

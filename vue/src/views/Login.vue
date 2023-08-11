@@ -37,7 +37,6 @@
 <script>
 import authService from "../services/AuthService";
 
-
 export default {
   name: "login",
   components: {},
@@ -74,7 +73,9 @@ export default {
 </script>
 
 <style >
+@import "@/assets/style.css";
 
+/*
 body {
   min-height: 100vh; 
   margin: 0;
@@ -170,6 +171,6 @@ button[type="submit"]:hover {
   max-width: 200px;
   height: auto;
   transform: rotate(-25deg);
-}
+} */
 
 </style>
