@@ -1,15 +1,15 @@
 <template>
     <section>
       <div class = "container">
-        <div class="feed-list-left">
+        <!-- <div class="feed-list-left">
           <post-card />
-        </div>
+        </div> -->
         <div class="feed-list">
           <post-card />
         </div>
-        <div class="feed-list-right">
+        <!-- <div class="feed-list-right">
           <post-card />
-        </div>
+        </div> -->
       </div>
       <div id="arrows">
           <div class="orange-triangle"></div>
@@ -60,7 +60,7 @@ body {
   margin-right: none;
 }
 
-.orange-triangle {
+/* .orange-triangle {
   width: 0; 
   height: 0; 
   position: sticky;
@@ -94,7 +94,7 @@ body {
   border-right: 220px solid #EDDEA4;
   transform: translateX(1620px);
   margin-top: -640px;
-}
+} */
 
 
 </style>

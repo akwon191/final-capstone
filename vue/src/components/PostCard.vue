@@ -1,10 +1,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
 <template>
     <div id="main">
-        <div class="card">
+        <div id="main-card">
+            <div class="card-border-1"></div>
+            <div class="card-border-2"></div>
+            <div class="card-border-3"></div>
             <h1 id="post-title">{{ post.postId }}</h1>
-            <div class="image-container">
-                <img v-if="imageUrl" :src="imageUrl" alt="Image" @click="nextPost()" />
+            <div id="image-container">
+                <img id="post-img" v-if="imageUrl" :src="imageUrl" alt="Image" @click="nextPost()" />
             </div>
             <div class="post-content">
                 <h2 id="post-author">{{ post.username }}</h2>
@@ -20,16 +23,16 @@
                 retrieved. Our scroll mechanism will modify that index. That same index will be used to determine
                 the postId to send to our URL generator for image generator.
              -->
-            <div class="button-container">
-                <div class="button-vibes">
+            <div id="button-container">
+                <div id="button-vibes">
                     <div class="button-style" @click="setVibes()" v-show="!vibeCheck"><i class="fa-solid fa-hand-holding-heart" style="color: #57614b;"></i></div>
                     <div class="button-style" @click="setVibes()" v-show="vibeCheck"><i class="fa-solid fa-hand-holding-heart" style="color: #C52E1D;"></i></div>
                 </div>
-                <div class="button-thanks">
+                <div id="button-thanks">
                     <div class="button-style" @click="setThanks()" v-show="!thanksCheck"><i class="fa-solid fa-thumbs-up" style="color: #57614b;"></i></div>
                     <div class="button-style" @click="setThanks()" v-show="thanksCheck"><i class="fa-solid fa-thumbs-up" style="color: #C52E1D;"></i></div>
                 </div>
-                <div class="button-nothanks">
+                <div id="button-nothanks">
                     <div class="button-style" @click="setNoThanks()" v-show="!noThanksCheck"><i class="fa-solid fa-thumbs-down" style="color: #57614b;"></i></div>
                     <div class="button-style" @click="setNoThanks()" v-show="noThanksCheck"><i class="fa-solid fa-thumbs-down" style="color: #C52E1D;"></i></div>
                 </div>
@@ -38,15 +41,24 @@
             </div>
         </div>
         <transition name="expand">
-        <div class="card comments" v-if="isHidden">
+        <div id="comments-card" v-show="isHidden">
             <h1 id="comments-title">Comments</h1>
             <div class="comment" v-if="this.$store.state.posts.length > 0">
-            <div class="single-comment" v-for="(comment, commentIndex) in this.$store.state.posts[0].comments" :key="commentIndex">
-                <h4 class="comment-author">{{ comment.comment_id }}</h4>
-                <p class="comment-text">{{ comment.comment_text }}</p>
+            <div id="single-comment" v-for="(comment, commentIndex) in this.$store.state.posts[0].comments" :key="commentIndex">
+                <h4 id="comment-author">{{ comment.comment_id }}</h4>
+                <p id="comment-text">{{ comment.comment_text }}</p>
             </div>
             </div>
         </div>
+        </transition>
+        <transition name="expand">
+            <div class="card-border-1 comments-border" v-show="isHidden"></div>
+        </transition>
+        <transition name="expand">
+            <div class="card-border-2 comments-border" v-show="isHidden"></div>
+        </transition>
+        <transition name="expand">
+            <div class="card-border-3 comments-border" v-show="isHidden"></div>
         </transition>
     </div>
 </template>
@@ -145,43 +157,54 @@
         flex-direction: column;
     }
 
-    .card {
+    #main-card {
         margin-top: 80px;
-        margin-bottom: -100px;
         position: relative;
+        width: 500px;
+        height: 600px;
         background: whitesmoke;
-        border-top: 10px solid #FF9B42;
-        border-right: 10px solid #FF9B42;
-        border-left: 10px solid #FF9B42;
-        border-bottom: 10px solid #FF9B42;
+    }
+
+    .card-border-1 {
+        pointer-events: none;
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        border: 10px solid #E85E6A;
         border-radius: 10px;
         width: 500px;
         height: 600px;
+        z-index: -1;
     }
    
-    .card::after {
-        content: '';
+    .card-border-2 {
+        pointer-events: none;
         position: absolute;
         top: -20px;
         left: -20px;
-        right: -20px;
-        bottom: -20px;
+        border: 20px solid #EA70CF;
         border-radius: 10px;
-        background: #F7A072;
-        z-index: -1;
+        width: 500px;
+        height: 600px;
+        z-index: -2;
     }
 
-    .card::before {
-        content: '';
+    .card-border-3 {
+        pointer-events: none;
         position: absolute;
         top: -30px;
         left: -30px;
-        right: -30px;
-        bottom: -30px;
+        border: 30px solid #FFBA29;
         border-radius: 10px;
-        background: #EDDEA4;
-        z-index: -2;
+        width: 500px;
+        height: 600px;
+        z-index: -3;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
+    .comments-border {
+        margin-top: 690px;
+        margin-left: 702px;
     }
 
     #post-title {
@@ -207,19 +230,21 @@
         margin: 20px;
     }
 
-    .image-container {
+    #image-container {
         display: flex;
         justify-content: center;
         align-items: center;
         margin: 10px auto; /* Adjust margin as needed */
     }
-    img {
+    
+    #post-img {
         max-width: 100%;
         max-height: 300px; /* Adjust height as needed */
+        min-height: 300px;
         object-fit: contain; /* or "cover" depending on design */
     }
 
-    .button-container {
+    #button-container {
         display: flex;
         justify-content: space-evenly;
         font-size: 2.0rem;
@@ -236,27 +261,16 @@
         box-shadow: rgba(54, 80, 22, 0.17) 0px -23px 25px 0px inset, rgba(54, 80, 22, 0.15) 0px -36px 30px 0px inset, rgba(54, 80, 22, 0.1) 0px -79px 40px 0px inset, rgba(54, 80, 22, 0.06) 0px 2px 1px, rgba(54, 80, 22, 0.09) 0px 4px 2px, rgba(54, 80, 22, 0.09) 0px 8px 4px, rgba(54, 80, 22, 0.09) 0px 16px 8px, rgba(54, 80, 22, 0.09) 0px 32px 16px;
     }
 
-    .card.comments {
-        border-top: 0px;
-        border-top-left-radius: 0px;
-        border-top-right-radius: 0px;
+    #comments-card {
+        position: relative;
+        width: 500px;
+        height: 600px;
+        background: whitesmoke;
     }
-
-    .card.comments::after {
-        top: 0px;
-        border-top-left-radius: 0px;
-        border-top-right-radius: 0px;
-    }
-
-    .card.comments::before {
-        top: 0px;
-        border-top-left-radius: 0px;
-        border-top-right-radius: 0px;
-    } 
 
     #comments-title {
-        border-top: 5px solid #FF9B42;
-        border-bottom: 5px solid #FF9B42;
+        border-top: 5px solid #E85E6A;
+        border-bottom: 5px solid #E85E6A;
         font-family: 'Courgette';
         font-size: 1.5rem;
         color: #365016;
@@ -276,14 +290,14 @@
         transition: opacity 0.5s;
     }
 
-    .comment-author {
+    #comment-author {
         font-family: 'Courgette';
         font-size: 1rem;
         color: #365016;
         margin: 10px;
     }
 
-    .comment-text {
+    #comment-text {
         font-family: 'Courgette';
         font-size: 0.9rem;
         color: #365016;
@@ -291,12 +305,12 @@
     }
 
     .expand-enter-active, .expand-leave-active {
-        transition: max-height .5s ease;
-        max-height: 400px;
+        transition: all 1s ease;
+        max-height: 1000px;
     }
 
     .expand-enter, .expand-leave-to {
-        max-height: 0;
+        max-height: 0px;
         overflow: hidden;
     }
 
