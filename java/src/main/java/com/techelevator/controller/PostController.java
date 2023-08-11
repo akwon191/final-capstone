@@ -13,22 +13,15 @@ import java.util.List;
 @CrossOrigin
 
 public class PostController {
-        @Autowired
-
+    @Autowired
         private PostService postService;
-
-
-    public PostController(PostService postService) {
+        public PostController(PostService postService) {
         this.postService = postService;
-
     }
-
 
     @GetMapping(path = "")
     public List<Post> getAllPosts() {
         return postService.getAllPosts();
     }
-
-
 
 }
