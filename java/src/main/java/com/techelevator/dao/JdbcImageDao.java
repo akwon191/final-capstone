@@ -45,7 +45,7 @@ public class JdbcImageDao implements ImageDao {
     }
 
 
-    public Image uploadImage(Image img) {
+   /*public Image uploadImage(Image img) {
 
         Image newImg = null;
         String sql = "INSERT INTO image_data (image_name, image_data) VALUES (?, ?) RETURNING image_data_id";
@@ -59,7 +59,7 @@ public class JdbcImageDao implements ImageDao {
             return null;
         }
         return newImg;
-    }
+    }*/
 
     public Image uploadImageNew(MultipartFile file) {
         Image newImg = null;
