@@ -12,7 +12,7 @@ Vue.use(Vuex)
 const currentToken = localStorage.getItem('token')
 const currentUser = JSON.parse(localStorage.getItem('user'));
 
-if(currentToken != null) {
+if (currentToken != null) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${currentToken}`;
 }
 
@@ -30,7 +30,7 @@ export default new Vuex.Store({
     },
     SET_USER(state, user) {
       state.user = user;
-      localStorage.setItem('user',JSON.stringify(user));
+      localStorage.setItem('user', JSON.stringify(user));
     },
     LOGOUT(state) {
       localStorage.removeItem('token');
@@ -39,8 +39,28 @@ export default new Vuex.Store({
       state.user = {};
       axios.defaults.headers.common = {};
     },
-    setPosts(state,posts) {
+    setPosts(state, posts) {
       state.posts = posts;
     },
   },
+  actions: {
+    fetchPosts({ commit }) {
+      const posts = axios.get('http://localhost:9000/posts')
+        .then(response => {
+          this.$store.commit('setPosts', response.data);
+          if (response.data.length > 0) {
+
+            // this.post = response.data[0];
+            const imgId = this.post.img_id;
+            this.fetchImage(imgId);
+          }
+
+        })
+        .catch(error => {
+          console.error('Error fetching posts:', error);
+        });
+
+        commit('setPosts', posts);
+    },
+  }
 })

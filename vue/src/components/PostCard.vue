@@ -92,29 +92,7 @@
         },
         },
         methods: {
-            nextPost() {
-                const i= ++count.value%this.$store.state.posts.length;
-                console.log(i);
-                postIndex(i);
-                const imgId = this.post.img_id;
-                        this.fetchImage(imgId);
-            },
-            fetchPosts() {
-                axios.get('http://localhost:9000/posts')
-                .then(response => {
-                    this.$store.commit('setPosts', response.data);
-                    if (response.data.length > 0) {
-                        
-                        // this.post = response.data[0];
-                        const imgId = this.post.img_id;
-                        this.fetchImage(imgId);
-                    }
-                    
-            })
-            .catch(error => {
-                console.error('Error fetching posts:', error);
-            });
-            },
+            
             setVibes() {
                 this.vibeCheck = !this.vibeCheck;
             },
@@ -136,11 +114,6 @@
         });
 },
         },
-        created() {
-        
-                this.fetchPosts();
-               
-        }
     }
 
 </script>
