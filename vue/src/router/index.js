@@ -7,6 +7,7 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import Vibes from '../views/Vibes.vue'
 import Upload from '../views/Upload.vue'
+import Profile from '../views/Profile.vue'
 
 Vue.use(Router)
 
@@ -67,6 +68,14 @@ const router = new Router({
       path: '/upload',
       name: 'upload',
       component: Upload,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: Profile,
       meta: {
         requiresAuth: true
       }
