@@ -40,7 +40,8 @@ export default {
         display: flex;
         flex-direction: row;
         align-items: center;
-        border-bottom: 10px solid #FF9B42;
+        position: sticky;
+        border-bottom: 10px solid #E85E6A;
         background-color: whitesmoke;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }

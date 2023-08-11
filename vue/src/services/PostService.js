@@ -13,13 +13,13 @@ export default {
     addPost(Post) {
         return axios.post(API_BASE_URL + '/posts', Post)
     },
-    listFavorites() {
-        return axios.get('/favorites')
+    listVibes() {
+        return axios.get('/vibes')
     },
-    addFavorite(postId) {
-        return axios.post(`/favorites/${postId}`)
+    addVibe(postId) {
+        return axios.post(`/vibes/${postId}`)
     },
-    removeFavorite(postId) {
-        return axios.delete(`/favorites/${postId}`)
+    removeVibe(postId) {
+        return axios.post(`/vibes/${postId}`)
     },
 }

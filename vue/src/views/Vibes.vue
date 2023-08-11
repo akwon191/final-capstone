@@ -1,9 +1,6 @@
 <template>
   <div id="fav-main">
       <post-card
-        v-bind:key="post.postId"
-        v-bind:post="post"
-        v-for="post in $store.state.posts"
       />
     </div>
 </template>
