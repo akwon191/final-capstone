@@ -6,7 +6,11 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.support.SqlLobValue;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Base64;
@@ -54,6 +58,22 @@ public class JdbcImageDao implements ImageDao {
         } catch (EmptyResultDataAccessException ex) {
             return null;
         }
+        return newImg;
+    }
+
+    public Image uploadImageNew(MultipartFile file) {
+        Image newImg = null;
+        String sql = "INSERT INTO image_data (image_name, image_data) VALUES (?, ?) RETURNING image_data_id";
+
+        try {
+                long imgId = jdbcTemplate.queryForObject(sql, int.class, file.getOriginalFilename(), file.getBytes());
+                newImg = getImageDataStringById(imgId);
+        } catch (EmptyResultDataAccessException ex) {
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return newImg;
     }
 }

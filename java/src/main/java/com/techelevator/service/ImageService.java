@@ -4,6 +4,7 @@ import com.techelevator.dao.JdbcImageDao;
 import com.techelevator.model.Image;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class ImageService {
@@ -19,5 +20,6 @@ public class ImageService {
         return imageDao.getImageDataStringById(id);
     }
     public Image uploadImage(Image image) { return imageDao.uploadImage(image); }
+    public Image uploadImage(MultipartFile file) { return imageDao.uploadImageNew(file); }
 
 }
