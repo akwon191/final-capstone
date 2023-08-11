@@ -1,6 +1,9 @@
 <template>
   <div id="login">
      <div class="header-container">
+       <div class="birds-header-image">
+        <img src="@/assets/Birds.png" alt="Birds Image" class="birds-image">
+      </div>
       <div class="welcome-header">
         <h1>Welcome to Uplift</h1>
       </div>
@@ -75,7 +78,9 @@ export default {
 body {
   min-height: 100vh; 
   margin: 0;
-  background: linear-gradient(to bottom, lightblue, #edffeb, lightblue); 
+  background-image: url(@/assets/LeafOverlay.png),linear-gradient(to bottom, lightblue, #edffeb, lightblue);
+  background-size: cover;
+  background-position: center center; 
 }
 
 #login {
@@ -93,8 +98,10 @@ body {
   width: calc(100% - 40px); 
   max-width: 500px; 
   margin: 0 auto;
+  margin-top: 80px;
   box-sizing: border-box; 
   padding: 20px;
+  
 }
 
 .welcome-header {
@@ -102,6 +109,7 @@ body {
   margin-bottom: 20px; 
   
 }
+
  .login-image {
   display: flex;
   justify-content: center; 
@@ -150,5 +158,18 @@ button[type="submit"]:hover {
   text-align: left;
 }
 
+.birds-header-image {
+  display: flex;
+  justify-content: flex-end; 
+  align-items: flex-start;
+  
+  position: relative; 
+}
+
+.birds-image {
+  max-width: 200px;
+  height: auto;
+  transform: rotate(-25deg);
+}
 
 </style>

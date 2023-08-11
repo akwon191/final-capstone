@@ -1,5 +1,8 @@
 <template>
   <div id="register" class="text-center">
+    <div class="image-container">
+      <img src="@/assets/fireworks.png" alt="Fireworks Image" class="fireworks-image">
+    </div>
     <form @submit.prevent="register">
       <h1>Be the Moment</h1> 
       <h1>Create Vibes with Us</h1>
@@ -18,9 +21,12 @@
         <label for="confirmPassword">Double check Password vibes</label>
         <input type="password" id="confirmPassword" v-model="user.confirmPassword" required />
       </div>
-      <button type="submit">Create Account</button>
+      <button type="submit">Create Account</button> 
       <p><router-link :to="{ name: 'login' }">Already have an account? Log in.</router-link></p>
     </form>
+       <div class="flowers-image">
+        <img src="@/assets/dandelion.png" alt="Flowers Image" class="flowers-image">
+      </div>
   </div>
 </template>
 
@@ -91,6 +97,7 @@ export default {
   width: calc(100% - 40px); 
   max-width: 500px; 
   margin: 0 auto;
+  margin-top: 80px;
   box-sizing: border-box;  
   padding: 20px;
 }
@@ -111,10 +118,39 @@ button[type="submit"]:hover {
   background-color: #FF9B42;
   color: #365016;
 }
+
 .form-input-group {
   margin-bottom: 1rem;
 }
+
 label {
   margin-right: 0.5rem;
+}
+
+.image-container {
+  text-align: center;
+  
+}
+
+.fireworks-container {
+  margin-bottom: 0;
+  display: flex;
+  justify-content: center;
+  padding: 0; 
+}
+
+.fireworks-image {
+  max-width: 460px;
+  height: auto;
+}
+
+.flowers-container {
+  text-align: left;
+  margin-top: 0;
+}
+
+.flowers-image img {
+  max-width: 300px;
+  height: auto;
 }
 </style>
