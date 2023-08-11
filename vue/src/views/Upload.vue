@@ -1,6 +1,6 @@
 <template>
   <div class = "upload">
-      <input type = "file-input" ref ="fileInput" @change ="onFileSelected">
+      <input type = "file" class = "file-input" ref ="fileInput" @change ="onFileSelected">
       <button @click="$refs.fileInput.click()">Pick File</button>
       <button @click="onUpload" class="upload-button">Upload</button>
   </div>
@@ -53,6 +53,7 @@ export default {
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-left: 10px;
 }
 
 .upload-button:hover {
