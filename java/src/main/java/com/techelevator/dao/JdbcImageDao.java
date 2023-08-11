@@ -41,49 +41,25 @@ public class JdbcImageDao implements ImageDao {
     }
 
 
-
-    /*public Image uploadImage(Image img) {
+    public Image uploadImage(Image img) {
 
         Image newImg = null;
-        String sql = "INSERT INTO image_data (img_name, image_data) VALUES (?, ?) RETURNING image_data_id";
+        String sql = "INSERT INTO image_data (image_name, image_data) VALUES (?, ?) RETURNING image_data_id";
+        String inputString = img.getImageData();
+        byte[] byteArray = inputString.getBytes();
 
-
-       // img.getImageData()
         try {
-            long imgId = jdbcTemplate.queryForObject(sql, int.class, img.getImageName(), img.getImageData());
+            long imgId = jdbcTemplate.queryForObject(sql, int.class, img.getImageName(), byteArray);
             newImg = getImageDataStringById(imgId);
         } catch (EmptyResultDataAccessException ex) {
             return null;
         }
         return newImg;
     }
-}*/
-    @Override
-    public Image uploadImage(Image img) {
 
-        Image newImg = null;
-        String sql = "INSERT INTO image_data (img_name, image_data) VALUES (?, ?) RETURNING image_data_id";
 
-        //create params array for all ? params
-        Object[] params = {img.getImageName(), img.getImageData()};
-        RowMapper<Image> rowMapper = (resultSet, rowNum) -> {
-            int imageId = resultSet.getInt("img_id");
-            String imageName = resultSet.getString("image_name");
 
-            byte[] imageData = resultSet.getBytes("image_data");
-            String imageDataString = Base64.getEncoder().encodeToString(imageData);
-
-            return new Image(imageId, imageName, imageDataString);
-        };
-
-       try {
-            return jdbcTemplate.queryForObject(sql, rowMapper, params);
-        } catch (EmptyResultDataAccessException ex) {
-            return null;
-        }
-
-    }
-    }
+}
 
 
 

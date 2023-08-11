@@ -7,7 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.validation.Valid;
+import java.util.Base64;
 
 
 @PreAuthorize("isAuthenticated()")
@@ -29,15 +32,19 @@ public class ImageController {
     public Image getImageDataById(@Valid @PathVariable long imageId) {
         return imageService.getImageDataStringById(imageId);
     }
-    @PostMapping(path = "/upload")
-    public ResponseEntity<?> uploadImage(@RequestBody Image image) {
-        Image uploadedImage = imageService.uploadImage(image);
-        if (uploadedImage != null) {
-            return ResponseEntity.status(HttpStatus.CREATED).body("Image uploaded successfully.");
-        } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Image upload failed.");
-        }
 
+    @PostMapping (path = "/upload")
+    public String uploadImage(@RequestParam("file") MultipartFile file) {
+        try {
+            Image imageEntity = new Image();
+            imageEntity.setImageName(file.getOriginalFilename());
+            String imageDataString = Base64.getEncoder().encodeToString(file.getBytes());
+            imageEntity.setImageData(imageDataString);
+            Image uploadedImage = imageService.uploadImage(imageEntity);
+            return "Image uploaded successfully!";
+        } catch (Exception e) {
+            return "Image upload failed: " + e.getMessage();
+        }
     }
 
 
