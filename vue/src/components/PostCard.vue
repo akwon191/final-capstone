@@ -5,13 +5,13 @@
       <div class="card-border-1"></div>
       <div class="card-border-2"></div>
       <div class="card-border-3"></div>
-      <h1 id="post-title">{{ postList[0].postId }}</h1>
-      <div id="image-container">
-        <!-- <img id="post-img" v-if="imageUrl" :src="imageUrl" alt="Image" /> -->
+      <h1 id="post-title">{{ postList[postIndex].postId }}</h1>
+      <div id="image-container" v-if="isImageLoaded">
+        <img id="post-img" :src="imageUrl" alt="Image" />
       </div>
       <div class="post-content">
-        <h2 id="post-author">{{ postList[0].username }}</h2>
-        <p id="description">{{ postList[0].caption }}</p>
+        <h2 id="post-author">{{ postList[postIndex].username }}</h2>
+        <p id="description">{{ postList[postIndex].caption }}</p>
       </div>
       <div id="button-container">
         <div id="button-vibes">
@@ -99,7 +99,7 @@ export default {
       vibeCheck: false,
       thanksCheck: false,
       noThanksCheck: false,
-      imageUrl: "",
+      isLoadingImage: true,
     };
   },
   props: {
@@ -108,6 +108,21 @@ export default {
   computed: {
     postList() {
       return this.$store.state.posts.length > 0 ? this.$store.state.posts : {};
+    },
+    imageUrl() {
+      if (
+        this.$store.state.posts.length > 0 &&
+        this.postIndex >= 0 &&
+        this.postIndex < this.postList.length
+      ) {
+        if (this.isImageLoaded) {
+          return this.fetchImage(this.postList[this.postIndex].imageId);
+        } else {
+          return null;
+        }
+      } else {
+        return "";
+      }
     },
   },
   methods: {
@@ -124,13 +139,17 @@ export default {
       this.isHidden = !this.isHidden;
     },
     fetchImage(imageId) {
+      this.isLoadingImage = true; // Set the loading state
+
       axios
         .get(`http://localhost:9000/images/${imageId}`)
         .then((response) => {
           this.imageUrl = `data:image/jpg;base64,${response.data.imageData}`;
+          this.isLoadingImage = false; // Unset the loading state
         })
         .catch((error) => {
           console.error("Image could not be retrieved:", error);
+          this.isLoadingImage = false; // Unset the loading state in case of an error
         });
     },
   },
