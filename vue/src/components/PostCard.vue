@@ -146,8 +146,8 @@
     }
 
     .card {
-        margin-top: 50px;
-        margin-bottom: -70px;
+        margin-top: 80px;
+        margin-bottom: -100px;
         position: relative;
         background: whitesmoke;
         border-top: 10px solid #FF9B42;
