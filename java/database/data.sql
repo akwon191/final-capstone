@@ -27,6 +27,7 @@ VALUES ((SELECT user_id FROM users WHERE username = 'brianr'), '2023-01-01 18:03
 ((SELECT user_id FROM users WHERE username = 'beckyz'), '2023-02-15 05:15:19', 'At risus viverra adipiscing at in tellus.', 4),
 ((SELECT user_id FROM users WHERE username = 'brodinm'), '2023-06-19 17:03:01', 'Pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus.', 5),
 ((SELECT user_id FROM users WHERE username = 'andyk'), '2023-01-10 13:15:02', 'Duis convallis convallis tellus id interdum. Neque volutpat ac tincidunt vitae semper quis lectus nulla.', 6);
+((SELECT user_id FROM users WHERE username = 'aartik'), '2023-01-10 13:15:02', 'Duis convallis convallis tellus id interdum. Neque volutpat ac tincidunt vitae semper quis lectus nulla.', 7);
 
 COMMIT TRANSACTION;
 
