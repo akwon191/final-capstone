@@ -19,7 +19,7 @@ public class ImageService {
     public Image getImageDataStringById(long id) {
         return imageDao.getImageDataStringById(id);
     }
-    public Image uploadImage(Image image) { return imageDao.uploadImage(image); }
+    //public Image uploadImage(Image image) { return imageDao.uploadImage(image); }
     public Image uploadImage(MultipartFile file) { return imageDao.uploadImageNew(file); }
 
 }
