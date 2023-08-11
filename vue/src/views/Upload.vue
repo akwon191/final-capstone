@@ -36,31 +36,32 @@ export default {
             this.selectedFile = evt.target.files[0]
         },
         onUpload() {
-             if (!this.selectedFile || !this.caption) {
-             alert('Please select an image and enter a caption.');
-             }
-            try {
-            let formdata = new FormData();
-            formdata.append('file', this.selectedFile);
-            formdata.append('caption', this.caption);
-
-            const options = {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
+            if (!this.selectedFile || !this.caption) {
+            alert('Please select an image and enter a caption.');
             }
-            axios.post('http://localhost:9000/upload', formdata, options).then(response => {
-                console.log('Photo uploaded:', response.data)
-            });
-            this.selectedFile = null;
-            this.caption = '';
-            }  catch (error) {
-            console.error('Error uploading photo:', error);
+
+            try {
+                let formdata = new FormData();
+                formdata.append('file', this.selectedFile);
+                formdata.append('caption', this.caption);
+
+                const options = {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+                axios.post('http://localhost:9000/images/upload', formdata, options).then(response => {
+                    console.log('Photo uploaded:', response.data)
+                });
+                this.selectedFile = null;
+                this.caption = '';
+            } catch (error) {
+                console.error('Error uploading photo:', error);
             }
                 
-            }
         }
-    } 
+    }
+} 
 </script>
 
 <style>
