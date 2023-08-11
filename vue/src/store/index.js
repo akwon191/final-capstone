@@ -51,8 +51,8 @@ export default new Vuex.Store({
           if (response.data.length > 0) {
 
             // this.post = response.data[0];
-            const imgId = this.post.img_id;
-            this.fetchImage(imgId);
+            // const imgId = this.post.img_id;
+            // this.fetchImage(imgId);
           }
 
         })

@@ -7,7 +7,7 @@
             <div class="card-border-3"></div>
             <h1 id="post-title">{{ post.postId }}</h1>
             <div id="image-container">
-                <img id="post-img" v-if="imageUrl" :src="imageUrl" alt="Image" @click="nextPost()" />
+                <!-- <img id="post-img" v-if="imageUrl" :src="imageUrl" alt="Image" @click="nextPost()" /> -->
             </div>
             <div class="post-content">
                 <h2 id="post-author">{{ post.username }}</h2>
@@ -44,9 +44,9 @@
         <div id="comments-card" v-show="isHidden">
             <h1 id="comments-title">Comments</h1>
             <div class="comment" v-if="this.$store.state.posts.length > 0">
-            <div id="single-comment" v-for="(comment, commentIndex) in this.$store.state.posts[0].comments" :key="commentIndex">
-                <h4 id="comment-author">{{ comment.comment_id }}</h4>
-                <p id="comment-text">{{ comment.comment_text }}</p>
+            <div id="single-comment" v-for="(comment, commentIndex) in post.comments" :key="commentIndex">
+                <h4 id="comment-author">{{ comment.commentId }}</h4>
+                <p id="comment-text">{{ comment.commentText }}</p>
             </div>
             </div>
         </div>
