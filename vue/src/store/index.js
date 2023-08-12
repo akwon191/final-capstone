@@ -47,7 +47,7 @@ export default new Vuex.Store({
     fetchPosts({ commit }) {
       axios.get('http://localhost:9000/posts')
         .then(response => {
-          commit('setPosts', response.data); // Use commit function directly
+          commit('setPosts', response.data);
           if (response.data.length > 0) {
             // ...
           }
