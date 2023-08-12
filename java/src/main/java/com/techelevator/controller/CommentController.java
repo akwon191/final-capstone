@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.*;
 @PreAuthorize("isAuthenticated()")
 @RequestMapping("/comment")
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:8080",
+        methods = {RequestMethod.POST, RequestMethod.OPTIONS},
+        allowedHeaders = {"Authorization", "Content-Type"},
+        allowCredentials = "true")
 
 public class CommentController {
 }

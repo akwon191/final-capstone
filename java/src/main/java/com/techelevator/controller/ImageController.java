@@ -19,7 +19,7 @@ import java.util.Base64;
 @PreAuthorize("isAuthenticated()")
 @RequestMapping("/images")
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:8080")
 
 public class ImageController {
     @Autowired

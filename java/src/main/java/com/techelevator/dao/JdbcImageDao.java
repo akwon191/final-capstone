@@ -18,9 +18,6 @@ import java.util.Base64;
 @Component
 public class JdbcImageDao implements ImageDao {
 
-
-    //TO-DO - ERROR HANDLING FOR jdbc query
-
     private final JdbcTemplate jdbcTemplate;
 
     public JdbcImageDao(JdbcTemplate jdbcTemplate) {
@@ -43,8 +40,6 @@ public class JdbcImageDao implements ImageDao {
             return newImg;
         }, id);
     }
-
-
 
     public Image uploadImageNew(MultipartFile file) {
         Image newImg = null;

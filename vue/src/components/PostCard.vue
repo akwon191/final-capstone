@@ -249,14 +249,14 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px auto; /* Adjust margin as needed */
+  margin: 10px auto; 
 }
 
 #post-img {
   max-width: 100%;
-  max-height: 300px; /* Adjust height as needed */
+  max-height: 300px;
   min-height: 300px;
-  object-fit: contain; /* or "cover" depending on design */
+  object-fit: contain; 
 }
 
 #button-container {

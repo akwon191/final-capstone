@@ -1,67 +1,94 @@
 <template>
-  <div class = "upload">
-      <div class="card-border-1"></div>
-      <div class="card-border-2"></div>
-      <div class="card-border-3"></div>
-      <h2>Upload a Photo</h2>
-      <div>
-        <input type = "file" class = "file-input" ref ="fileInput" @change ="onFileSelected">
-      </div>
-      <div>
-        <button @click="$refs.fileInput.click()">Pick File</button>
-      </div>
-      <div>
-        <label for="caption">Caption:</label>
-        <input v-model="caption" type="text" id="caption" />
-      </div>
-      <div>
-        <button @click="onUpload" class="upload-button">Upload</button>
-      </div>
+  <div class="upload">
+    <div class="card-border-1"></div>
+    <div class="card-border-2"></div>
+    <div class="card-border-3"></div>
+    <h2>Upload a Photo</h2>
+    <div>
+      <input
+        type="file"
+        class="file-input"
+        ref="fileInput"
+        @change="onFileSelected"
+      />
+    </div>
+    <div>
+      <button @click="$refs.fileInput.click()">Pick File</button>
+    </div>
+    <div>
+      <label for="caption">Caption:</label>
+      <input v-model="caption" type="text" id="caption" />
+    </div>
+    <div>
+      <button @click="onUpload" class="upload-button">Upload</button>
+    </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
+import { mapState } from "vuex";
 
 export default {
-    name: 'Upload',
-    data() {
-        return {
-            selectedFile: null,
-            caption: '',
-        };
+  name: "Upload",
+  data() {
+    return {
+      selectedFile: null,
+      caption: "",
+    };
+  },
+  computed: {
+    ...mapState(["user"]),
+    userId() {
+      return this.user.id || null;
     },
-    methods: {
-        onFileSelected(evt) {
-            this.selectedFile = evt.target.files[0]
-        },
-        onUpload() {
-            if (!this.selectedFile || !this.caption) {
-            alert('Please select an image and enter a caption.');
-            }
+  },
+  methods: {
+    onFileSelected(evt) {
+      this.selectedFile = evt.target.files[0];
+    },
+    onUpload() {
+      if (!this.selectedFile || !this.caption) {
+        alert("Please select an image and enter a caption.");
+        return;
+      }
 
-            try {
-                let formdata = new FormData();
-                formdata.append('file', this.selectedFile);
-                formdata.append('caption', this.caption);
+      try {
+        const formdata = new FormData();
+        formdata.append("file", this.selectedFile);
+      //Refactor these when appropriate to call to image and post services
+        axios
+          .post("http://localhost:9000/images/upload", formdata)
+          .then((response) => {
+            const image_data_id = response.data.imageId;
 
-                const options = {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                }
-                axios.post('http://localhost:9000/images/upload', formdata, options).then(response => {
-                    console.log('Photo uploaded:', response.data)
-                });
-                this.selectedFile = null;
-                this.caption = '';
-            } catch (error) {
-                console.error('Error uploading photo:', error);
-            }
-                
-        }
-    }
-} 
+            const post = {
+              user_id: this.userId,
+              caption: this.caption,
+              image_data_id: image_data_id,
+            };
+
+            axios
+              .post("http://localhost:9000/posts", post)
+              .then((postResponse) => {
+                console.log("Post uploaded:", postResponse.data);
+              })
+              .catch((error) => {
+                console.error("Error uploading post:", error);
+              });
+
+            this.selectedFile = null;
+            this.caption = "";
+          })
+          .catch((error) => {
+            console.error("Error uploading image:", error);
+          });
+      } catch (error) {
+        console.error("Error uploading photo:", error);
+      }
+    },
+  },
+};
 </script>
 
 <style>
@@ -84,7 +111,7 @@ export default {
 }
 
 .upload-button {
-  background-color: #EA70CF;;
+  background-color: #ea70cf;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -95,10 +122,10 @@ export default {
 }
 
 .upload-button:hover {
-  background-color: #FFBA29;
+  background-color: #ffba29;
 }
 h2 {
-  font-family: 'Courgette';
+  font-family: "Courgette";
   font-size: 2.5rem;
   color: #365016;
   margin: 50px;

@@ -32,6 +32,11 @@ public class JdbcPostDao implements PostDao {
         return posts;
     }
 
+    public int addPost(Post post) {
+        String sql = "INSERT INTO posts (user_id, image_data_id, caption) VALUES (?, ?, ?) RETURNING post_id";
+        return jdbcTemplate.queryForObject(sql, Integer.class, post.getUserId(), post.getImg_id(), post.getCaption());
+    }
+
     private Post mapPost(SqlRowSet rowSet) {
         int postId = rowSet.getInt("post_id");
         int userId = rowSet.getInt("user_id");
