@@ -10,7 +10,18 @@
       </div>
       <div class="post-content">
         <h2 id="post-author">{{ postList[postIndex].username }}</h2>
-        <p id="description">{{ postList[postIndex].caption }}</p>
+        <p
+          id="description"
+          @mouseover="hoverCaption = true"
+          @mouseleave="hoverCaption = false"
+        >
+          {{ hoverCaption ? postList[postIndex].caption : truncatedCaption }}
+          <span
+            v-if="truncatedCaption.length > 50 && !hoverCaption"
+            class="see-more"
+          >
+          </span>
+        </p>
       </div>
       <div id="button-container">
         <div id="button-vibes">
@@ -98,24 +109,26 @@ export default {
       thanksCheck: false,
       noThanksCheck: false,
       isLoadingImage: true,
-      imageUrl: '',
+      imageUrl: "",
+      hoverCaption: false,
     };
   },
   props: {
     postIndex: Number, // Prop to receive the index number
   },
   created() {
-      this.fetchImage(this.postList[this.postIndex].img_id);
+    this.fetchImage(this.postList[this.postIndex].img_id);
   },
   computed: {
     postList() {
       return this.$store.state.posts.length > 0 ? this.$store.state.posts : {};
     },
-    // imageUrl() {
-    //   if (this.postList && this.postList > 0) {
-    //     return this.fetchImage(this.postList[this.postIndex].imageId);
-    //   }
-    // },
+    truncatedCaption() {
+      const caption = this.postList[this.postIndex].caption;
+      return caption.length > 50
+        ? caption.substring(0, 40) + "... see more"
+        : caption;
+    },
   },
   methods: {
     setVibes() {
