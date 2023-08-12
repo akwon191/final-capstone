@@ -1,16 +1,31 @@
 <template>
   <section>
     <div class="container">
-      <div
-        class="feed-list"
-        ref="feedList"
-      >
-        <post-card
-          v-for="(post, index) in posts"
-          :key="index"
-          :postIndex="index"
-          class="post-card-item"
-        />
+      <div class="feed-list" ref="feedList">
+        <div @click="shiftDisplay('left')">
+          <post-card
+            v-if="posts[displayedIndices.left] !== undefined"
+            :key="displayedIndices.left"
+            :postIndex="displayedIndices.left"
+            class="post-card-item feed-list-left"
+          />
+        </div>
+        <div>
+          <post-card
+            v-if="posts[displayedIndices.left] !== undefined"
+            :key="displayedIndices.center"
+            :postIndex="displayedIndices.center"
+            class="post-card-item"
+          />
+        </div>
+        <div @click="shiftDisplay('right')">
+          <post-card
+            v-if="posts[displayedIndices.right] !== undefined"
+            :key="displayedIndices.right"
+            :postIndex="displayedIndices.right"
+            class="post-card-item feed-list-right"
+          />
+        </div>
       </div>
     </div>
     <div id="arrows">
@@ -27,6 +42,15 @@ import { mapActions } from "vuex";
 
 export default {
   name: "feed-list",
+  data() {
+    return {
+      displayedIndices: {
+        left: 0,
+        center: 1,
+        right: 2,
+      },
+    };
+  },
   components: {
     PostCard,
   },
@@ -40,19 +64,39 @@ export default {
   },
   methods: {
     ...mapActions(["fetchPosts"]),
+    shiftDisplay(direction) {
+      const leftIndex =
+        (this.displayedIndices.left - 1 + this.posts.length) %
+        this.posts.length;
+      const rightIndex = (this.displayedIndices.right + 1) % this.posts.length;
+
+      if (direction === "left" && this.posts[leftIndex] !== undefined) {
+        this.displayedIndices.right = this.displayedIndices.center;
+        this.displayedIndices.center = this.displayedIndices.left;
+        this.displayedIndices.left = leftIndex;
+      } else if (
+        direction === "right" &&
+        this.posts[rightIndex] !== undefined
+      ) {
+        this.displayedIndices.left = this.displayedIndices.center;
+        this.displayedIndices.center = this.displayedIndices.right;
+        this.displayedIndices.right = rightIndex;
+      }
+    },
   },
 };
 </script>
 
 <style>
 .feed-list {
+  width: 100%;
   display: flex;
   justify-content: space-evenly;
   flex-wrap: nowrap;
 }
 
 .post-card-item {
-  margin-right: 100px; /* Adjust the value for horizontal spacing */
+  /* margin-right: 150px; Adjust the value for horizontal spacing */
 }
 
 body {
@@ -68,13 +112,13 @@ body {
 }
 
 .feed-list-left {
-  margin-left: none;
-  margin-right: 250px;
+  /* margin-left: none;
+  margin-right: 0px; */
 }
 
 .feed-list-right {
-  margin-left: 250px;
-  margin-right: none;
+  /* margin-left: 250px;
+  margin-right: none; */
 }
 
 /* .orange-triangle {
