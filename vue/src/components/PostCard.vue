@@ -117,7 +117,7 @@ export default {
     postIndex: Number, // Prop to receive the index number
   },
   created() {
-    this.fetchImage(this.postList[this.postIndex].img_id);
+    this.fetchImage(this.postList[this.postIndex].imgId);
   },
   computed: {
     postList() {

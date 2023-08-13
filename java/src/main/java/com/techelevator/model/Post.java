@@ -9,7 +9,7 @@ public class Post {
     private int postId;
     private int userId;
     private String username;
-    private int img_id;
+    private int imgId;
     private Timestamp dateTime;
     private String caption;
     private int likeCount;
@@ -17,11 +17,15 @@ public class Post {
     private int vibeCount;
     private List<Comment> comments;
 
+    public Post() {
+
+    }
+
     public Post( int postId, int userId, String username, int imgId, Timestamp dateTime, String caption, int likeCount, int dislikeCount, int vibeCount) {
         this.postId = postId;
         this.userId = userId;
         this.username = username;
-        this.img_id = imgId;
+        this.imgId = imgId;
         this.dateTime = dateTime;
         this.caption = caption;
         this.likeCount = likeCount;
@@ -38,12 +42,12 @@ public class Post {
         this.username = username;
     }
 
-    public int getImg_id() {
-        return img_id;
+    public int getImgId() {
+        return imgId;
     }
 
-    public void setImg_id(int img_id) {
-        this.img_id = img_id;
+    public void setImgId(int imgId) {
+        this.imgId = imgId;
     }
 
     public void addComment(Comment comment) {

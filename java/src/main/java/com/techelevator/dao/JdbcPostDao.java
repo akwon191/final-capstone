@@ -38,7 +38,7 @@ public class JdbcPostDao implements PostDao {
 
         Timestamp currentTimestamp = Timestamp.valueOf(LocalDateTime.now()); // Create Timestamp from current date and time
 
-        return jdbcTemplate.queryForObject(sql, Integer.class, post.getUserId(), currentTimestamp, post.getCaption(), post.getImg_id());
+        return jdbcTemplate.queryForObject(sql, Integer.class, post.getUserId(), currentTimestamp, post.getCaption(), post.getImgId());
     }
 
     private Post mapPost(SqlRowSet rowSet) {
