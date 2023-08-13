@@ -24,7 +24,7 @@ public class CommentController {
     public CommentController(CommentService commentService) {
         this.commentService = commentService;
     }
-    @GetMapping("/posts/{postId}")
+    @GetMapping(path ="/{postId}")
     public ResponseEntity<List<Comment>> getCommentsByPostId(@PathVariable int postId) throws SQLException {
         List<Comment> comments = commentService.getCommentsByPostId(postId);
         return ResponseEntity.ok(comments);
