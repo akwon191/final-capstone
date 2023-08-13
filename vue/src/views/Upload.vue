@@ -29,6 +29,7 @@
 import axios from "axios";
 import { mapState } from "vuex";
 
+
 export default {
   name: "Upload",
   data() {
@@ -52,40 +53,42 @@ export default {
         alert("Please select an image and enter a caption.");
         return;
       }
+      const formdata = new FormData();
+      formdata.append("file", this.selectedFile);
+      axios.post("http://localhost:9000/images/upload", formdata)
+      // try {
+      //   const formdata = new FormData();
+      //   formdata.append("file", this.selectedFile);
+      // // Refactor these when appropriate to call to image and post services
+      //   axios
+      //     .post("http://localhost:9000/images/upload", formdata)
+      //     .then((response) => {
+      //       const image_data_id = response.data.imageId;
 
-      try {
-        const formdata = new FormData();
-        formdata.append("file", this.selectedFile);
-      //Refactor these when appropriate to call to image and post services
-        axios
-          .post("http://localhost:9000/images/upload", formdata)
-          .then((response) => {
-            const image_data_id = response.data.imageId;
+      //       const post = {
+      //         user_id: this.userId,
+      //         caption: this.caption,
+      //         image_data_id: image_data_id,
+      //       };
 
-            const post = {
-              user_id: this.userId,
-              caption: this.caption,
-              image_data_id: image_data_id,
-            };
+      //       axios
+      //         .post("http://localhost:9000/posts", post)
+      //         .then((postResponse) => {
+      //           console.log("Post uploaded:", postResponse.data);
+      //         })
+      //         .catch((error) => {
+      //           console.error("Error uploading post:", error);
+      //         });
 
-            axios
-              .post("http://localhost:9000/posts", post)
-              .then((postResponse) => {
-                console.log("Post uploaded:", postResponse.data);
-              })
-              .catch((error) => {
-                console.error("Error uploading post:", error);
-              });
-
-            this.selectedFile = null;
-            this.caption = "";
-          })
-          .catch((error) => {
-            console.error("Error uploading image:", error);
-          });
-      } catch (error) {
-        console.error("Error uploading photo:", error);
-      }
+      //       this.selectedFile = null;
+      //       this.caption = "";
+      //     })
+      //     .catch((error) => {
+      //       console.error("Error uploading image:", error);
+      //     });
+      // } catch (error) {
+      //   console.error("Error uploading photo:", error);
+      // }
     },
   },
 };

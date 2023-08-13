@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,8 +34,11 @@ public class JdbcPostDao implements PostDao {
     }
 
     public int addPost(Post post) {
-        String sql = "INSERT INTO posts (user_id, image_data_id, caption) VALUES (?, ?, ?) RETURNING post_id";
-        return jdbcTemplate.queryForObject(sql, Integer.class, post.getUserId(), post.getImg_id(), post.getCaption());
+        String sql = "INSERT INTO posts (user_id, date_time, caption, image_data_id) VALUES (?, ?, ?, ?) RETURNING post_id";
+
+        Timestamp currentTimestamp = Timestamp.valueOf(LocalDateTime.now()); // Create Timestamp from current date and time
+
+        return jdbcTemplate.queryForObject(sql, Integer.class, post.getUserId(), currentTimestamp, post.getCaption(), post.getImg_id());
     }
 
     private Post mapPost(SqlRowSet rowSet) {
