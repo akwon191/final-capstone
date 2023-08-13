@@ -10,7 +10,7 @@ import java.util.List;
 @PreAuthorize("isAuthenticated()")
 @RequestMapping("/posts")
 @RestController
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin
 
 public class PostController {
     @Autowired
