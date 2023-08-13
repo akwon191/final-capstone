@@ -34,7 +34,6 @@ public class JdbcCommentDao implements CommentDao {
     public Comment createComment(Comment comment) {
         String sql = "INSERT INTO post_comments ( user_id, date_time, comment_text, post_id,) VALUES (?, ?, ?, ?) RETURNING comment_id";
 
-
         int commentId = jdbcTemplate.queryForObject(sql, Integer.class, comment.getUserId(), comment.getDateTime(), comment.getCommentText(),comment.getPostId());
         comment.setCommentId(commentId);
         return comment;
