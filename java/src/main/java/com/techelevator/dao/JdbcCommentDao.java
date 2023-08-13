@@ -32,10 +32,10 @@ public class JdbcCommentDao implements CommentDao {
 
     @Override
     public Comment createComment(Comment comment) {
-        String sql = "INSERT INTO post_comments (post_id, user_id, date_time, comment_text) VALUES (?, ?, ?, ?) RETURNING comment_id";
+        String sql = "INSERT INTO post_comments ( user_id, date_time, comment_text, post_id,) VALUES (?, ?, ?, ?) RETURNING comment_id";
 
 
-        int commentId = jdbcTemplate.queryForObject(sql, Integer.class, comment.getPostId(), comment.getUserId(), comment.getDateTime(), comment.getCommentText());
+        int commentId = jdbcTemplate.queryForObject(sql, Integer.class, comment.getUserId(), comment.getDateTime(), comment.getCommentText(),comment.getPostId());
         comment.setCommentId(commentId);
         return comment;
     }
