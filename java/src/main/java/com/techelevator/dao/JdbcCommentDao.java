@@ -1,14 +1,11 @@
 package com.techelevator.dao;
 import com.techelevator.model.Comment;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
-
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -21,20 +18,28 @@ public class JdbcCommentDao implements CommentDao {
     }
 
     @Override
-    public List<Comment> getCommentsByPostId(int postId) {
-        return null;
+    public List<Comment> getCommentsByPostId(int postId) throws SQLException {
+        List<Comment> comments = new ArrayList<>();
+        String sql = "SELECT * FROM post_comments WHERE post_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, postId);
+        while (results.next()) {
+            Comment com = mapRowToComment(results);
+            comments.add(com);
+        }
+        return comments;
     }
+
 
     @Override
     public Comment createComment(Comment comment) {
-        String sql = "INSERT INTO comments (post_id, user_id, date_time, comment_text) VALUES (?, ?, ?, ?) RETURNING comment_id";
+        String sql = "INSERT INTO post_comments (post_id, user_id, date_time, comment_text) VALUES (?, ?, ?, ?) RETURNING comment_id";
 
 
         int commentId = jdbcTemplate.queryForObject(sql, Integer.class, comment.getPostId(), comment.getUserId(), comment.getDateTime(), comment.getCommentText());
         comment.setCommentId(commentId);
         return comment;
     }
-    private Comment mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+    private Comment mapRowToComment(SqlRowSet resultSet) throws SQLException {
         int commentId = resultSet.getInt("comment_id");
         int postId = resultSet.getInt("post_id");
         int userId = resultSet.getInt("user_id");

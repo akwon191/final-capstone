@@ -9,17 +9,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.List;
 
 
 @PreAuthorize("isAuthenticated()")
 @RequestMapping("/comments")
 @RestController
-@CrossOrigin(origins = "http://localhost:8080",
-        methods = {RequestMethod.POST, RequestMethod.OPTIONS},
-        allowedHeaders = {"Authorization", "Content-Type"},
-        allowCredentials = "true")
-
+@CrossOrigin
 public class CommentController {
     private final CommentService commentService;
 
@@ -27,8 +24,8 @@ public class CommentController {
     public CommentController(CommentService commentService) {
         this.commentService = commentService;
     }
-    @GetMapping("/post/{postId}")
-    public ResponseEntity<List<Comment>> getCommentsByPostId(@PathVariable int postId) {
+    @GetMapping(path ="/{postId}")
+    public ResponseEntity<List<Comment>> getCommentsByPostId(@PathVariable int postId) throws SQLException {
         List<Comment> comments = commentService.getCommentsByPostId(postId);
         return ResponseEntity.ok(comments);
     }
