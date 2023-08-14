@@ -2,30 +2,12 @@
   <section>
     <div class="container">
       <div class="feed-list" ref="feedList">
-        <div @click="shiftDisplay('left')">
-          <post-card
-            v-if="posts[displayedIndices.left] !== undefined"
-            :key="displayedIndices.left"
-            :postIndex="displayedIndices.left"
-            class="post-card-item feed-list-left"
-          />
-        </div>
-        <div>
-          <post-card
-            v-if="posts[displayedIndices.left] !== undefined"
-            :key="displayedIndices.center"
-            :postIndex="displayedIndices.center"
-            class="post-card-item"
-          />
-        </div>
-        <div @click="shiftDisplay('right')">
-          <post-card
-            v-if="posts[displayedIndices.right] !== undefined"
-            :key="displayedIndices.right"
-            :postIndex="displayedIndices.right"
-            class="post-card-item feed-list-right"
-          />
-        </div>
+        <post-card
+          v-for="(post, index) in posts"
+          :key="index"
+          :postIndex="index"
+          class="post-card-item"
+        />
       </div>
     </div>
     <div id="arrows">
@@ -44,11 +26,7 @@ export default {
   name: "feed-list",
   data() {
     return {
-      displayedIndices: {
-        left: 0,
-        center: 1,
-        right: 2,
-      },
+      
     };
   },
   components: {
@@ -96,7 +74,7 @@ export default {
 }
 
 .post-card-item {
-  /* margin-right: 150px; Adjust the value for horizontal spacing */
+  margin-right: 150px; 
 }
 
 body {
