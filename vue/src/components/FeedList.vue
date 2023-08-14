@@ -17,9 +17,12 @@
       <div type="button" id="scroll-right" @click="scrollRight()"></div>
     </div>
     <div id="arrows">
-      <div class="orange-triangle"></div>
-      <div class="peach-triangle"></div>
-      <div class="yellow-triangle"></div>
+      <div id="red-triangle-right"></div>
+      <div id="pink-triangle-right"></div>
+      <div id="yellow-triangle-right"></div>
+      <div id="red-triangle-left"></div>
+      <div id="pink-triangle-left"></div>
+      <div id="yellow-triangle-left"></div>
     </div>
   </section>
 </template>
@@ -152,51 +155,82 @@ justify-content: space-between;
   margin-top: 65px;
 }
 
-
-/* .feed-list-left {
-  margin-left: none;
-  margin-right: 0px;
-}
-
-.feed-list-right {
-  margin-left: 250px;
-  margin-right: none;
-} */
-
-/* .orange-triangle {
+#red-triangle-right {
+  pointer-events: none;
   width: 0; 
   height: 0; 
   position: sticky;
-  border-top: 300px solid #FF9B42;
-  border-bottom: 300px solid #FF9B42; 
-  border-left: 200px solid transparent; 
-  border-right: 200px solid #FF9B42;
-  transform: translateX(1600px);
-  margin-top: -520px;
+  border-top: 310px solid #e85e6a;
+  border-bottom: 310px solid #e85e6a; 
+  border-left: 210px solid transparent; 
+  border-right: 210px solid #e85e6a;
+  transform: translateX(1640px);
+  margin-top: -605px;
 }
 
-.peach-triangle {
+#pink-triangle-right {
+  pointer-events: none;
   width: 0; 
   height: 0; 
   position: sticky;
-  border-top: 320px solid #F7A072;
-  border-bottom: 320px solid #F7A072; 
+  border-top: 320px solid #ea70cf;
+  border-bottom: 320px solid #ea70cf; 
   border-left: 220px solid transparent; 
-  border-right: 220px solid #F7A072;
-  transform: translateX(1600px);
-  margin-top: -620px;
+  border-right: 220px solid #ea70cf;
+  transform: translateX(1650px);
+  margin-top: -630px;
 }
 
-.yellow-triangle {
+#yellow-triangle-right {
+  pointer-events: none;
   width: 0; 
   height: 0; 
   position: sticky;
-  border-top: 320px solid #EDDEA4;
-  border-bottom: 320px solid #EDDEA4; 
-  border-left: 220px solid transparent; 
-  border-right: 220px solid #EDDEA4;
-  transform: translateX(1620px);
+  border-top: 330px solid #ffba29;
+  border-bottom: 330px solid #ffba29; 
+  border-left: 230px solid transparent; 
+  border-right: 230px solid #ffba29;
+  transform: translateX(1660px);
+  margin-top: -650px;
+}
+
+#red-triangle-left {
+  pointer-events: none;
+  width: 0; 
+  height: 0; 
+  position: sticky;
+  border-top: 310px solid #e85e6a;
+  border-bottom: 310px solid #e85e6a; 
+  border-right: 210px solid transparent; 
+  border-left: 210px solid #e85e6a;
+  transform: translateX(-155px);
   margin-top: -640px;
-} */
+}
+
+#pink-triangle-left {
+  pointer-events: none;
+  width: 0; 
+  height: 0; 
+  position: sticky;
+  border-top: 320px solid #ea70cf;
+  border-bottom: 320px solid #ea70cf; 
+  border-right: 220px solid transparent; 
+  border-left: 220px solid #ea70cf;
+  transform: translateX(-185px);
+  margin-top: -630px;
+}
+
+#yellow-triangle-left {
+  pointer-events: none;
+  width: 0; 
+  height: 0; 
+  position: sticky;
+  border-top: 330px solid #ffba29;
+  border-bottom: 330px solid #ffba29; 
+  border-right: 230px solid transparent; 
+  border-left: 230px solid #ffba29;
+  transform: translateX(-215px);
+  margin-top: -650px;
+}
 
 </style>
