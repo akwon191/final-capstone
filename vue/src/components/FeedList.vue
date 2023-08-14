@@ -1,14 +1,20 @@
 <template>
   <section>
     <div class="container">
-      <div class="feed-list" ref="feedList">
-        <post-card
-          v-for="(post, index) in posts"
-          :key="index"
-          :postIndex="index"
-          class="post-card-item"
-        />
+      <div id="scroller" >
+        <div class="feed-list" ref="feedList">
+          <post-card
+            v-for="(post, index) in posts"
+            :key="index"
+            :postIndex="index"
+            class="post-card-item"
+          />
+        </div>
       </div>
+    </div>
+    <div id="scroll-buttons">
+      <div type="button" id="scroll-left" @click="scrollLeft()"></div>
+      <div type="button" id="scroll-right" @click="scrollRight()"></div>
     </div>
     <div id="arrows">
       <div class="orange-triangle"></div>
@@ -26,7 +32,10 @@ export default {
   name: "feed-list",
   data() {
     return {
-      
+      rightScroll: false,
+      leftScroll: false,
+      x: 0,
+      y: 0,
     };
   },
   components: {
@@ -61,16 +70,37 @@ export default {
         this.displayedIndices.right = rightIndex;
       }
     },
-  },
-};
+    scrollRight() {
+      document.getElementById('scroller').animate([ { transform: `translateX(${this.x}px` }, { transform: `translateX(${this.x-650}px` }
+      ], {
+        duration: 1000,
+        iterations: 1,
+        fill: 'forwards'
+      });
+      this.x -= 650;
+    },
+    scrollLeft() {
+      document.getElementById('scroller').animate([ { transform: `translateX(${this.x}px` }, { transform: `translateX(${this.x+650}px` }
+      ], {
+        duration: 1000,
+        iterations: 1,
+        fill: 'forwards'
+      });
+      this.x += 650;
+    }
+  }
+}
+
 </script>
 
 <style>
+
+/* the left command does not perfectly align the first post center but it works for now while I try to animate the scroll */
 .feed-list {
-  width: 100%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   flex-wrap: nowrap;
+  position: relative;
 }
 
 .post-card-item {
@@ -89,15 +119,15 @@ body {
   /* overflow: hidden; */
 }
 
-.feed-list-left {
-  /* margin-left: none;
-  margin-right: 0px; */
+/* .feed-list-left {
+  margin-left: none;
+  margin-right: 0px;
 }
 
 .feed-list-right {
-  /* margin-left: 250px;
-  margin-right: none; */
-}
+  margin-left: 250px;
+  margin-right: none;
+} */
 
 /* .orange-triangle {
   width: 0; 
@@ -134,4 +164,33 @@ body {
   transform: translateX(1620px);
   margin-top: -640px;
 } */
+
+#scroller {
+  position: absolute;
+  overflow: visible;
+  left: 37%;
+}
+
+#scroll-buttons {
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+
+}
+
+#scroll-left {
+  width: 560px; 
+  height: 600px; 
+  position: sticky;
+  margin-top: 65px;
+}
+
+#scroll-right {
+  width: 560px; 
+  height: 600px; 
+  position: sticky;
+  margin-top: 65px;
+}
+
+
 </style>
