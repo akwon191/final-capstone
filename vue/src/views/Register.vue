@@ -25,7 +25,7 @@
       <p><router-link :to="{ name: 'login' }">Already have an account? Log in.</router-link></p>
     </form>
        <div class="flowers-image">
-        <img src="@/assets/dandelion.png" alt="Flowers Image" class="flowers-image">
+        <img src="@/assets/Bottom2.png" alt="Flowers Image" class="flowers-image">
       </div>
   </div>
 </template>
@@ -93,7 +93,7 @@ export default {
   font-size: 1rem;
   color: #365016;
   background: whitesmoke;
-  border: 10px solid #FF9B42;
+  border: 10px solid #ff5765;
   border-radius: 10px;
   width: calc(100% - 40px); 
   max-width: 500px; 
@@ -101,11 +101,12 @@ export default {
   margin-top: 80px;
   box-sizing: border-box;  
   padding: 20px;
+  text-align: center;
 }
 
 button[type="submit"] {
   background-color: whitesmoke;
-  border: 2px solid #FF9B42;
+  border: 2px solid #ff5765;
   border-radius: 15px;
   font-family: courgette;
   color: #365016;
@@ -113,10 +114,12 @@ button[type="submit"] {
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  margin: 0 auto;
+  display: block;
 }
 
 button[type="submit"]:hover {
-  background-color: #FF9B42;
+  background-color: #ff5765;
   color: #365016;
 }
 
@@ -141,7 +144,7 @@ label {
 }
 
 .fireworks-image {
-  max-width: 460px;
+  max-width: 480px;
   height: auto;
 }
 
@@ -151,7 +154,7 @@ label {
 }
 
 .flowers-image img {
-  max-width: 300px;
+  max-width: 360px;
   height: auto;
 }
 </style>

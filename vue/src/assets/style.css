@@ -28,6 +28,7 @@ body {
   margin-top: 80px;
   box-sizing: border-box; 
   padding: 20px;
+  text-align: center;
   
 }
 
@@ -66,7 +67,7 @@ label {
 
 button[type="submit"] {
   background-color: whitesmoke;
-  border: 2px solid #FF9B42;
+  border: 2px solid #ff5765;
   border-radius: 15px;
   font-family: courgette;
   color: #365016;
@@ -74,10 +75,12 @@ button[type="submit"] {
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  margin: 0 auto;
+  display: block;
 }
 
 button[type="submit"]:hover {
-  background-color: #FF9B42;
+  background-color: #ff5765;
   color: #365016;
 }
 
