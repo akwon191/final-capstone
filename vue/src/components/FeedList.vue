@@ -34,6 +34,7 @@ export default {
     return {
       rightScroll: false,
       leftScroll: false,
+      currentPos: 1,
       x: 0,
       y: 0,
     };
@@ -71,22 +72,28 @@ export default {
       }
     },
     scrollRight() {
-      document.getElementById('scroller').animate([ { transform: `translateX(${this.x}px` }, { transform: `translateX(${this.x-650}px` }
-      ], {
-        duration: 1000,
-        iterations: 1,
-        fill: 'forwards'
-      });
-      this.x -= 650;
+      if (this.currentPos < this.posts.length) {
+        document.getElementById('scroller').animate([ { transform: `translateX(${this.x}px` }, { transform: `translateX(${this.x-650}px` }
+        ], {
+          duration: 1000,
+          iterations: 1,
+          fill: 'forwards'
+        });
+        this.x -= 650;
+        this.currentPos += 1;
+      }
     },
     scrollLeft() {
-      document.getElementById('scroller').animate([ { transform: `translateX(${this.x}px` }, { transform: `translateX(${this.x+650}px` }
-      ], {
-        duration: 1000,
-        iterations: 1,
-        fill: 'forwards'
-      });
-      this.x += 650;
+      if (this.currentPos > 1) {
+        document.getElementById('scroller').animate([ { transform: `translateX(${this.x}px` }, { transform: `translateX(${this.x+650}px` }
+        ], {
+          duration: 1000,
+          iterations: 1,
+          fill: 'forwards'
+        });
+        this.x += 650;
+        this.currentPos -= 1;
+      }
     }
   }
 }
@@ -116,8 +123,35 @@ body {
   display: flex;
   justify-content: space-evenly;
   padding: 10px;
-  /* overflow: hidden; */
 }
+
+#scroller {
+  position: absolute;
+  overflow: visible;
+  left: 37%;
+}
+
+#scroll-buttons {
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+
+}
+
+#scroll-left {
+  width: 560px; 
+  height: 600px; 
+  position: sticky;
+  margin-top: 65px;
+}
+
+#scroll-right {
+  width: 560px; 
+  height: 600px; 
+  position: sticky;
+  margin-top: 65px;
+}
+
 
 /* .feed-list-left {
   margin-left: none;
@@ -164,33 +198,5 @@ body {
   transform: translateX(1620px);
   margin-top: -640px;
 } */
-
-#scroller {
-  position: absolute;
-  overflow: visible;
-  left: 37%;
-}
-
-#scroll-buttons {
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-
-}
-
-#scroll-left {
-  width: 560px; 
-  height: 600px; 
-  position: sticky;
-  margin-top: 65px;
-}
-
-#scroll-right {
-  width: 560px; 
-  height: 600px; 
-  position: sticky;
-  margin-top: 65px;
-}
-
 
 </style>
