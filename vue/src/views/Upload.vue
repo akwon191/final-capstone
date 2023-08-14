@@ -16,8 +16,8 @@
       <button @click="$refs.fileInput.click()">Pick File</button>
     </div>
     <div>
-      <label for="caption">Caption:</label>
-      <input v-model="caption" type="text" id="caption" />
+      <!-- <label for="caption">Caption:</label> -->
+      <textarea v-model="caption" type="text" id="caption" rows = "10" cols = "30" wrap = "soft" placeholder = "Insert Caption Here"></textarea>
     </div>
     <div>
       <button @click="onUpload" class="upload-button">Upload</button>
@@ -70,7 +70,7 @@ export default {
 
             PostService.addPost(post)
               .then((postResponse) => {
-                console.log("Post uploaded:", postResponse.data);
+                alert("Post uploaded!", postResponse.data);
               })
               .catch((error) => {
                 console.error("Error uploading post:", error);
@@ -78,6 +78,7 @@ export default {
 
             this.selectedFile = null;
             this.caption = "";
+            this.$router.push('/');
           })
       } catch (error) {
         console.error("Error uploading photo:", error);
@@ -142,4 +143,6 @@ h2 {
 #caption {
   margin-top: 50px;
 }
+
+
 </style>
