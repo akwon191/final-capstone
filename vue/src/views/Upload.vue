@@ -26,8 +26,10 @@
 </template>
 
 <script>
-import axios from "axios";
+
 import { mapState } from "vuex";
+import ImageService from '../services/ImageService';
+import PostService from '../services/PostService';
 
 
 export default {
@@ -53,16 +55,11 @@ export default {
         alert("Please select an image and enter a caption.");
         return;
       }
-      // const formdata = new FormData();
-      // formdata.append("file", this.selectedFile);
-      // axios.post("http://localhost:9000/images/upload", formdata)
       try {
         const formdata = new FormData();
         formdata.append("file", this.selectedFile);
-      // Refactor these when appropriate to call to image and post services
-        axios
-          .post("http://localhost:9000/images/upload", formdata)
-          .then((response) => {
+      
+        ImageService.postImage(formdata).then((response) => {
             const image_data_id = response.data.imageId;
 
             const post = {
@@ -71,8 +68,7 @@ export default {
               imgId: image_data_id,
             };
 
-            axios
-              .post("http://localhost:9000/posts", post)
+            PostService.addPost(post)
               .then((postResponse) => {
                 console.log("Post uploaded:", postResponse.data);
               })
@@ -83,9 +79,6 @@ export default {
             this.selectedFile = null;
             this.caption = "";
           })
-          .catch((error) => {
-            console.error("Error uploading image:", error);
-          });
       } catch (error) {
         console.error("Error uploading photo:", error);
       }

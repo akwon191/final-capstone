@@ -79,7 +79,7 @@ CREATE TABLE no_thanks (
 CREATE TABLE profiles (
         user_id int NOT NULL,
         description varchar (350) NOT NULL,
-        profile_image_url varchar(200) NOT NULL,
+        profile_image_url varchar(200),
         CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
 
