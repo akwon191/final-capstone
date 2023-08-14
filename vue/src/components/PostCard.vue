@@ -98,7 +98,7 @@
 </template>
   
 <script>
-import axios from "axios";
+import ImageService from '../services/ImageService'
 
 export default {
   name: "post-card",
@@ -144,8 +144,7 @@ export default {
       this.isHidden = !this.isHidden;
     },
     fetchImage(imageId) {
-      axios
-        .get(`http://localhost:9000/images/${imageId}`)
+      ImageService.getImage(imageId)
         .then((response) => {
           this.imageUrl = `data:image/jpg;base64,${response.data.imageData}`;
         })
