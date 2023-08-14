@@ -7,13 +7,14 @@
     <div>
       <input
         type="file"
-        class="file-input"
+        id="fileInput"
         ref="fileInput"
         @change="onFileSelected"
       />
     </div>
+    <ul id = "preview"></ul>
     <div>
-      <button @click="$refs.fileInput.click()">Pick File</button>
+      <button @click="$refs.fileInput.click()">Pick an Image</button>
     </div>
     <div>
       <!-- <label for="caption">Caption:</label> -->
@@ -49,6 +50,7 @@ export default {
   methods: {
     onFileSelected(evt) {
       this.selectedFile = evt.target.files[0];
+      this.previewFile();
     },
     onUpload() {
       if (!this.selectedFile || !this.caption) {
@@ -84,6 +86,24 @@ export default {
         console.error("Error uploading photo:", error);
       }
     },
+    previewFile() {
+      let preview = document.getElementById("preview");
+      let fileInput = document.getElementById("fileInput");
+
+      if (fileInput != null) {
+        for (let i = 0; i < fileInput.files.length; i++) {
+          let reader = new FileReader();
+          reader.onload = function (readerEvent) {
+            let listItem = document.createElement("li");
+            listItem.innerHTML =
+              "<img src='" + readerEvent.target.result + "' />"; // creates img tag for display
+            preview.append(listItem); // adds img to preview list
+          };
+
+          reader.readAsDataURL(fileInput.files[i]);
+        }
+      }
+    },
   },
 };
 </script>
@@ -108,7 +128,7 @@ export default {
   padding: 0px;
 }
 
-.file-input {
+#fileInput {
   display: none;
 }
 
@@ -123,7 +143,7 @@ export default {
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
   margin-left: 10px;
-  margin-top: 50px;
+  margin-top: none;
   display: block;
 }
 
@@ -136,13 +156,30 @@ h2 {
   font-family: "Courgette";
   font-size: 2.5rem;
   color: #365016;
-  margin: 50px;
+  margin-top: -30px;
   text-shadow: 0px 0px 1px black;
 }
 
 #caption {
   margin-top: 50px;
 }
+
+ul {
+  text-align: center;
+}
+
+li {
+  list-style: none;
+}
+
+li img {
+  width: 200px;
+  height: 180px;
+  margin-right: 35px;
+}
+
+
+
 
 
 </style>
