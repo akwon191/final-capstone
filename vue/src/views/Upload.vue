@@ -107,6 +107,11 @@ export default {
   background: whitesmoke;
   margin-left: 500px;
   margin-top: 100px;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 80px;
+  box-sizing: border-box; 
+  padding: 0px;
 }
 
 .file-input {
@@ -114,19 +119,25 @@ export default {
 }
 
 .upload-button {
-  background-color: #ea70cf;
-  color: white;
+  background-color: whitesmoke;
+  border: 2px solid #ff5765;
+  border-radius: 15px;
+  font-family: courgette;
+  color: #365016;
   padding: 10px 20px;
-  border: none;
+  font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
   margin-left: 10px;
   margin-top: 50px;
+  display: block;
 }
 
 .upload-button:hover {
-  background-color: #ffba29;
+background-color: #ff5765;
+color: #365016;
 }
+
 h2 {
   font-family: "Courgette";
   font-size: 2.5rem;

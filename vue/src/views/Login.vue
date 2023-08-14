@@ -75,39 +75,12 @@ export default {
 <style >
 @import "@/assets/style.css";
 
-/*
-body {
-  min-height: 100vh; 
-  margin: 0;
-  background-image: url(@/assets/LeafOverlay.png),linear-gradient(to bottom, lightblue, #edffeb, lightblue);
-  background-size: cover;
-  background-position: center center; 
-}
 
-#login {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 80vh;
-  font-family: courgette;
-  font-size: 1rem;
-  color: #365016;
-  background: whitesmoke;
-  border: 10px solid #FF9B42;
-  border-radius: 10px;
-  width: calc(100% - 40px); 
-  max-width: 500px; 
-  margin: 0 auto;
-  margin-top: 80px;
-  box-sizing: border-box; 
-  padding: 20px;
-  
-}
 
 .welcome-header {
   text-align: center;
   margin-bottom: 20px; 
+  font-size: 1.35rem;
   
 }
 
@@ -128,6 +101,7 @@ body {
   max-width: 400px;
   width: 100%;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  
 }
 
 .form-input-group {
@@ -138,22 +112,6 @@ label {
   margin-right: 0.5rem;
 }
 
-button[type="submit"] {
-  background-color: whitesmoke;
-  border: 2px solid #FF9B42;
-  border-radius: 15px;
-  font-family: courgette;
-  color: #365016;
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-}
-
-button[type="submit"]:hover {
-  background-color: #FF9B42;
-  color: #365016;
-}
 
 .login-form {
   text-align: left;
@@ -163,7 +121,7 @@ button[type="submit"]:hover {
   display: flex;
   justify-content: flex-end; 
   align-items: flex-start;
-  
+  margin-top: -100px;
   position: relative; 
 }
 
@@ -171,6 +129,6 @@ button[type="submit"]:hover {
   max-width: 200px;
   height: auto;
   transform: rotate(-25deg);
-} */
+}
 
 </style>

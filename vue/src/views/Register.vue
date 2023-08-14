@@ -81,47 +81,7 @@ export default {
 </script>
 
 <style >
-/* @import "@/assets/style.css"; */
-
-#register {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 80vh;
-  font-family: courgette;
-  font-size: 1rem;
-  color: #365016;
-  background: whitesmoke;
-  border: 10px solid #ff5765;
-  border-radius: 10px;
-  width: calc(100% - 40px); 
-  max-width: 500px; 
-  margin: 0 auto;
-  margin-top: 80px;
-  box-sizing: border-box;  
-  padding: 20px;
-  text-align: center;
-}
-
-button[type="submit"] {
-  background-color: whitesmoke;
-  border: 2px solid #ff5765;
-  border-radius: 15px;
-  font-family: courgette;
-  color: #365016;
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-  margin: 0 auto;
-  display: block;
-}
-
-button[type="submit"]:hover {
-  background-color: #ff5765;
-  color: #365016;
-}
+@import "@/assets/style.css";
 
 .form-input-group {
   margin-bottom: 1rem;
@@ -137,24 +97,25 @@ label {
 }
 
 .fireworks-container {
-  margin-bottom: 0;
   display: flex;
-  justify-content: center;
-  padding: 0; 
+  justify-content: flex-end; 
+  align-items: flex-start;
+  margin-top: -100px;
+  position: relative;
 }
 
 .fireworks-image {
-  max-width: 480px;
+  max-width: 0px;
   height: auto;
 }
 
 .flowers-container {
   text-align: left;
-  margin-top: 0;
+  margin-top: 30;
 }
 
 .flowers-image img {
-  max-width: 360px;
+  max-width: 400px;
   height: auto;
 }
 </style>
