@@ -10,8 +10,8 @@ export default {
     getPost(postId) {
         return axios.get(API_BASE_URL + '/posts/' + postId)
     },
-    addPost(Post) {
-        return axios.post(API_BASE_URL + '/posts', Post)
+    addPost(post) {
+        return axios.post(API_BASE_URL + '/posts', post)
     },
     listVibes() {
         return axios.get('/vibes')

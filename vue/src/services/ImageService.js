@@ -8,7 +8,11 @@ export default {
     },
 
     getImage(imageId) {
-        return axios.get(API_BASE_URL + '/images/' + imageId)
+        return axios.get(API_BASE_URL + `/images/${imageId}`)
+
     },
+    postImage(formdata) {
+        return axios.post(API_BASE_URL + '/images/upload', formdata)
+    }
     
 }
