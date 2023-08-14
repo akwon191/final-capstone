@@ -41,5 +41,6 @@ public class ImageController {
     public ResponseEntity<Image> uploadImage(@RequestParam("file") MultipartFile file) throws IOException {
             Image uploadedImage = imageService.uploadImage(file);
             return ResponseEntity.status(HttpStatus.CREATED).body(uploadedImage);
+
     }
 }
