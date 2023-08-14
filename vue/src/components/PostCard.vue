@@ -169,6 +169,7 @@ html {
 #main {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
 }
 
 #main-card {
