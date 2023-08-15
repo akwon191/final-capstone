@@ -1,16 +1,16 @@
 package com.techelevator.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 import com.techelevator.model.Vibe;
 import com.techelevator.service.VibeService;
 import java.util.List;
 
+@PreAuthorize("isAuthenticated()")
+@RequestMapping("/images")
 @RestController
-@RequestMapping("/vibes")
+@CrossOrigin(origins = "http://localhost:8080")
 public class VibeController {
 
     private final VibeService vibeService;
