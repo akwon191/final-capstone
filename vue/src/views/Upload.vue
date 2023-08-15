@@ -18,7 +18,7 @@
     </div>
     <div>
       <!-- <label for="caption">Caption:</label> -->
-      <textarea v-model="caption" type="text" id="caption" rows = "10" cols = "30" wrap = "soft" placeholder = "Insert Caption Here"></textarea>
+      <textarea v-model="caption" type="text" id="caption" rows = "10" cols = "40" wrap = "soft" placeholder = "Insert Caption Here"></textarea>
     </div>
     <div>
       <button @click="onUpload" class="upload-button">Upload</button>
@@ -173,7 +173,7 @@ li {
 }
 
 li img {
-  width: 200px;
+  width: 220px;
   height: 180px;
   margin-right: 35px;
 }
