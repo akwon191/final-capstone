@@ -49,12 +49,23 @@ export default {
     posts() {
       return this.$store.state.posts.length > 0 ? this.$store.state.posts : {};
     },
+    vibes() {
+      return this.$store.state.vibes.length > 0 ? this.$store.state.vibes : {};
+    },
   },
   created() {
     this.fetchPosts();
+    this.fetchVibes();
   },
   methods: {
-    ...mapActions(["fetchPosts"]),
+    ...mapActions(["fetchPosts", "fetchVibesByUserId"]),
+    fetchVibes() {
+      const userId = this.$store.state.user.id;
+      this.fetchVibesByUserId(userId)
+        .catch(error => {
+          console.error('Error fetching vibes:', error);
+        });
+    },
     shiftDisplay(direction) {
       const leftIndex =
         (this.displayedIndices.left - 1 + this.posts.length) %

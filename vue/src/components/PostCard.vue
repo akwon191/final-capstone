@@ -107,7 +107,7 @@ export default {
     };
   },
   props: {
-    postIndex: Number, // Prop to receive the index number
+    postIndex: Number,
   },
   created() {
     this.fetchImage(this.postList[this.postIndex].imgId);
@@ -150,7 +150,7 @@ export default {
           console.error("Image could not be retrieved:", error);
         })
         .finally(() => {
-          this.isLoadingImage = false; // Set isLoadingImage to false when done
+          this.isLoadingImage = false;
         });
     },
     postComment() {
