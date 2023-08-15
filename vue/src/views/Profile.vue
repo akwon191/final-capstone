@@ -5,7 +5,7 @@
   </template>
   
   <script>
-  import ProfileCard from '../components/ProfileCard.vue'
+  import ProfileCard from '../components/ProfileCard'
   
   export default {
     name: "profile",

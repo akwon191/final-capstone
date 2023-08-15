@@ -8,6 +8,7 @@ import store from '../store/index'
 import Vibes from '../views/Vibes.vue'
 import Upload from '../views/Upload.vue'
 import Profile from '../views/Profile.vue'
+import PostDetails from '../views/PostDetails.vue'
 
 Vue.use(Router)
 
@@ -76,6 +77,14 @@ const router = new Router({
       path: '/profile',
       name: 'profile',
       component: Profile,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/postdetails',
+      name: 'postdetails',
+      component: PostDetails,
       meta: {
         requiresAuth: true
       }
