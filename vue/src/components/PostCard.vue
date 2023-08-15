@@ -80,7 +80,7 @@
       <div id="comments-card" v-show="isHidden">
         <h1 id="comments-title">Add Comment</h1>
         <textarea id="comment-input" v-model="message" type="text" rows = "5" cols = "65" wrap = "soft" placeholder = "Add a comment..."></textarea>
-        <button id="post-comment" style="color: #57614b">Comment</button>
+        <button id="post-comment" @click="postComment()" style="color: #57614b">Comment</button>
 
       </div>
     </transition>
@@ -89,6 +89,7 @@
   
 <script>
 import axios from "axios";
+import CommentService from '../services/CommentService';
 
 export default {
   name: "post-card",
@@ -101,6 +102,7 @@ export default {
       isLoadingImage: true,
       imageUrl: "",
       hoverCaption: false,
+      message: "",
     };
   },
   props: {
@@ -146,6 +148,23 @@ export default {
           this.isLoadingImage = false; // Set isLoadingImage to false when done
         });
     },
+    postComment() {
+      if (!this.message) {
+        alert("Please add a comment.");
+        return;
+      }
+      try {
+        CommentService.createComment(this.message)
+        .then((postResponse) => {
+                alert("Comment uploaded!", postResponse.data);
+              });
+
+        this.message = "";
+        this.isHidden = false;
+      } catch (error) {
+        console.error("Error uploading comment:", error);
+      }
+    }
   },
 };
 </script>
