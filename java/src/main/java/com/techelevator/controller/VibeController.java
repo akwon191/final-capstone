@@ -1,5 +1,6 @@
 package com.techelevator.controller;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -24,5 +25,17 @@ public class VibeController {
     public ResponseEntity<List<Long>> getVibesByUserId(@PathVariable Long userId) {
         List<Long> postIds = vibeService.getPostIdsByUserId(userId);
         return ResponseEntity.ok(postIds);
+    }
+
+    @PostMapping("/{postId}/{userId}")
+    public ResponseEntity<Void> createVibe(@PathVariable Long postId, @PathVariable Long userId) {
+        vibeService.createVibe(postId, userId);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @DeleteMapping("/{postId}/{userId}")
+    public ResponseEntity<Void> deleteVibe(@PathVariable Long postId, @PathVariable Long userId) {
+        vibeService.deleteVibe(postId, userId);
+        return ResponseEntity.ok().build();
     }
 }
