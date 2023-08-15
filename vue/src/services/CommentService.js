@@ -11,8 +11,8 @@ export default {
         return axios.get(API_BASE_URL + '/comments/posts/' + postId);
     },
    
-    createComment(comment) {
-        return axios.post(API_BASE_URL + '/comments', comment)
+    createComment(postId, comment) {
+        return axios.post(API_BASE_URL + '/comments/posts/' + postId, comment);
 
 }
 }
