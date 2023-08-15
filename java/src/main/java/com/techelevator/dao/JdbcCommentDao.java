@@ -5,6 +5,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,8 +34,8 @@ public class JdbcCommentDao implements CommentDao {
     @Override
     public Comment createComment(Comment comment) {
         String sql = "INSERT INTO post_comments ( user_id, date_time, comment_text, post_id,) VALUES (?, ?, ?, ?) RETURNING comment_id";
-
-        int commentId = jdbcTemplate.queryForObject(sql, Integer.class, comment.getUserId(), comment.getDateTime(), comment.getCommentText(),comment.getPostId());
+        Timestamp currentTimestamp = Timestamp.valueOf(LocalDateTime.now());
+        int commentId = jdbcTemplate.queryForObject(sql, Integer.class, comment.getUserId(), currentTimestamp, comment.getCommentText(),comment.getPostId());
         comment.setCommentId(commentId);
         return comment;
     }
