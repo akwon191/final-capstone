@@ -14,8 +14,8 @@ export default {
       });
   },
 
-  addVibe(postId, userId, vibe) {
-    return axios.post(API_BASE_URL + `/vibes/${postId}/${userId}`, vibe)
+  addVibe(postId, userId) {
+    return axios.post(API_BASE_URL + `/vibes/${postId}/${userId}`)
   },
   removeVibe(userId, postId) {
     return axios.delete(API_BASE_URL + `/vibes/${postId}/${userId}`)

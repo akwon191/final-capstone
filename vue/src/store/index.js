@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-
+import VibeService from '../services/VibeService'
 Vue.use(Vuex)
 
 /*
@@ -21,6 +21,7 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {},
     posts: [],
+    vibes: [],
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -42,6 +43,9 @@ export default new Vuex.Store({
     setPosts(state, posts) {
       state.posts = posts;
     },
+    setVibes(state, vibes) {
+      state.vibes = vibes;
+    },
   },
   actions: {
     fetchPosts({ commit }) {
@@ -54,6 +58,15 @@ export default new Vuex.Store({
         })
         .catch(error => {
           console.error('Error fetching posts:', error);
+        });
+    },
+    fetchVibesByUserId({ commit }, userId) {
+      return VibeService.getVibesByUserId(userId)
+        .then(vibes => {
+          commit('setVibes', vibes);
+        })
+        .catch(error => {
+          console.error('Error fetching vibes:', error);
         });
     },
   }

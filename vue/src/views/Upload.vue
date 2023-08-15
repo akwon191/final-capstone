@@ -17,7 +17,6 @@
       <button @click="$refs.fileInput.click()">Pick an Image</button>
     </div>
     <div>
-      <!-- <label for="caption">Caption:</label> -->
       <textarea v-model="caption" type="text" id="caption" rows = "10" cols = "40" wrap = "soft" placeholder = "Insert Caption Here"></textarea>
     </div>
     <div>
