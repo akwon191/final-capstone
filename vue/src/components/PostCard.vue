@@ -10,12 +10,8 @@
       </div>
       <div class="post-content">
         <h2 id="post-author">{{ postList[postIndex].username }}</h2>
-        <p
-          id="description"
-          @mouseover="hoverCaption = true"
-          @mouseleave="hoverCaption = false"
-        >
-          {{ hoverCaption ? postList[postIndex].caption : truncatedCaption }}
+        <p id="description">
+          {{ truncatedCaption }}
           <span
             v-if="truncatedCaption.length > 50 && !hoverCaption"
             class="see-more"
@@ -69,11 +65,7 @@
           <button class="fa-solid fa-ellipsis" style="color: #57614b"></button>
         </div>
       </div>
-    </div>
-    <transition name="expand">
-      <div id="comments-card" v-show="isHidden">
-        <h1 id="comments-title">Add Comment</h1>
-        <div class="comment" v-if="this.$store.state.posts.length > 0">
+      <div class="comment" v-if="this.$store.state.posts.length > 0">
           <div
             id="single-comment"
             v-for="(comment, commentIndex) in postList[postIndex].comments"
@@ -83,6 +75,13 @@
             <p id="comment-text">{{ comment.commentText }}</p>
           </div>
         </div>
+    </div>
+    <transition name="expand">
+      <div id="comments-card" v-show="isHidden">
+        <h1 id="comments-title">Add Comment</h1>
+        <textarea id="comment-input" v-model="message" type="text" rows = "5" cols = "65" wrap = "soft" placeholder = "Add a comment..."></textarea>
+        <button id="post-comment" style="color: #57614b">Comment</button>
+
       </div>
     </transition>
   </div>
@@ -208,11 +207,6 @@ body {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.comments-border {
-  margin-top: 690px;
-  margin-left: 702px;
-}
-
 #post-title {
   font-family: "Courgette";
   font-size: 2rem;
@@ -287,22 +281,31 @@ body {
   border-top: 5px solid #e85e6a;
   border-bottom: 5px solid #e85e6a;
   font-family: "Courgette";
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: #365016;
   text-align: center;
   margin: auto;
 }
 
 .comment {
+  display: flex;
+  flex-direction: column;
+  max-height: 128px;
+  overflow: hidden;
+}
+
+#single-comment {
   border: solid 1px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
-  margin: 10px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
   box-sizing: border-box;
   width: auto;
   position: relative;
   clear: both;
   background: rgb(226, 226, 226);
-  transition: opacity 0.5s;
 }
 
 #comment-author {
@@ -317,6 +320,17 @@ body {
   font-size: 0.9rem;
   color: #365016;
   margin: 10px;
+}
+
+#comment-input {
+  display: flex;
+  align-items: center;
+}
+
+#post-comment {
+  font-family: "Courgette";
+  font-size: 1rem;
+  color: #365016;
 }
 
 .expand-enter-active,

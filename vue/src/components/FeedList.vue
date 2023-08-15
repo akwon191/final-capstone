@@ -78,7 +78,7 @@ export default {
       if (this.currentPos < this.posts.length) {
         document.getElementById('scroller').animate([ { transform: `translateX(${this.x}px` }, { transform: `translateX(${this.x-650}px` }
         ], {
-          duration: 1000,
+          duration: 600,
           iterations: 1,
           fill: 'forwards'
         });
@@ -90,7 +90,7 @@ export default {
       if (this.currentPos > 1) {
         document.getElementById('scroller').animate([ { transform: `translateX(${this.x}px` }, { transform: `translateX(${this.x+650}px` }
         ], {
-          duration: 1000,
+          duration: 600,
           iterations: 1,
           fill: 'forwards'
         });
