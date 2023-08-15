@@ -72,7 +72,7 @@
     </div>
     <transition name="expand">
       <div id="comments-card" v-show="isHidden">
-        <h1 id="comments-title">Comments</h1>
+        <h1 id="comments-title">Add Comment</h1>
         <div class="comment" v-if="this.$store.state.posts.length > 0">
           <div
             id="single-comment"
@@ -85,20 +85,11 @@
         </div>
       </div>
     </transition>
-    <transition name="expand">
-      <div class="card-border-1 comments-border" v-show="isHidden"></div>
-    </transition>
-    <transition name="expand">
-      <div class="card-border-2 comments-border" v-show="isHidden"></div>
-    </transition>
-    <transition name="expand">
-      <div class="card-border-3 comments-border" v-show="isHidden"></div>
-    </transition>
   </div>
 </template>
   
 <script>
-import ImageService from '../services/ImageService'
+import axios from "axios";
 
 export default {
   name: "post-card",
@@ -144,7 +135,8 @@ export default {
       this.isHidden = !this.isHidden;
     },
     fetchImage(imageId) {
-      ImageService.getImage(imageId)
+      axios
+        .get(`http://localhost:9000/images/${imageId}`)
         .then((response) => {
           this.imageUrl = `data:image/jpg;base64,${response.data.imageData}`;
         })
@@ -162,14 +154,13 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Courgette&family=Lobster&display=swap");
 
-html {
-  overflow-y: scroll;
+body {
+  overflow-y: hidden;
 }
 
 #main {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
 }
 
 #main-card {
@@ -284,8 +275,12 @@ html {
 #comments-card {
   position: relative;
   width: 500px;
-  height: 600px;
+  height: 150px;
   background: whitesmoke;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: 10px solid #e85e6a;
+  margin-left: -10px;
 }
 
 #comments-title {
@@ -327,7 +322,7 @@ html {
 .expand-enter-active,
 .expand-leave-active {
   transition: all 1s ease;
-  max-height: 1000px;
+  max-height: 500px;
 }
 
 .expand-enter,

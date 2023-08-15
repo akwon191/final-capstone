@@ -105,8 +105,12 @@ export default {
 
 <style>
 
-/* the left command does not perfectly align the first post center but it works for now while I try to animate the scroll */
+body {
+   overflow-x: hidden;
+}
+
 .feed-list {
+  
   display: flex;
   justify-content: flex-start;
   flex-wrap: nowrap;
