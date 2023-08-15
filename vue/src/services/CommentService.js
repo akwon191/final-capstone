@@ -8,11 +8,11 @@ export default {
     },
 
     getComment(postId) {
-        return axios.get(API_BASE_URL + '/comments/posts/' + postId);
+        return axios.get(API_BASE_URL + '/comments' + postId);
     },
    
-    createComment(postId, comment) {
-        return axios.post(API_BASE_URL + '/comments/posts/' + postId, comment);
+    createComment(comment) {
+        return axios.post(API_BASE_URL + '/comments', comment);
 
 }
 }

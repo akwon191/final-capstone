@@ -90,6 +90,7 @@
 <script>
 import axios from "axios";
 import CommentService from '../services/CommentService';
+import { mapState } from "vuex";
 
 export default {
   name: "post-card",
@@ -112,6 +113,10 @@ export default {
     this.fetchImage(this.postList[this.postIndex].imgId);
   },
   computed: {
+    ...mapState(["user"]),
+    userId() {
+      return this.user.id || null;
+    },
     postList() {
       return this.$store.state.posts.length > 0 ? this.$store.state.posts : {};
     },
@@ -153,11 +158,20 @@ export default {
         alert("Please add a comment.");
         return;
       }
+      const postId = this.postList[this.postIndex].postId;
+      const userId = this.userId;
+
+      const commentObject = {
+        postId: postId,
+        userId: userId,
+        commentText: this.message
+      };
+
       try {
-        CommentService.createComment(this.message)
-        .then((postResponse) => {
-                alert("Comment uploaded!", postResponse.data);
-              });
+        CommentService.createComment(commentObject)
+          .then((postResponse) => {
+            alert("Comment uploaded!", postResponse.data);
+          });
 
         this.message = "";
         this.isHidden = false;

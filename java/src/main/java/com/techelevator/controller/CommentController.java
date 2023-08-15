@@ -24,13 +24,13 @@ public class CommentController {
     public CommentController(CommentService commentService) {
         this.commentService = commentService;
     }
-    @GetMapping(path = "/posts/{postId}")
+    @GetMapping(path = "/{postId}")
     public ResponseEntity<List<Comment>> getCommentsByPostId(@PathVariable int postId) throws SQLException {
         List<Comment> comments = commentService.getCommentsByPostId(postId);
         return ResponseEntity.ok(comments);
     }
 
-    @PostMapping
+    @PostMapping("")
     public ResponseEntity<Comment> createComment(@RequestBody Comment comment) {
         Comment createdComment = commentService.createComment(comment);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdComment);
