@@ -180,18 +180,19 @@ export default {
         console.error("Error uploading comment:", error);
       }
     },
-    addVibe() {
-      const postId = this.postList[this.postIndex].postId;
-      const userId = this.userId;
-      VibeService.addVibe(userId, postId)
-              .then((postResponse) => {
-                alert("Vibe on!", postResponse.data);
-              })
-              .catch((error) => {
-                console.error("Error adding to vibes:", error);
-              });
-              this.vibeCheck = true;
-    }
+    // addVibe() {
+    //   const postId = this.postList[this.postIndex].postId;
+    //   const userId = this.userId;
+
+    //   try {
+    //     VibeService.addVibe(postId, userId)
+    //       .then((postResponse) => {
+    //         alert("Vibe on!", postResponse.data);
+    //       });
+    //       thanksCheck = true;
+    //   } catch (error) {
+    //     console.error("Error adding vibe:", error);
+    //   }
   },
 };
 </script>
