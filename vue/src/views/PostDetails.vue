@@ -12,7 +12,6 @@
                 <div id="full-comments">
                     <h1 id="comments-title">Comments</h1>
                 </div>
-
             </div>
         </div>
     </div>

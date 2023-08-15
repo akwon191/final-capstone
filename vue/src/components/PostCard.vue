@@ -21,7 +21,7 @@
       </div>
       <div id="button-container">
         <div id="button-vibes">
-          <div class="button-style" @click="setVibes()" v-show="!vibeCheck">
+          <div class="button-style" @click="addVibes()" v-show="!vibeCheck">
             <i
               class="fa-solid fa-hand-holding-heart"
               style="color: #57614b"
@@ -91,6 +91,7 @@
 import axios from "axios";
 import CommentService from '../services/CommentService';
 import { mapState } from "vuex";
+import VibeService from '../services/VibeService';
 
 export default {
   name: "post-card",
@@ -178,6 +179,18 @@ export default {
       } catch (error) {
         console.error("Error uploading comment:", error);
       }
+    },
+    addVibe() {
+      const postId = this.postList[this.postIndex].postId;
+      const userId = this.userId;
+      VibeService.addVibe(userId, postId)
+              .then((postResponse) => {
+                alert("Vibe on!", postResponse.data);
+              })
+              .catch((error) => {
+                console.error("Error adding to vibes:", error);
+              });
+              this.vibeCheck = true;
     }
   },
 };
