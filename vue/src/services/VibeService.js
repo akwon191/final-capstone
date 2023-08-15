@@ -14,10 +14,10 @@ export default {
       });
   },
 
-  addVibe(vibe) {
-    return axios.post(API_BASE_URL + '/vibes', vibe)
+  addVibe(postId, userId, vibe) {
+    return axios.post(API_BASE_URL + `/vibes/${postId}/${userId}`, vibe)
   },
-  removeVibe(postId) {
-    return axios.delete(API_BASE_URL + `/vibes/${postId}`)
+  removeVibe(userId, postId) {
+    return axios.delete(API_BASE_URL + `/vibes/${postId}/${userId}`)
 },
 };
