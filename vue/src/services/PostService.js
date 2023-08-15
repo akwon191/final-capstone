@@ -13,13 +13,5 @@ export default {
     addPost(post) {
         return axios.post(API_BASE_URL + '/posts', post)
     },
-    listVibes() {
-        return axios.get('/vibes')
-    },
-    addVibe(postId) {
-        return axios.post(`/vibes/${postId}`)
-    },
-    removeVibe(postId) {
-        return axios.post(`/vibes/${postId}`)
-    },
+
 }

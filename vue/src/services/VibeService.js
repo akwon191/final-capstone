@@ -13,4 +13,11 @@ export default {
         throw error;
       });
   },
+
+  addVibe(vibe) {
+    return axios.post(API_BASE_URL + '/vibes', vibe)
+  },
+  removeVibe(postId) {
+    return axios.delete(API_BASE_URL + `/vibes/${postId}`)
+},
 };
