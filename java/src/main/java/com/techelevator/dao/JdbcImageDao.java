@@ -3,16 +3,10 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Image;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.support.SqlLobValue;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Base64;
 
 @Component

@@ -1,9 +1,8 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.Vibe;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository
