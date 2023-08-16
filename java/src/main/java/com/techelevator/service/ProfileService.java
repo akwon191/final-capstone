@@ -18,9 +18,6 @@ public class ProfileService {
         this.profileDao = profileDao;
     }
 
-    public int createProfile(Profile profile) {
-        return profileDao.createProfile(profile);
-    }
 
     public Profile getProfileById(int userId) {
         return profileDao.getProfileById(userId);
