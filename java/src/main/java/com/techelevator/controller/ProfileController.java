@@ -17,7 +17,7 @@ import java.security.Principal;
 import java.util.List;
 
 @PreAuthorize("isAuthenticated()")
-@RequestMapping("/profiles")
+@RequestMapping("/profile")
 @RestController
 @CrossOrigin
 
@@ -29,7 +29,7 @@ public class ProfileController  {
     @Autowired
     private FollowDao followDao;
 
-    @RequestMapping(path = "/profile", method = RequestMethod.GET)
+    @RequestMapping(path = "", method = RequestMethod.GET)
     public Profile getMyProfile(Principal principal) {
         int userId = userDao.findIdByUsername(principal.getName());
 
