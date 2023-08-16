@@ -52,17 +52,20 @@ export default {
     vibes() {
       return this.$store.state.vibes.length > 0 ? this.$store.state.vibes : {};
     },
+    thanks() {
+      return this.$store.state.thanks.length > 0 ? this.$store.state.thanks : {};
+    }
   },
   created() {
     this.fetchPosts();
     this.fetchVibes();
+    this.fetchThanks();
   },
   methods: {
     ...mapActions([
       "fetchPosts",
       "fetchVibesByUserId",
       "fetchThanksByUserId", 
-      "fetchNoThanksByUserId",
     ]),
     fetchVibes() {
       const userId = this.$store.state.user.id;
@@ -133,13 +136,6 @@ export default {
         console.error("Error fetching thanks:", error);
       });
     },
-    fetchNoThanks() {
-      const userId = this.$store.state.user.id;
-      this.fetchNoThanksByUserId(userId).catch((error) => {
-        console.error("Error fetching noThanks:", error);
-      });
-    },
-    
   },
 };
 </script>
