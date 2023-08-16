@@ -8,12 +8,12 @@ COMMIT TRANSACTION;
 BEGIN TRANSACTION;
 -- Users
 INSERT INTO users (username, password_hash, role)
-VALUES ('brianr', 'techelevator1', 'ROLE_USER'),
-('aartik', 'techelevator1', 'ROLE_USER'),
-('yoavm', 'techelevator1', 'ROLE_USER'),
-('beckyz', 'techelevator1', 'ROLE_USER'),
-('brodinm', 'techelevator1', 'ROLE_USER'),
-('andyk', 'techelevator1', 'ROLE_USER');
+VALUES ('brianr', '$2a$10$xr4oT4kYUK7JKNCyvUV/.OrhzCv/AyNTkXHHB6nuxE0Rvten95Oeq', 'ROLE_USER'),
+('aartik', '$2a$10$OwQsPAN8f/MPxcPq1D9kPeVz9SvKb4BR7yzPJUCVybC1.yyHqP4jG', 'ROLE_USER'),
+('yoavm', '$2a$10$8zTJoG.b5jLoymTnNyiQcuAvtPZ/fLL4CWTLRs6rU3RyiPE8NcTlO', 'ROLE_USER'),
+('beckyz', '$2a$10$9HDhkJ0u3FkGwgJXXvES4.5crkYp9ouFpDMDA/n7cgxM/F.7InSHi', 'ROLE_USER'),
+('brodinm', '$2a$10$zyB7UwoRSBDfEd1NvDI8HO1.KJRfN1eO3xDeQvKBVpI5P9Uq7pgw.', 'ROLE_USER'),
+('andyk', '$2a$10$0MhExxOdGod7mK/DomEqGul1YteHnXQWvseA/MfYQxN3RYUP175t6', 'ROLE_USER');
 
 COMMIT TRANSACTION;
 
@@ -106,6 +106,9 @@ VALUES ((SELECT user_id FROM users WHERE username = 'brianr'), (SELECT post_id F
 ((SELECT user_id FROM users WHERE username = 'andyk'), (SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'aartik'));
 
 COMMIT TRANSACTION;
+
+
+
 
 
 
