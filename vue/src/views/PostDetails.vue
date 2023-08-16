@@ -68,8 +68,8 @@ export default {
   position: absolute;
   top: -30px;
   left: -30px;
-  border-right: 30px solid #ffba29;
-  border-left: 30px solid #ffba29;
+  border-right: 30px solid #ffd06b;
+  border-left: 30px solid #ffd06b;
   width: 1000px;
   height: 100%;
   z-index: -3;
