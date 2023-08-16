@@ -5,7 +5,7 @@ import com.techelevator.model.Profile;
 import java.util.List;
 
 public interface ProfileDao {
-     void createProfile(Profile profile);
+     int createProfile(Profile profile);
 
      Profile getProfileById(int userId);
 

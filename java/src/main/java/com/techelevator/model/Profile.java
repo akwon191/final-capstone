@@ -8,6 +8,10 @@ public class Profile {
     private String description;
     private String username;
 
+    public Profile() {
+
+    }
+
 
     public int getUserId() {
         return userId;
