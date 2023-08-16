@@ -28,7 +28,8 @@ public class JdbcVibeDao implements VibeDao {
 
     @Override
     public void deleteVibe(Long postId, Long userId) {
-        String sql = "DELETE FROM vibes WHERE post_id = ? AND user_id = ?";
-        jdbcTemplate.update(sql, postId, userId);
+        String sql = "DELETE FROM vibes WHERE user_id = ? AND post_id = ?";
+        jdbcTemplate.update(sql, userId, postId);
     }
+
 }

@@ -21,13 +21,13 @@
       </div>
       <div id="button-container">
         <div id="button-vibes">
-          <div class="button-style" @click="addVibes()" v-show="!vibeCheck">
+          <div class="button-style" @click="addVibe()" v-show="!isVibing">
             <i
               class="fa-solid fa-hand-holding-heart"
               style="color: #57614b"
             ></i>
           </div>
-          <div class="button-style" @click="setVibes()" v-show="vibeCheck">
+          <div class="button-style" @click="removeVibe()" v-show="isVibing">
             <i
               class="fa-solid fa-hand-holding-heart"
               style="color: #c52e1d"
@@ -35,10 +35,10 @@
           </div>
         </div>
         <div id="button-thanks">
-          <div class="button-style" @click="setThanks()" v-show="!thanksCheck">
+          <div class="button-style" @click="setThanks" v-show="!thanksCheck">
             <i class="fa-solid fa-thumbs-up" style="color: #57614b"></i>
           </div>
-          <div class="button-style" @click="setThanks()" v-show="thanksCheck">
+          <div class="button-style" @click="setThanks" v-show="thanksCheck">
             <i class="fa-solid fa-thumbs-up" style="color: #c52e1d"></i>
           </div>
         </div>
@@ -66,22 +66,31 @@
         </div>
       </div>
       <div class="comment" v-if="this.$store.state.posts.length > 0">
-          <div
-            id="single-comment"
-            v-for="(comment, commentIndex) in postList[postIndex].comments"
-            :key="commentIndex"
-          >
-            <h4 id="comment-author">{{ comment.commentId }}</h4>
-            <p id="comment-text">{{ comment.commentText }}</p>
-          </div>
+        <div
+          id="single-comment"
+          v-for="(comment, commentIndex) in postList[postIndex].comments"
+          :key="commentIndex"
+        >
+          <h4 id="comment-author">{{ comment.commentId }}</h4>
+          <p id="comment-text">{{ comment.commentText }}</p>
         </div>
+      </div>
     </div>
     <transition name="expand">
       <div id="comments-card" v-show="isHidden">
         <h1 id="comments-title">Add Comment</h1>
-        <textarea id="comment-input" v-model="message" type="text" rows = "5" cols = "65" wrap = "soft" placeholder = "Add a comment..."></textarea>
-        <button id="post-comment" @click="postComment()" style="color: #57614b">Comment</button>
-
+        <textarea
+          id="comment-input"
+          v-model="message"
+          type="text"
+          rows="5"
+          cols="65"
+          wrap="soft"
+          placeholder="Add a comment..."
+        ></textarea>
+        <button id="post-comment" @click="postComment()" style="color: #57614b">
+          Comment
+        </button>
       </div>
     </transition>
   </div>
@@ -89,9 +98,9 @@
   
 <script>
 import axios from "axios";
-import CommentService from '../services/CommentService';
+import CommentService from "../services/CommentService";
 import { mapState } from "vuex";
-import VibeService from '../services/VibeService';
+import VibeService from "../services/VibeService";
 
 export default {
   name: "post-card",
@@ -105,13 +114,20 @@ export default {
       imageUrl: "",
       hoverCaption: false,
       message: "",
+      isVibing: "",
     };
   },
   props: {
     postIndex: Number,
   },
+  watch: {
+    "$store.state.vibes"(newVibes) {
+      this.checkVibingStatus();
+    },
+  },
   created() {
     this.fetchImage(this.postList[this.postIndex].imgId);
+    this.checkVibingStatus();
   },
   computed: {
     ...mapState(["user"]),
@@ -129,6 +145,43 @@ export default {
     },
   },
   methods: {
+    toggleVibe() {
+      if (this.isVibing) {
+        this.removeVibe();
+      } else if (!this.isVibing) {
+        this.addVibe();
+      }
+    },
+    addVibe() {
+      const postId = this.postList[this.postIndex].postId;
+      const userId = this.userId;
+
+      try {
+        VibeService.addVibe(postId, userId).then((postResponse) => {
+          this.isVibing = !this.isVibing;
+        });
+      } catch (error) {
+        console.error("Error adding vibe:", error);
+      }
+    },
+    removeVibe() {
+      const postId = this.postList[this.postIndex].postId;
+      const userId = this.userId;
+      try {
+        VibeService.removeVibe(postId, userId).then((postResponse) => {
+          this.isVibing = !this.isVibing;
+        });
+      } catch (error) {
+        console.error("Error removing vibe:", error);
+      }
+    },
+    checkVibingStatus() {
+      const postId = this.postList[this.postIndex].postId;
+      const vibesArray = this.$store.state.vibes;
+
+      // Check if current postId is included in the vibes array
+      this.isVibing = vibesArray.includes(postId);
+    },
     setVibes() {
       this.vibeCheck = !this.vibeCheck;
     },
@@ -165,14 +218,13 @@ export default {
       const commentObject = {
         postId: postId,
         userId: userId,
-        commentText: this.message
+        commentText: this.message,
       };
 
       try {
-        CommentService.createComment(commentObject)
-          .then((postResponse) => {
-            alert("Comment uploaded!", postResponse.data);
-          });
+        CommentService.createComment(commentObject).then((postResponse) => {
+          alert("Comment uploaded!", postResponse.data);
+        });
 
         this.message = "";
         this.isHidden = false;
@@ -180,19 +232,6 @@ export default {
         console.error("Error uploading comment:", error);
       }
     },
-    // addVibe() {
-    //   const postId = this.postList[this.postIndex].postId;
-    //   const userId = this.userId;
-
-    //   try {
-    //     VibeService.addVibe(postId, userId)
-    //       .then((postResponse) => {
-    //         alert("Vibe on!", postResponse.data);
-    //       });
-    //       thanksCheck = true;
-    //   } catch (error) {
-    //     console.error("Error adding vibe:", error);
-    //   }
   },
 };
 </script>
@@ -281,14 +320,14 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px auto; 
+  margin: 10px auto;
 }
 
 #post-img {
   max-width: 100%;
   max-height: 300px;
   min-height: 300px;
-  object-fit: contain; 
+  object-fit: contain;
 }
 
 #button-container {

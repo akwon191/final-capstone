@@ -17,7 +17,8 @@ export default {
   addVibe(postId, userId) {
     return axios.post(API_BASE_URL + `/vibes/${postId}/${userId}`)
   },
-  removeVibe(userId, postId) {
+  removeVibe(postId, userId) {
+    console.log(postId, userId)
     return axios.delete(API_BASE_URL + `/vibes/${postId}/${userId}`)
-},
+  },
 };
