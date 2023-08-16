@@ -46,22 +46,22 @@
             <i class="fa-solid fa-thumbs-up" style="color: #c52e1d"></i>
           </div>
         </div>
-        <div id="button-nothanks">
+        <!-- <div id="button-nothanks">
           <div
             class="button-style"
-            @click="addNoThanks()"
-            v-show="!noThanksCheck"
+            
+            v-show="thanksCheck"
           >
             <i class="fa-solid fa-thumbs-down" style="color: #57614b"></i>
           </div>
           <div
             class="button-style"
-            @click="removeNoThanks()"
-            v-show="noThanksCheck"
+            
+            v-show="!thanksCheck"
           >
             <i class="fa-solid fa-thumbs-down" style="color: #c52e1d"></i>
           </div>
-        </div>
+        </div> -->
         <div class="button-style" @click="toggleHidden">
           <i class="fa-solid fa-comment" style="color: #57614b"></i>
         </div>
@@ -69,16 +69,20 @@
           <button class="fa-solid fa-ellipsis" style="color: #57614b"></button>
         </div>
       </div>
-      <div class="comment" v-if="this.$store.state.posts.length > 0">
+      <!-- <div class="comment" v-if="this.$store.state.posts.length > 0">
         <div
           id="single-comment"
           v-for="(comment, commentIndex) in postList[postIndex].comments"
           :key="commentIndex"
         >
+<<<<<<< HEAD
           <h4 id="comment-author">{{ comment.username }}</h4>
+=======
+          <h4 id="comment-author">{{ comment.commentId + " " + comment.commentText }}</h4>
+>>>>>>> 41d0f9a05c8b57db798a41adb88eb7b98feec1c9
           <p id="comment-text">{{ comment.commentText }}</p>
         </div>
-      </div>
+      </div> -->
     </div>
     <transition name="expand">
       <div id="comments-card" v-show="isHidden">
@@ -106,21 +110,18 @@ import CommentService from "../services/CommentService";
 import { mapState } from "vuex";
 import VibeService from "../services/VibeService";
 import ThanksService from "../services/ThanksService";
-import NoThanksService from "../services/NoThanksService";
 
 export default {
   name: "post-card",
   data() {
     return {
       isHidden: false,
-      vibeCheck: false,
-      thanksCheck: false,
-      noThanksCheck: false,
       isLoadingImage: true,
       imageUrl: "",
       hoverCaption: false,
       message: "",
       isVibing: "",
+      thanksCheck: "",
     };
   },
   props: {
@@ -139,18 +140,11 @@ export default {
       },
       immediate: true,
     },
-    "$store.state.noThanks": {
-      handler(newNoThanks) {
-        this.checkNoThanksStatus(newNoThanks);
-      },
-      immediate: true,
-    },
   },
   created() {
     this.fetchImage(this.postList[this.postIndex].imgId);
     this.checkVibingStatus();
     this.checkThanksStatus();
-    this.checkNoThanksStatus();
   },
   computed: {
     ...mapState(["user"]),
@@ -194,30 +188,20 @@ export default {
     addThanks() {
       const postId = this.postList[this.postIndex].postId;
       const userId = this.$store.state.user.id;
+      this.thanksCheck = !this.thanksCheck;
       ThanksService.addThanks(postId, userId).catch((error) => {
         console.error("Error adding thanks:", error);
       });
+      
     },
     removeThanks() {
       const postId = this.postList[this.postIndex].postId;
       const userId = this.$store.state.user.id;
+      this.thanksCheck = !this.thanksCheck;
       ThanksService.removeThanks(postId, userId).catch((error) => {
         console.error("Error removing thanks:", error);
       });
-    },
-    addNoThanks() {
-      const postId = this.postList[this.postIndex].postId;
-      const userId = this.$store.state.user.id;
-      NoThanksService.addNoThanks(postId, userId).catch((error) => {
-        console.error("Error adding noThanks:", error);
-      });
-    },
-    removeNoThanks() {
-      const postId = this.postList[this.postIndex].postId;
-      const userId = this.$store.state.user.id;
-      NoThanksService.removeNoThanks(postId, userId).catch((error) => {
-        console.error("Error removing noThanks:", error);
-      });
+      
     },
     checkVibingStatus() {
       const postId = this.postList[this.postIndex].postId;
@@ -229,19 +213,11 @@ export default {
       const thanksArray = this.$store.state.thanks;
       this.thanksCheck = thanksArray.includes(postId);
     },
-    checkNoThanksStatus() {
-      const postId = this.postList[this.postIndex].postId;
-      const noThanksArray = this.$store.state.noThanks;
-      this.noThanksCheck = noThanksArray.includes(postId);
-    },
     setVibes() {
       this.vibeCheck = !this.vibeCheck;
     },
     setThanks() {
       this.thanksCheck = !this.thanksCheck;
-    },
-    setNoThanks() {
-      this.noThanksCheck = !this.noThanksCheck;
     },
     toggleHidden() {
       this.isHidden = !this.isHidden;
