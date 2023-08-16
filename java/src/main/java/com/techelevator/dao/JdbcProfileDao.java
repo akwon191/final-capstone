@@ -19,14 +19,7 @@ public class JdbcProfileDao implements ProfileDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    @Override
-    public int createProfile(Profile profile) {
-        String sql = "INSERT INTO profiles (user_id, description, username) VALUES (?, ?, ?) RETURNING profile_id";
-        int profileId = jdbcTemplate.queryForObject(sql, Integer.class, profile.getUserId(), profile.getDescription(), profile.getUsername());
-        return profileId;
-    }
-
-
+   
 
 
     @Override
