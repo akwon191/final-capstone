@@ -224,10 +224,10 @@ body {
   width: 0;
   height: 0;
   position: sticky;
-  border-top: 330px solid #ffba29;
-  border-bottom: 330px solid #ffba29;
+  border-top: 330px solid #ffd06b;
+  border-bottom: 330px solid #ffd06b;
   border-left: 230px solid transparent;
-  border-right: 230px solid #ffba29;
+  border-right: 230px solid #ffd06b;
   transform: translateX(1660px);
   margin-top: -650px;
 }
@@ -263,10 +263,10 @@ body {
   width: 0;
   height: 0;
   position: sticky;
-  border-top: 330px solid #ffba29;
-  border-bottom: 330px solid #ffba29;
+  border-top: 330px solid #ffd06b;
+  border-bottom: 330px solid #ffd06b;
   border-right: 230px solid transparent;
-  border-left: 230px solid #ffba29;
+  border-left: 230px solid #ffd06b;
   transform: translateX(-215px);
   margin-top: -650px;
 }

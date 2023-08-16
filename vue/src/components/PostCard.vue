@@ -49,9 +49,9 @@
         <div class="button-style" @click="toggleHidden">
           <i class="fa-solid fa-comment" style="color: #57614b"></i>
         </div>
-        <div class="button-style">
+        <router-link class="button-style" :to="{ name: 'postdetails', params: {  id: postList[this.postIndex].postId }}">
           <button class="fa-solid fa-ellipsis" style="color: #57614b"></button>
-        </div>
+        </router-link>
       </div>
       <div class="comment" v-if="this.$store.state.posts.length > 0">
         <div
@@ -293,7 +293,7 @@ body {
   position: absolute;
   top: -30px;
   left: -30px;
-  border: 30px solid #ffba29;
+  border: 30px solid #ffd06b;
   border-radius: 10px;
   width: 500px;
   height: 600px;
