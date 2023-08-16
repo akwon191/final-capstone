@@ -18,13 +18,9 @@ public class ProfileService {
         this.profileDao = profileDao;
     }
 
-
     public Profile getProfileById(int userId) {
-        return profileDao.getProfileById(userId);
+        return profileDao.getProfile(userId);
     }
 
-    public List<Profile> getFollowers(int userId) {
-        return profileDao.getFollowers(userId);
-    }
 }
 

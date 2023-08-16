@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface ProfileDao {
 
+     Profile getProfile(int userId);
 
-     Profile getProfileById(int userId);
-
-     List<Profile> getFollowers(int userId);
 }

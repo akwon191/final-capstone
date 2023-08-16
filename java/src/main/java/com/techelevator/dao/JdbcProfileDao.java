@@ -19,32 +19,27 @@ public class JdbcProfileDao implements ProfileDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-   
-
 
     @Override
-    public Profile getProfileById(int userId) {
-        String sql = "SELECT user_id, description, username FROM profiles WHERE user_id = ?";
-        RowMapper<Profile> rowMapper = (resultSet, rowNum) -> mapRowToProfile((SqlRowSet) resultSet);
-        return jdbcTemplate.queryForObject(sql, rowMapper, userId);
-    }
+    public Profile getProfile(int userId) {
 
-    @Override
-    public List<Profile> getFollowers(int userId) {
-        String sql = "SELECT p.user_id, p.description, p.username FROM profiles p " +
-                "JOIN followers f ON p.user_id = f.follower_id " +
-                "WHERE f.followed_id = ?";
-        RowMapper<Profile> rowMapper = (resultSet, rowNum) -> mapRowToProfile((SqlRowSet) resultSet);
-        return jdbcTemplate.query(sql, rowMapper, userId);
+        String sqlGetProfile = "SELECT * FROM profiles p JOIN users ON users.user_id = p.user_id WHERE p.user_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetProfile, userId);
+
+        results.next();
+        Profile theProfile = mapRowToProfile(results);
+
+        return theProfile;
     }
 
 
 
-    public Profile mapRowToProfile(SqlRowSet resultSet) throws SQLException {
-        int userId = resultSet.getInt("user_id");
-        String description = resultSet.getString("description");
-        String username = resultSet.getString("username");
+    private Profile mapRowToProfile(SqlRowSet results) {
+        Profile theProfile = new Profile();
+        theProfile.setUserId(results.getInt("user_id"));
+        theProfile.setUsername(results.getString("username"));
+        theProfile.setDescription(results.getString("description"));
 
-        return new Profile(userId, description, username);
+        return theProfile;
     }
 }

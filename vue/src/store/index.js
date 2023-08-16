@@ -26,6 +26,7 @@ export default new Vuex.Store({
     vibes: [],
     thanks: [],
     noThanks: [],
+    profile: [],
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -56,6 +57,9 @@ export default new Vuex.Store({
     SET_NO_THANKS(state, noThanks) {
       state.noThanks = noThanks;
     },
+    SET_PROFILE(state, profile) {
+      state.profile = profile;
+    }
   },
   actions: {
     fetchPosts({ commit }) {

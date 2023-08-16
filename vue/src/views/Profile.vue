@@ -2,10 +2,10 @@
     <div>
       <profile-card />
     </div>
-  </template>
+</template>
   
-  <script>
-  import ProfileCard from '../components/ProfileCard'
+<script>
+  import ProfileCard from '../components/ProfileCard';
   
   export default {
     name: "profile",
@@ -13,4 +13,4 @@
       ProfileCard
     }
   };
-  </script>
+</script>
