@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import VibeService from '../services/VibeService'
+import ThanksService from '../services/ThanksService';
+import NoThanksService from '../services/NoThanksService';
 Vue.use(Vuex)
 
 /*
@@ -22,6 +24,8 @@ export default new Vuex.Store({
     user: currentUser || {},
     posts: [],
     vibes: [],
+    thanks: [],
+    noThanks: [],
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -46,6 +50,12 @@ export default new Vuex.Store({
     setVibes(state, vibes) {
       state.vibes = vibes;
     },
+    SET_THANKS(state, thanks) {
+      state.thanks = thanks;
+    },
+    SET_NO_THANKS(state, noThanks) {
+      state.noThanks = noThanks;
+    },
   },
   actions: {
     fetchPosts({ commit }) {
@@ -67,6 +77,24 @@ export default new Vuex.Store({
         })
         .catch(error => {
           console.error('Error fetching vibes:', error);
+        });
+    },
+    fetchThanksByUserId({ commit }, userId) {
+      return ThanksService.getThanksByUserId(userId)
+        .then(thanks => {
+          commit('SET_THANKS', thanks);
+        })
+        .catch(error => {
+          console.error('Error fetching thanks:', error);
+        });
+    },
+    fetchNoThanksByUserId({ commit }, userId) {
+      return NoThanksService.getNoThanksByUserId(userId)
+        .then(noThanks => {
+          commit('SET_NO_THANKS', noThanks);
+        })
+        .catch(error => {
+          console.error('Error fetching noThanks:', error);
         });
     },
   }

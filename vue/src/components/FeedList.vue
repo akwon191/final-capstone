@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="container">
-      <div id="scroller" >
+      <div id="scroller">
         <div class="feed-list" ref="feedList">
           <post-card
             v-for="(post, index) in posts"
@@ -58,13 +58,17 @@ export default {
     this.fetchVibes();
   },
   methods: {
-    ...mapActions(["fetchPosts", "fetchVibesByUserId"]),
+    ...mapActions([
+      "fetchPosts",
+      "fetchVibesByUserId",
+      "fetchThanksByUserId", 
+      "fetchNoThanksByUserId",
+    ]),
     fetchVibes() {
       const userId = this.$store.state.user.id;
-      this.fetchVibesByUserId(userId)
-        .catch(error => {
-          console.error('Error fetching vibes:', error);
-        });
+      this.fetchVibesByUserId(userId).catch((error) => {
+        console.error("Error fetching vibes:", error);
+      });
     },
     shiftDisplay(direction) {
       const leftIndex =
@@ -87,41 +91,65 @@ export default {
     },
     scrollRight() {
       if (this.currentPos < this.posts.length) {
-        document.getElementById('scroller').animate([ { transform: `translateX(${this.x}px` }, { transform: `translateX(${this.x-650}px` }
-        ], {
-          duration: 600,
-          iterations: 1,
-          fill: 'forwards'
-        });
+        document
+          .getElementById("scroller")
+          .animate(
+            [
+              { transform: `translateX(${this.x}px` },
+              { transform: `translateX(${this.x - 650}px` },
+            ],
+            {
+              duration: 600,
+              iterations: 1,
+              fill: "forwards",
+            }
+          );
         this.x -= 650;
         this.currentPos += 1;
       }
     },
     scrollLeft() {
       if (this.currentPos > 1) {
-        document.getElementById('scroller').animate([ { transform: `translateX(${this.x}px` }, { transform: `translateX(${this.x+650}px` }
-        ], {
-          duration: 600,
-          iterations: 1,
-          fill: 'forwards'
-        });
+        document
+          .getElementById("scroller")
+          .animate(
+            [
+              { transform: `translateX(${this.x}px` },
+              { transform: `translateX(${this.x + 650}px` },
+            ],
+            {
+              duration: 600,
+              iterations: 1,
+              fill: "forwards",
+            }
+          );
         this.x += 650;
         this.currentPos -= 1;
       }
-    }
-  }
-}
-
+    },
+    fetchThanks() {
+      const userId = this.$store.state.user.id;
+      this.fetchThanksByUserId(userId).catch((error) => {
+        console.error("Error fetching thanks:", error);
+      });
+    },
+    fetchNoThanks() {
+      const userId = this.$store.state.user.id;
+      this.fetchNoThanksByUserId(userId).catch((error) => {
+        console.error("Error fetching noThanks:", error);
+      });
+    },
+    
+  },
+};
 </script>
 
 <style>
-
 body {
-   overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 .feed-list {
-  
   display: flex;
   justify-content: flex-start;
   flex-wrap: nowrap;
@@ -129,7 +157,7 @@ body {
 }
 
 .post-card-item {
-  margin-right: 150px; 
+  margin-right: 150px;
 }
 
 body {
@@ -150,34 +178,33 @@ body {
 }
 
 #scroll-buttons {
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 #scroll-left {
-  width: 560px; 
-  height: 600px; 
+  width: 560px;
+  height: 600px;
   position: sticky;
   margin-top: 65px;
 }
 
 #scroll-right {
-  width: 560px; 
-  height: 600px; 
+  width: 560px;
+  height: 600px;
   position: sticky;
   margin-top: 65px;
 }
 
 #red-triangle-right {
   pointer-events: none;
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   position: sticky;
   border-top: 310px solid #e85e6a;
-  border-bottom: 310px solid #e85e6a; 
-  border-left: 210px solid transparent; 
+  border-bottom: 310px solid #e85e6a;
+  border-left: 210px solid transparent;
   border-right: 210px solid #e85e6a;
   transform: translateX(1640px);
   margin-top: -605px;
@@ -185,12 +212,12 @@ justify-content: space-between;
 
 #pink-triangle-right {
   pointer-events: none;
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   position: sticky;
   border-top: 320px solid #ea70cf;
-  border-bottom: 320px solid #ea70cf; 
-  border-left: 220px solid transparent; 
+  border-bottom: 320px solid #ea70cf;
+  border-left: 220px solid transparent;
   border-right: 220px solid #ea70cf;
   transform: translateX(1650px);
   margin-top: -630px;
@@ -198,12 +225,12 @@ justify-content: space-between;
 
 #yellow-triangle-right {
   pointer-events: none;
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   position: sticky;
   border-top: 330px solid #ffba29;
-  border-bottom: 330px solid #ffba29; 
-  border-left: 230px solid transparent; 
+  border-bottom: 330px solid #ffba29;
+  border-left: 230px solid transparent;
   border-right: 230px solid #ffba29;
   transform: translateX(1660px);
   margin-top: -650px;
@@ -211,12 +238,12 @@ justify-content: space-between;
 
 #red-triangle-left {
   pointer-events: none;
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   position: sticky;
   border-top: 310px solid #e85e6a;
-  border-bottom: 310px solid #e85e6a; 
-  border-right: 210px solid transparent; 
+  border-bottom: 310px solid #e85e6a;
+  border-right: 210px solid transparent;
   border-left: 210px solid #e85e6a;
   transform: translateX(-155px);
   margin-top: -640px;
@@ -224,12 +251,12 @@ justify-content: space-between;
 
 #pink-triangle-left {
   pointer-events: none;
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   position: sticky;
   border-top: 320px solid #ea70cf;
-  border-bottom: 320px solid #ea70cf; 
-  border-right: 220px solid transparent; 
+  border-bottom: 320px solid #ea70cf;
+  border-right: 220px solid transparent;
   border-left: 220px solid #ea70cf;
   transform: translateX(-185px);
   margin-top: -630px;
@@ -237,15 +264,14 @@ justify-content: space-between;
 
 #yellow-triangle-left {
   pointer-events: none;
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   position: sticky;
   border-top: 330px solid #ffba29;
-  border-bottom: 330px solid #ffba29; 
-  border-right: 230px solid transparent; 
+  border-bottom: 330px solid #ffba29;
+  border-right: 230px solid transparent;
   border-left: 230px solid #ffba29;
   transform: translateX(-215px);
   margin-top: -650px;
 }
-
 </style>

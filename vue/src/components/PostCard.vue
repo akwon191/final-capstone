@@ -35,24 +35,28 @@
           </div>
         </div>
         <div id="button-thanks">
-          <div class="button-style" @click="setThanks" v-show="!thanksCheck">
+          <div class="button-style" @click="addThanks()" v-show="!thanksCheck">
             <i class="fa-solid fa-thumbs-up" style="color: #57614b"></i>
           </div>
-          <div class="button-style" @click="setThanks" v-show="thanksCheck">
+          <div
+            class="button-style"
+            @click="removeThanks()"
+            v-show="thanksCheck"
+          >
             <i class="fa-solid fa-thumbs-up" style="color: #c52e1d"></i>
           </div>
         </div>
         <div id="button-nothanks">
           <div
             class="button-style"
-            @click="setNoThanks()"
+            @click="addNoThanks()"
             v-show="!noThanksCheck"
           >
             <i class="fa-solid fa-thumbs-down" style="color: #57614b"></i>
           </div>
           <div
             class="button-style"
-            @click="setNoThanks()"
+            @click="removeNoThanks()"
             v-show="noThanksCheck"
           >
             <i class="fa-solid fa-thumbs-down" style="color: #c52e1d"></i>
@@ -101,6 +105,8 @@ import axios from "axios";
 import CommentService from "../services/CommentService";
 import { mapState } from "vuex";
 import VibeService from "../services/VibeService";
+import ThanksService from "../services/ThanksService";
+import NoThanksService from "../services/NoThanksService";
 
 export default {
   name: "post-card",
@@ -121,13 +127,30 @@ export default {
     postIndex: Number,
   },
   watch: {
-    "$store.state.vibes"(newVibes) {
-      this.checkVibingStatus();
+    "$store.state.vibes": {
+      handler(newVibes) {
+        this.checkVibingStatus(newVibes);
+      },
+      immediate: true,
+    },
+    "$store.state.thanks": {
+      handler(newThanks) {
+        this.checkThanksStatus(newThanks);
+      },
+      immediate: true,
+    },
+    "$store.state.noThanks": {
+      handler(newNoThanks) {
+        this.checkNoThanksStatus(newNoThanks);
+      },
+      immediate: true,
     },
   },
   created() {
     this.fetchImage(this.postList[this.postIndex].imgId);
     this.checkVibingStatus();
+    this.checkThanksStatus();
+    this.checkNoThanksStatus();
   },
   computed: {
     ...mapState(["user"]),
@@ -145,13 +168,6 @@ export default {
     },
   },
   methods: {
-    toggleVibe() {
-      if (this.isVibing) {
-        this.removeVibe();
-      } else if (!this.isVibing) {
-        this.addVibe();
-      }
-    },
     addVibe() {
       const postId = this.postList[this.postIndex].postId;
       const userId = this.userId;
@@ -175,12 +191,48 @@ export default {
         console.error("Error removing vibe:", error);
       }
     },
+    addThanks() {
+      const postId = this.postList[this.postIndex].postId;
+      const userId = this.$store.state.user.id;
+      ThanksService.addThanks(postId, userId).catch((error) => {
+        console.error("Error adding thanks:", error);
+      });
+    },
+    removeThanks() {
+      const postId = this.postList[this.postIndex].postId;
+      const userId = this.$store.state.user.id;
+      ThanksService.removeThanks(postId, userId).catch((error) => {
+        console.error("Error removing thanks:", error);
+      });
+    },
+    addNoThanks() {
+      const postId = this.postList[this.postIndex].postId;
+      const userId = this.$store.state.user.id;
+      NoThanksService.addNoThanks(postId, userId).catch((error) => {
+        console.error("Error adding noThanks:", error);
+      });
+    },
+    removeNoThanks() {
+      const postId = this.postList[this.postIndex].postId;
+      const userId = this.$store.state.user.id;
+      NoThanksService.removeNoThanks(postId, userId).catch((error) => {
+        console.error("Error removing noThanks:", error);
+      });
+    },
     checkVibingStatus() {
       const postId = this.postList[this.postIndex].postId;
       const vibesArray = this.$store.state.vibes;
-
-      // Check if current postId is included in the vibes array
       this.isVibing = vibesArray.includes(postId);
+    },
+    checkThanksStatus() {
+      const postId = this.postList[this.postIndex].postId;
+      const thanksArray = this.$store.state.thanks;
+      this.thanksCheck = thanksArray.includes(postId);
+    },
+    checkNoThanksStatus() {
+      const postId = this.postList[this.postIndex].postId;
+      const noThanksArray = this.$store.state.noThanks;
+      this.noThanksCheck = noThanksArray.includes(postId);
     },
     setVibes() {
       this.vibeCheck = !this.vibeCheck;
