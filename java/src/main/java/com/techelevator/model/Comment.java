@@ -1,5 +1,6 @@
 package com.techelevator.model;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 public class Comment {
 
@@ -10,14 +11,14 @@ public class Comment {
     private Timestamp dateTime;
     private String commentText;
 
+
     public Comment(int commentId, int postId, int userId, String username, Timestamp dateTime, String commentText) {
-        this.commentId= commentId;
+        this.commentId = commentId;
         this.postId = postId;
         this.userId = userId;
         this.username = username;
         this.dateTime = dateTime;
         this.commentText = commentText;
-        this.username = username;
     }
 
     public int getCommentId() {
@@ -66,6 +67,19 @@ public class Comment {
 
     public void setCommentText(String commentText) {
         this.commentText = commentText;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Comment comment = (Comment) o;
+        return commentId == comment.commentId && postId == comment.postId && userId == comment.userId && Objects.equals(username, comment.username) && Objects.equals(dateTime, comment.dateTime) && Objects.equals(commentText, comment.commentText);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(commentId, postId, userId, username, dateTime, commentText);
     }
 
     @Override

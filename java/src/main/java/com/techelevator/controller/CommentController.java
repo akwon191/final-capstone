@@ -29,7 +29,7 @@ public class CommentController {
         return ResponseEntity.ok(comments);
     }
 
-    @PostMapping(path ="")
+    @PostMapping(path = "")
     public ResponseEntity<Comment> createComment(@RequestBody Comment comment) {
         Comment createdComment = commentService.createComment(comment);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdComment);

@@ -5,8 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.techelevator.service.ThanksService;
-import com.techelevator.model.Thanks;
 import java.util.List;
+
 @RequestMapping("/thanks")
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")

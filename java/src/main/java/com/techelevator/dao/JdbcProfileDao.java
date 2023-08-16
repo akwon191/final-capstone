@@ -2,13 +2,11 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
-
 import javax.sql.DataSource;
-import java.sql.SQLException;
-import java.util.List;
+
+
 
 @Component
 public class JdbcProfileDao implements ProfileDao {
@@ -25,7 +23,6 @@ public class JdbcProfileDao implements ProfileDao {
 
         String sqlGetProfile = "SELECT * FROM profiles p JOIN users ON users.user_id = p.user_id WHERE p.user_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetProfile, userId);
-
         results.next();
         Profile theProfile = mapRowToProfile(results);
 
