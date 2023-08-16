@@ -2,7 +2,7 @@ package com.techelevator.model;
 
 public class Image {
     private int imageId;
-    private String imageName; //leaving, but may be perfunctory - do we need this?
+    private String imageName;
     private String imageData;
 
     public Image(int imageId, String imageName, String imageData){
