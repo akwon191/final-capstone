@@ -31,13 +31,8 @@ public class JdbcThanksDao implements ThanksDao {
     }
 
     @Override
-    public List<Thanks> getAllThanks() {
-        String sql = "SELECT user_id, post_id FROM thanks";
-        return jdbcTemplate.query(sql, (rs, rowNum) -> {
-            Thanks thanks = new Thanks();
-            thanks.setUserId(rs.getLong("user_id"));
-            thanks.setPostId(rs.getLong("post_id"));
-            return thanks;
-        });
+    public List<Long> getThanksByUserId(Long userId) {
+        String sql = "SELECT post_id FROM thanks WHERE user_id = ?";
+        return jdbcTemplate.queryForList(sql, Long.class, userId);
     }
 }

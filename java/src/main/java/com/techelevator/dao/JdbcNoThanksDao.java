@@ -30,13 +30,9 @@ public class JdbcNoThanksDao implements NoThanksDao {
     }
 
     @Override
-    public List<NoThanks> getAllNoThanks() {
-        String sql = "SELECT user_id, post_id FROM no_thanks";
-        return jdbcTemplate.query(sql, (rs, rowNum) -> {
-            NoThanks noThanks = new NoThanks();
-            noThanks.setUserId(rs.getLong("user_id"));
-            noThanks.setPostId(rs.getLong("post_id"));
-            return noThanks;
-        });
+    public List<Long> getNoThanksByUserId(Long userId) {
+        String sql = "SELECT post_id FROM no_thanks WHERE user_id = ?";
+        return jdbcTemplate.queryForList(sql, Long.class, userId);
     }
 }
+

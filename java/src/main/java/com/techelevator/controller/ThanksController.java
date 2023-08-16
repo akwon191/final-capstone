@@ -30,9 +30,9 @@ public class ThanksController {
         thanksService.deleteThanks(postId, userId);
         return ResponseEntity.ok().build();
     }
-    @GetMapping("")
-    public ResponseEntity<List<Thanks>> getAllThanks() {
-        List<Thanks> allThanks = thanksService.getAllThanks();
-        return ResponseEntity.ok(allThanks);
+    @GetMapping("/{userId}")
+    public ResponseEntity<List<Long>> getVibesByUserId(@PathVariable Long userId) {
+        List<Long> postIds = thanksService.getThanksByUserId(userId);
+        return ResponseEntity.ok(postIds);
     }
 }

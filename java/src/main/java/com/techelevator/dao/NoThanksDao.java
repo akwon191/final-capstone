@@ -10,5 +10,5 @@ public interface NoThanksDao {
 
     void deleteNoThanks(Long postId, Long userId);
 
-    List<NoThanks> getAllNoThanks();
+    List<Long> getNoThanksByUserId(Long userId);
 }

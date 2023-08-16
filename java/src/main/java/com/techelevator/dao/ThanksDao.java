@@ -10,5 +10,5 @@ public interface ThanksDao {
 
     void deleteThanks(Long postId, Long userId);
 
-    List<Thanks> getAllThanks();
+    List<Long> getThanksByUserId(Long userId);
 }

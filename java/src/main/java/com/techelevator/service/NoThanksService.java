@@ -24,7 +24,7 @@ public class NoThanksService {
         noThanksDao.deleteNoThanks(postId, userId);
     }
 
-    public List<NoThanks> getAllNoThanks() {
-        return noThanksDao.getAllNoThanks();
+    public List<Long> getNoThanksByUserId(Long userId) {
+        return noThanksDao.getNoThanksByUserId(userId);
     }
 }

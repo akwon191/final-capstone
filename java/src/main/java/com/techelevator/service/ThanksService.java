@@ -24,7 +24,7 @@ public class ThanksService {
         thanksDao.deleteThanks(postId, userId);
     }
 
-    public List<Thanks> getAllThanks() {
-        return thanksDao.getAllThanks();
+    public List<Long> getThanksByUserId(Long userId) {
+        return thanksDao.getThanksByUserId(userId);
     }
 }

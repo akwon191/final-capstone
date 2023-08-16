@@ -32,9 +32,9 @@ public class NoThanksController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("")
-    public ResponseEntity<List<NoThanks>> getAllNoThanks() {
-        List<NoThanks> allNoThanks = noThanksService.getAllNoThanks();
-        return ResponseEntity.ok(allNoThanks);
+    @GetMapping("/{userId}")
+    public ResponseEntity<List<Long>> getNoThanksByUserId(@PathVariable Long userId) {
+        List<Long> postIds = noThanksService.getNoThanksByUserId(userId);
+        return ResponseEntity.ok(postIds);
     }
 }
