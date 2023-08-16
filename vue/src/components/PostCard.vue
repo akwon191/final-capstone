@@ -75,7 +75,7 @@
           v-for="(comment, commentIndex) in postList[postIndex].comments"
           :key="commentIndex"
         >
-          <h4 id="comment-author">{{ comment.commentId }}</h4>
+          <h4 id="comment-author">{{ comment.username }}</h4>
           <p id="comment-text">{{ comment.commentText }}</p>
         </div>
       </div>

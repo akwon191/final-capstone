@@ -81,9 +81,10 @@ public class JdbcPostDao implements PostDao {
         int commentId = rowSet.getInt("comment_id");
         int postId = rowSet.getInt("post_id");
         int userId = rowSet.getInt("user_id");
+        String username = rowSet.getString("username");
         Timestamp dateTime = rowSet.getTimestamp("date_time");
         String commentText = rowSet.getString("comment_text");
-        return new Comment(commentId, postId, userId, dateTime, commentText);
+        return new Comment(commentId, postId, userId, username, dateTime, commentText);
     }
 
 }

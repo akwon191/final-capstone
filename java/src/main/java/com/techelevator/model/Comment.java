@@ -6,15 +6,18 @@ public class Comment {
     private int commentId;
     private int postId;
     private int userId;
+    private String username;
     private Timestamp dateTime;
     private String commentText;
 
-    public Comment(int commentId, int postId, int userId, Timestamp dateTime, String commentText) {
+    public Comment(int commentId, int postId, int userId, String username, Timestamp dateTime, String commentText) {
         this.commentId= commentId;
         this.postId = postId;
         this.userId = userId;
+        this.username = username;
         this.dateTime = dateTime;
         this.commentText = commentText;
+        this.username = username;
     }
 
     public int getCommentId() {
@@ -27,6 +30,14 @@ public class Comment {
 
     public int getPostId() {
         return postId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setPostId(int postId) {

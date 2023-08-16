@@ -23,11 +23,13 @@ CREATE TABLE post_comments (
         comment_id serial NOT NULL,
         user_id int NOT NULL,
         post_id int NOT NULL,
+        username varchar(50) NOT NULL,
         date_time TIMESTAMP NOT NULL,
         comment_text varchar (150),
         CONSTRAINT PK_comment PRIMARY KEY (comment_id),
         CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users (user_id),
-        CONSTRAINT FK_post_id FOREIGN KEY (post_id) REFERENCES posts (post_id)
+        CONSTRAINT FK_post_id FOREIGN KEY (post_id) REFERENCES posts (post_id),
+        CONSTRAINT FK_username FOREIGN KEY (username) REFERENCES users (username)
 );
 
 CREATE TABLE image_data(

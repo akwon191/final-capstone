@@ -33,19 +33,19 @@ COMMIT TRANSACTION;
 BEGIN TRANSACTION;
 
 -- Post_Comments
-INSERT INTO post_comments (post_id, user_id, date_time, comment_text)
-VALUES ((SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'brianr'), (SELECT user_id FROM users WHERE username = 'aartik'),'2023-01-01 23:59:59', 'Nice!'),
-((SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'aartik'), (SELECT user_id FROM users WHERE username = 'yoavm'),'2023-12-31 23:59:59', 'Great!'),
-((SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'yoavm'), (SELECT user_id FROM users WHERE username = 'beckyz'),'2023-12-31 23:59:59', 'Awesome!'),
-((SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'beckyz'), (SELECT user_id FROM users WHERE username = 'brodinm'),'2023-12-31 23:59:59', 'Beautiful!'),
-((SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'brodinm'), (SELECT user_id FROM users WHERE username = 'andyk'),'2023-12-31 23:59:59', 'Cool!'),
-((SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'andyk'), (SELECT user_id FROM users WHERE username = 'brianr'),'2023-12-31 23:59:59', 'How fun!'),
-((SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'brianr'), (SELECT user_id FROM users WHERE username = 'beckyz'),'2023-02-01 23:59:59', 'Quis enim lobortis scelerisque fermentum dui faucibus in ornare quam.'),
-((SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'aartik'), (SELECT user_id FROM users WHERE username = 'beckyz'),'2024-01-03 23:59:59', 'Commodo odio aenean sed adipiscing diam donec. '),
-((SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'brianr'), (SELECT user_id FROM users WHERE username = 'brodinm'),'2023-01-10 23:59:59', 'Orci ac auctor augue mauris augue.'),
-((SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'aartik'), (SELECT user_id FROM users WHERE username = 'brodinm'),'2024-01-05 23:59:59', 'Sed arcu non odio euismod lacinia at quis risus sed.'),
-((SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'brianr'), (SELECT user_id FROM users WHERE username = 'andyk'),'2023-01-06 23:59:59', 'Nibh venenatis cras sed felis eget velit aliquet sagittis id.'),
-((SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'aartik'), (SELECT user_id FROM users WHERE username = 'andyk'),'2024-01-02 23:59:59', 'Elit ullamcorper dignissim cras tincidunt.');
+INSERT INTO post_comments (post_id, user_id, username, date_time, comment_text)
+VALUES ((SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'brianr'), (SELECT user_id FROM users WHERE username = 'aartik'),(SELECT username FROM users WHERE username = 'aartik'),'2023-01-01 23:59:59', 'Nice!'),
+((SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'aartik'), (SELECT user_id FROM users WHERE username = 'yoavm'), (SELECT username FROM users WHERE username = 'yoavm'),'2023-12-31 23:59:59', 'Great!'),
+((SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'yoavm'), (SELECT user_id FROM users WHERE username = 'beckyz'), (SELECT username FROM users WHERE username = 'beckyz'),'2023-12-31 23:59:59', 'Awesome!'),
+((SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'beckyz'), (SELECT user_id FROM users WHERE username = 'brodinm'), (SELECT username FROM users WHERE username = 'brodinm'),'2023-12-31 23:59:59', 'Beautiful!'),
+((SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'brodinm'), (SELECT user_id FROM users WHERE username = 'andyk'), (SELECT username FROM users WHERE username = 'andyk'),'2023-12-31 23:59:59', 'Cool!'),
+((SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'andyk'), (SELECT user_id FROM users WHERE username = 'brianr'), (SELECT username FROM users WHERE username = 'brianr'),'2023-12-31 23:59:59', 'How fun!'),
+((SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'brianr'), (SELECT user_id FROM users WHERE username = 'beckyz'), (SELECT username FROM users WHERE username = 'beckyz'),'2023-02-01 23:59:59', 'Quis enim lobortis scelerisque fermentum dui faucibus in ornare quam.'),
+((SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'aartik'), (SELECT user_id FROM users WHERE username = 'beckyz'), (SELECT username FROM users WHERE username = 'beckyz'),'2024-01-03 23:59:59', 'Commodo odio aenean sed adipiscing diam donec. '),
+((SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'brianr'), (SELECT user_id FROM users WHERE username = 'brodinm'), (SELECT username FROM users WHERE username = 'brodinm'),'2023-01-10 23:59:59', 'Orci ac auctor augue mauris augue.'),
+((SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'aartik'), (SELECT user_id FROM users WHERE username = 'brodinm'), (SELECT username FROM users WHERE username = 'brodinm'),'2024-01-05 23:59:59', 'Sed arcu non odio euismod lacinia at quis risus sed.'),
+((SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'brianr'), (SELECT user_id FROM users WHERE username = 'andyk'), (SELECT username FROM users WHERE username = 'andyk'),'2023-01-06 23:59:59', 'Nibh venenatis cras sed felis eget velit aliquet sagittis id.'),
+((SELECT post_id FROM posts JOIN users ON posts.user_id = users.user_id WHERE username = 'aartik'), (SELECT user_id FROM users WHERE username = 'andyk'), (SELECT username FROM users WHERE username = 'andyk'),'2024-01-02 23:59:59', 'Elit ullamcorper dignissim cras tincidunt.');
 
 COMMIT TRANSACTION;
 

@@ -33,7 +33,7 @@ public class JdbcCommentDao implements CommentDao {
 
     @Override
     public Comment createComment(Comment comment) {
-        String sql = "INSERT INTO post_comments ( user_id, post_id, date_time, comment_text) VALUES (?, ?, ?, ?) RETURNING comment_id";
+        String sql = "INSERT INTO post_comments ( user_id, post_id, username, date_time, comment_text) VALUES (?, ?, ?, ?, ?) RETURNING comment_id";
         Timestamp currentTimestamp = Timestamp.valueOf(LocalDateTime.now());
         int commentId = jdbcTemplate.queryForObject(sql, Integer.class, comment.getUserId(), comment.getPostId(), currentTimestamp, comment.getCommentText());
         comment.setCommentId(commentId);
@@ -43,9 +43,10 @@ public class JdbcCommentDao implements CommentDao {
         int commentId = resultSet.getInt("comment_id");
         int postId = resultSet.getInt("post_id");
         int userId = resultSet.getInt("user_id");
+        String username = resultSet.getString("username");
         Timestamp dateTime = resultSet.getTimestamp("date_time");
         String commentText = resultSet.getString("comment_text");
-        return new Comment(commentId, postId, userId, dateTime, commentText);
+        return new Comment(commentId, postId, userId, username, dateTime, commentText);
     }
 }
 
