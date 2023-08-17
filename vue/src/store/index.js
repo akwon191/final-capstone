@@ -28,6 +28,14 @@ export default new Vuex.Store({
     noThanks: [],
     profile: [],
   },
+  getters: {
+    filteredPosts(state) {
+      if (state.vibes.length === 0) {
+        return state.posts;
+      }
+      return state.posts.filter(post => state.vibes.includes(post.postId));
+    },
+  },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
       state.token = token;
